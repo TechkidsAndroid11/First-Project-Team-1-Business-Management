@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="110dp">
+
+    <ImageView
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/ivAvatar"
+        android:layout_width="75dp"
+        android:layout_height="90dp" />
+
+    <RelativeLayout
+        android:layout_toRightOf="@+id/ivAvatar"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/textColor"
+            android:id="@+id/tvName"
+            android:text="Name: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/tvName"
+            android:id="@+id/tvDOB"
+            android:textSize="@dimen/def_textSize"
+            android:textColor="@color/textColor"
+            android:text="Date of birth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/tvDOB"
+            android:id="@+id/tvStartTime"
+            android:textSize="@dimen/def_textSize"
+            android:textColor="@color/textColor"
+            android:text="Start Time: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/tvStartTime"
+            android:id="@+id/tvSalary"
+            android:textSize="@dimen/def_textSize"
+            android:textColor="@color/textColor"
+            android:text="Salary (/day):"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/btnStatus"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:paddingBottom="3dp"
+            android:paddingRight="5dp"
+            android:paddingTop="3dp"
+            android:textSize="16sp"
+            android:background="@drawable/custom_button_absent"
+            android:textColor="@color/textColor"
+            android:text="Absent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

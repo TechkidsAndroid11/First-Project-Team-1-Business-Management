@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="90dp">
+
+    <TextView
+        android:id="@+id/tvRegency"
+        android:textColor="#131313"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="Vị trí: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="25dp"
+        android:textSize="13sp"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@+id/tvRegency"
+        android:textColor="#131313"
+        android:text="Description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:textSize="13sp"
+        android:layout_marginBottom="10dp"
+        android:textColor="#131313"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/tvNumberOfPeople"
+        android:text="Số : "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_chevron_right_black_24dp"
+        android:layout_width="15dp"
+        android:layout_height="30dp" />
+
+</RelativeLayout>

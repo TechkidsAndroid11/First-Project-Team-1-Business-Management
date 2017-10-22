@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.haihoang.managemaster.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
+    <android.support.design.widget.FloatingActionButton
+        android:layout_marginBottom="@dimen/def_margin"
+        android:layout_marginRight="@dimen/def_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="#26ff00"
+        android:src="@drawable/ic_add_white_24dp"
+        android:id="@+id/btnAdd"
+        app:fabSize="normal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content" />
 
-</android.support.constraint.ConstraintLayout>
+    <SearchView
+        android:id="@+id/svGroup"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"/>
+
+    <ListView
+        android:layout_below="@+id/svGroup"
+        android:id="@+id/lvListGroup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>
+
