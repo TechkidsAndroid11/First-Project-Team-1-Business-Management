@@ -22,11 +22,30 @@
         android:layout_width="match_parent"
         android:layout_height="35dp"/>
 
-    <ListView
-        android:layout_below="@+id/svGroup"
-        android:id="@+id/lvListGroup"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_below="@id/svGroup"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:weightSum="11">
+        <ListView
+            android:id="@+id/lvListGroup"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10.5" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tvCurrentTime"
+            android:gravity="center"
+            android:textColor="@color/textColor"
+            android:text="Current time"
+            android:layout_weight="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+    </LinearLayout>
+
+
+
+</>
 
