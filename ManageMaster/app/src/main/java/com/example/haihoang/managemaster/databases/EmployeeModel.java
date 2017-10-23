@@ -27,14 +27,14 @@ public class EmployeeModel {
     String experience;
     String image;
     String firstDayWork;
-    String status;
+    int status;
     float previvousMonthSalary;
     float totalSalary;
     String note;
 
     public EmployeeModel(int id, String name, String date, int gender, String address, String groupId,
                          String experience, String image, String firstDayWork,
-                         String status, float previvousMonthSalary, float totalSalary, String note) {
+                         int status, float previvousMonthSalary, float totalSalary, String note) {
         this.id = id;
         this.name = name;
         this.date = date;
@@ -122,11 +122,11 @@ public class EmployeeModel {
         this.firstDayWork = firstDayWork;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
