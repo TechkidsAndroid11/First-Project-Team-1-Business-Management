@@ -1,8 +1,10 @@
-package com.example.haihoang.managemaster;
+package com.example.haihoang.managemaster.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+
+import com.example.haihoang.managemaster.R;
 
 public class ListEmployeeActivity extends AppCompatActivity {
 
