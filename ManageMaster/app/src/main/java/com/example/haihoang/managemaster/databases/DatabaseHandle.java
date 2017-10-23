@@ -51,6 +51,7 @@ public class DatabaseHandle {
         sqLiteDatabase.execSQL(sql);
         sqLiteDatabase.close();
     }
+
     public ArrayList<EmployeeModel> getAllEmployee()
     {
         ArrayList<EmployeeModel> listEmployee = new ArrayList<>();
