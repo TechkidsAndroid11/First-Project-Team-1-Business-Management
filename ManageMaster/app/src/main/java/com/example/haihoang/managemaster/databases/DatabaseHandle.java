@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.haihoang.managemaster.models.EmployeeModel;
+
 import java.util.ArrayList;
 
 /**
@@ -261,6 +263,22 @@ public class DatabaseHandle extends SQLiteOpenHelper{
         sqLiteDatabase.close();
         return salary;
     }
-
+    public int getCountEmployeeInGroup(String groupName)
+    {
+        String sql="select count(GroupName) from Employee where GroupName='"+groupName+"'";
+        int count=0;
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(sql,null);
+        if(cursor!=null)
+        {
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast())
+            {
+                count=cursor.getInt(0);
+                cursor.moveToNext();
+            }
+        }
+        return count;
+    }
 
 }
