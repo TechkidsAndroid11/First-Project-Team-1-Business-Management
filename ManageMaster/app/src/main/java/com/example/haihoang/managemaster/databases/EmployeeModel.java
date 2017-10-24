@@ -5,48 +5,54 @@ package com.example.haihoang.managemaster.databases;
  */
 
 public class EmployeeModel {
-//    Id`	INTEGER PRIMARY KEY AUTOINCREMENT,
-//	`Name`	TEXT,
-//            `DOB`	TEXT,
-//            `Gender`	INTEGER,
-//            `Address`	TEXT,
-//            `GroupID`	TEXT,
-//            `Experience`	TEXT,
-//            `Image`	TEXT,
-//            `FirstDayWork`	TEXT,
-//            `Status`	TEXT,
-//            `PreviousMonthSalary`	REAL,
-//            `TotalSalary`	REAL,
-//            `Note`	TEXT
     int id;
     String name;
-    String date;
     int gender;
+    String date;
+    String phone;
     String address;
-    String groupId;
+    String avatar;
     String experience;
-    String image;
+    String group;
     String firstDayWork;
+    int daySalary;
+    int totalSalary;
+    int previousSalary;
     int status;
-    float previvousMonthSalary;
-    float totalSalary;
     String note;
 
-    public EmployeeModel(int id, String name, String date, int gender, String address, String groupId,
-                         String experience, String image, String firstDayWork,
-                         int status, float previvousMonthSalary, float totalSalary, String note) {
+    public EmployeeModel(String name, int gender, String date, String phone, String address, String avatar, String experience, String group, String firstDayWork, int daySalary, int totalSalary, int previousSalary, int status, String note) {
+        this.name = name;
+        this.gender = gender;
+        this.date = date;
+        this.phone = phone;
+        this.address = address;
+        this.avatar = avatar;
+        this.experience = experience;
+        this.group = group;
+        this.firstDayWork = firstDayWork;
+        this.daySalary = daySalary;
+        this.totalSalary = totalSalary;
+        this.previousSalary = previousSalary;
+        this.status = status;
+        this.note = note;
+    }
+
+    public EmployeeModel(int id, String name, int gender, String date, String phone, String address, String avatar, String experience, String group, String firstDayWork, int daySalary, int totalSalary, int previousSalary, int status, String note) {
         this.id = id;
         this.name = name;
-        this.date = date;
         this.gender = gender;
+        this.date = date;
+        this.phone = phone;
         this.address = address;
-        this.groupId = groupId;
+        this.avatar = avatar;
         this.experience = experience;
-        this.image = image;
+        this.group = group;
         this.firstDayWork = firstDayWork;
-        this.status = status;
-        this.previvousMonthSalary = previvousMonthSalary;
+        this.daySalary = daySalary;
         this.totalSalary = totalSalary;
+        this.previousSalary = previousSalary;
+        this.status = status;
         this.note = note;
     }
 
@@ -66,6 +72,14 @@ public class EmployeeModel {
         this.name = name;
     }
 
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
     public String getDate() {
         return date;
     }
@@ -74,12 +88,12 @@ public class EmployeeModel {
         this.date = date;
     }
 
-    public int getGender() {
-        return gender;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setGender(int gender) {
-        this.gender = gender;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getAddress() {
@@ -90,12 +104,12 @@ public class EmployeeModel {
         this.address = address;
     }
 
-    public String getGroupId() {
-        return groupId;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getExperience() {
@@ -106,12 +120,12 @@ public class EmployeeModel {
         this.experience = experience;
     }
 
-    public String getImage() {
-        return image;
+    public String getGroup() {
+        return group;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setGroup(String group) {
+        this.group = group;
     }
 
     public String getFirstDayWork() {
@@ -122,28 +136,36 @@ public class EmployeeModel {
         this.firstDayWork = firstDayWork;
     }
 
+    public int getDaySalary() {
+        return daySalary;
+    }
+
+    public void setDaySalary(int daySalary) {
+        this.daySalary = daySalary;
+    }
+
+    public int getTotalSalary() {
+        return totalSalary;
+    }
+
+    public void setTotalSalary(int totalSalary) {
+        this.totalSalary = totalSalary;
+    }
+
+    public int getPreviousSalary() {
+        return previousSalary;
+    }
+
+    public void setPreviousSalary(int previousSalary) {
+        this.previousSalary = previousSalary;
+    }
+
     public int getStatus() {
         return status;
     }
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public float getPrevivousMonthSalary() {
-        return previvousMonthSalary;
-    }
-
-    public void setPrevivousMonthSalary(float previvousMonthSalary) {
-        this.previvousMonthSalary = previvousMonthSalary;
-    }
-
-    public float getTotalSalary() {
-        return totalSalary;
-    }
-
-    public void setTotalSalary(float totalSalary) {
-        this.totalSalary = totalSalary;
     }
 
     public String getNote() {
