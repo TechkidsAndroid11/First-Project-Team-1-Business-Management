@@ -107,7 +107,6 @@ public class AddEmployeeActivity extends AppCompatActivity {
                         bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
                     } catch (IOException e) {
                         e.printStackTrace();
-
                     }
                 } else {
                     Log.e("MainActivity", "Data Null!!!!");

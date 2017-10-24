@@ -1,4 +1,4 @@
-package com.example.haihoang.managemaster.databases;
+package com.example.haihoang.managemaster.models;
 
 /**
  * Created by Linh Phan on 10/23/2017.

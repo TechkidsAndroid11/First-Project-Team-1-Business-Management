@@ -18,38 +18,43 @@
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:background="#8edfd2"
-        android:layout_width="100dp"
-        android:layout_height="120dp" />
+        android:layout_width="90dp"
+        android:layout_height="110dp" />
 
     <TableLayout
         android:paddingBottom="5dp"
         android:paddingTop="5dp"
         android:id="@+id/tableLayout"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_marginTop="5dp"
         android:layout_below="@+id/ivAddImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TableRow>
+        <TableRow android:orientation="horizontal"
+            android:weightSum="10">
             <TextView
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3.5"
                 android:textColor="@color/textColor"
-                android:text="Name: "/>
+                android:text="Họ Tên:"/>
             <EditText
+                android:paddingLeft="3dp"
+                android:layout_weight="6.5"
                 android:id="@+id/edtName"
                 android:background="@drawable/custom_edit_text"
-                android:layout_marginLeft="10dp"
                 android:layout_height="30dp"
-                android:layout_width="280dp"/>
+                android:layout_width="fill_parent"/>
         </TableRow>
 
         <TableRow
+            android:weightSum="10"
             android:layout_marginTop="5dp">
             <TextView
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/textColor"
-                android:text="Gioi Tinh: "/>
+                android:text="Giới Tính:"/>
 
             <RadioGroup
                 android:layout_marginLeft="10dp"
@@ -69,73 +74,114 @@
                     android:layout_marginLeft="10dp"
                     android:onClick="onRadioButtonClicked"
                     android:id="@+id/radio_nu"
-                    android:text="Nu"
+                    android:text="Nữ: "
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
             </RadioGroup>
         </TableRow>
 
-        <TableRow android:layout_marginTop="5dp">
+        <TableRow
+            android:weightSum="10"
+            android:layout_marginTop="5dp">
             <TextView
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3.5"
                 android:textColor="@color/textColor"
-                android:text="Date of birth: "/>
+                android:text="Ngày Sinh:"/>
             <EditText
+                android:paddingLeft="3dp"
+                android:layout_weight="6.5"
                 android:background="@drawable/custom_edit_text"
                 android:id="@+id/edtDOB"
-                android:layout_marginLeft="10dp"
                 android:layout_height="30dp"
-                android:layout_width="280dp"/>
+                android:layout_width="fill_parent"/>
         </TableRow>
 
-        <TableRow android:layout_marginTop="5dp">
+        <TableRow
+            android:weightSum="10"
+            android:layout_marginTop="5dp">
             <TextView
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3.5"
                 android:textColor="@color/textColor"
-                android:text="Que quan: "/>
+                android:text="Điện Thoại:"/>
             <EditText
+                android:paddingLeft="3dp"
+                android:layout_weight="6.5"
+                android:background="@drawable/custom_edit_text"
+                android:id="@+id/edtPhone"
+                android:layout_height="30dp"
+                android:layout_width="match_parent"/>
+        </TableRow>
 
+        <TableRow
+            android:weightSum="10"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3.5"
+                android:textColor="@color/textColor"
+                android:text="Địa Chỉ:"/>
+            <EditText
+                android:paddingLeft="3dp"
+                android:layout_weight="6.5"
                 android:background="@drawable/custom_edit_text"
                 android:id="@+id/edtHomeTown"
-                android:layout_marginLeft="10dp"
                 android:layout_height="30dp"
                 android:layout_width="280dp"/>
         </TableRow>
 
-        <TableRow android:layout_marginTop="5dp">
+        <TableRow
+            android:weightSum="10"
+            android:layout_marginTop="5dp">
             <TextView
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3.5"
                 android:textColor="@color/textColor"
-                android:text="trinh do: "/>
+                android:text="Trình Độ:"/>
             <EditText
+                android:paddingLeft="3dp"
+                android:layout_weight="6.5"
                 android:inputType="textMultiLine"
                 android:background="@drawable/custom_edit_text"
                 android:id="@+id/edtExp"
-                android:layout_marginLeft="10dp"
-                android:layout_height="60dp"
-                android:layout_width="280dp"/>
+                android:layout_height="30dp"
+                android:layout_width="match_parent"/>
         </TableRow>
 
-        <TableRow android:layout_marginTop="5dp">
+        <TableRow
+            android:weightSum="10"
+            android:layout_marginTop="5dp">
             <TextView
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3.5"
                 android:textColor="@color/textColor"
-                android:text="Group: "/>
+                android:text="Nhóm:"/>
             <EditText
+                android:paddingLeft="5dp"
+                android:layout_weight="6.5"
                 android:background="@drawable/custom_edit_text"
                 android:id="@+id/edtGroup"
-                android:layout_marginLeft="10dp"
                 android:layout_height="30dp"
-                android:layout_width="280dp"/>
+                android:layout_width="match_parent"/>
         </TableRow>
 
-        <TableRow android:layout_marginTop="5dp">
+        <TableRow
+            android:weightSum="10"
+            android:layout_marginTop="5dp">
             <TextView
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3.5"
                 android:textColor="@color/textColor"
-                android:text="Luong: "/>
+                android:text="Lương:"/>
             <EditText
+                android:paddingLeft="3dp"
+                android:layout_weight="6.5"
                 android:background="@drawable/custom_edit_text"
                 android:id="@+id/edtSalary"
-                android:layout_marginLeft="10dp"
                 android:layout_height="30dp"
-                android:layout_width="280dp"/>
+                android:layout_width="match_parent"/>
         </TableRow>
 
     </TableLayout>
