@@ -175,4 +175,12 @@ public class EmployeeModel {
     public void setNote(String note) {
         this.note = note;
     }
+
+    @Override
+    public String toString() {
+        return name + " " + id + " " + gender + " " + date + " " + phone + " \n" +
+                avatar + "\n" +
+                experience + " " + group + " " + daySalary + " " + status + "\n" +
+                firstDayWork;
+    }
 }
