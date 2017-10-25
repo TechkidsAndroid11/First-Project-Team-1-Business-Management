@@ -34,11 +34,11 @@
             android:layout_height="0dp"
             android:layout_weight="10.5" />
 
-        <TextView
-            android:id="@+id/tvCurrentTime"
+        <TextClock
+            android:id="@+id/tcCurrentTime"
             android:gravity="center"
             android:textColor="@color/textColor"
-            android:text="Current time"
+            android:format24Hour="dd/MM/yyyy"
             android:layout_weight="0.5"
             android:layout_width="match_parent"
             android:layout_height="0dp" />

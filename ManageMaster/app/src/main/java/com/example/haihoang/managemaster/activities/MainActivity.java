@@ -1,7 +1,11 @@
 package com.example.haihoang.managemaster.activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -11,11 +15,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextClock;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.adapters.ListGroupAdapter;
 import com.example.haihoang.managemaster.databases.DatabaseHandle;
+import com.example.haihoang.managemaster.models.AlarmService;
 import com.example.haihoang.managemaster.models.EmployeeModel;
 import com.example.haihoang.managemaster.models.Group;
 
@@ -23,6 +30,7 @@ import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -31,11 +39,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     FloatingActionButton btnAddEmployee;
     private boolean checkClick=true;
-    private TextView tvcurrentTime;
+
     ArrayList<String> listNameGroup;
     private ListView lvListGroup;
     Thread myThread = null;
-
+    private TextClock tcCurrenTime;
+    private String myDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: ");
 //        setAdapter();
 //        addListener();
-
+        createNotification();
     }
     @Override
     protected void onStart() {
@@ -54,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         setupUI();
         setAdapter();
         addListener();
+        checkDate();
     }
 
 
@@ -66,22 +76,23 @@ public class MainActivity extends AppCompatActivity {
     private void setupUI() {
         lvListGroup = (ListView) findViewById(R.id.lvListGroup);
         btnAddEmployee = (FloatingActionButton) findViewById(R.id.btnAdd);
-        tvcurrentTime = (TextView)findViewById(R.id.tvCurrentTime);
+        tcCurrenTime = (TextClock) findViewById(R.id.tcCurrentTime);
+
         //myThread = new Thread(new TimeRunner());
     //myThread.start();
 }
 
-    private void getTime(){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Date dt = new Date();
-                DateFormat sb = new SimpleDateFormat("dd/MM/yyyy");
-                String curTime = "Today: "+ sb.format(dt);
-                tvcurrentTime.setText(curTime);
-            }
-        });
-    }
+//    private void getTime(){
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Date dt = new Date();
+//                DateFormat sb = new SimpleDateFormat("dd/MM/yyyy");
+//                String curTime = "Today: "+ sb.format(dt);
+//                tvcurrentTime.setText(curTime);
+//            }
+//        });
+//    }
     private void setAdapter()
     {
         DatabaseHandle handle = DatabaseHandle.getInstance(this);
@@ -154,6 +165,47 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(ListGroupAdapter.NAME_GROUP,nameGroup);
         startActivity(intent);
     }
+    private void createNotification() {
+        Calendar cal = Calendar.getInstance();
+        //tạo thông báo vào 7 giờ sáng
+        cal.set(Calendar.HOUR_OF_DAY,7);
+        cal.set(Calendar.MINUTE,0);
+        cal.set(Calendar.SECOND,0);
+
+        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlarmService.class);
+        PendingIntent pendingIntent = PendingIntent.getService(this,0,intent,0);
+
+        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),1000,pendingIntent);
+
+    }
+    private void checkDate() {
+        SharedPreferences sharedPreferences = getSharedPreferences("my_date",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        myDate = sharedPreferences.getString("date","");
+        String currtime = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        if(myDate.equals("")){
+            editor.putString("date",currtime);
+            myDate = currtime;
+            editor.commit();
+        }else{
+            if(getDay(myDate)!= getDay(currtime)){
+                editor.clear();
+                editor.putString("date",currtime);
+                editor.commit();
+                //Reset Absent
+                DatabaseHandle handle = DatabaseHandle.getInstance(this);
+                handle.resetStatusAllAbsent();
+
+                Toast.makeText(this,"Sang ngày mới!! Reset Absent.",Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+    public int getDay(String s){
+        String []aday = s.split("/");
+        return Integer.parseInt(aday[0]);
+    }
+
 //    class TimeRunner implements Runnable{
 //
 //    }
