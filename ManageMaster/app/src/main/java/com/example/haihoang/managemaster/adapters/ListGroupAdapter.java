@@ -65,22 +65,12 @@ public class ListGroupAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.tvGroup.setText("Vị trí: "+ listGroup.get(position).getName());
-        viewHolder.tvNumOfPerson.setText("Số: "+ listGroup.get(position).getNumberOfPerson());
-        viewHolder.ivMoveListEmploee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addListener(listGroup.get(position).getName());
-            }
-        });
+        viewHolder.tvNumOfPerson.setText("Số nhân viên: "+ listGroup.get(position).getNumberOfPerson());
+
 
         return convertView;
     }
-    public void addListener(String nameGroup)
-    {
-        Intent intent = new Intent(contex, ListEmployeeActivity.class);
-        intent.putExtra(NAME_GROUP,nameGroup);
-        contex.startActivity(intent);
-    }
+
     public class ViewHolder
     {
         TextView tvGroup;

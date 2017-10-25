@@ -141,8 +141,8 @@ public class AddEmployeeActivity extends AppCompatActivity {
 
     private void galleryIntent() {
         Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*"); // mở tất cả các folder lưa trữ ảnh
+        intent.setAction(Intent.ACTION_GET_CONTENT); // đi đến folder mình chọn
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
     }
 

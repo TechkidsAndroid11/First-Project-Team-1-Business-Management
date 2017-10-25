@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     FloatingActionButton btnAddEmployee;
     private TextView tvcurrentTime;
+    ArrayList<String> listNameGroup;
     private ListView lvListGroup;
     Thread myThread = null;
 
@@ -46,7 +48,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         setAdapter();
+        addListener();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setAdapter();
+        addListener();
     }
 
     private void setupUI() {
@@ -71,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     private void setAdapter()
     {
         DatabaseHandle handle = DatabaseHandle.getInstance(this);
-        ArrayList<String> listNameGroup = handle.getAllGroup();
+        listNameGroup = handle.getAllGroup();
         ArrayList<Group> listGroup=new ArrayList<Group>();
         for(int i=0;i<listNameGroup.size();i++)
         {
@@ -81,6 +91,22 @@ public class MainActivity extends AppCompatActivity {
         ListGroupAdapter adapter = new ListGroupAdapter(this,R.layout.item_list_group,listGroup);
         lvListGroup.setAdapter(adapter);
 
+
+    }
+    private void addListener()
+    {
+        lvListGroup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                check(listNameGroup.get(position));
+            }
+        });
+    }
+    public void check(String nameGroup)
+    {
+        Intent intent = new Intent(this, ListEmployeeActivity.class);
+        intent.putExtra(ListGroupAdapter.NAME_GROUP,nameGroup);
+        startActivity(intent);
     }
 //    class TimeRunner implements Runnable{
 //
