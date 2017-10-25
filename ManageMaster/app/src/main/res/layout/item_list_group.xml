@@ -4,7 +4,7 @@
     android:layout_height="60dp">
 
     <TextView
-        android:id="@+id/tvRegency"
+        android:id="@+id/tv_Group"
         android:textColor="#131313"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
@@ -20,12 +20,13 @@
         android:textColor="#131313"
         android:layout_marginLeft="15dp"
         android:layout_alignParentBottom="true"
-        android:id="@+id/tvNumberOfPeople"
+        android:id="@+id/tv_numberOfPeople"
         android:text="Số : "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <ImageView
+        android:id="@+id/iv_moveListEmployee"
         android:layout_marginRight="10dp"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"

@@ -280,5 +280,18 @@ public class DatabaseHandle extends SQLiteOpenHelper{
         }
         return count;
     }
+    public void updateStatus(EmployeeModel model)
+    {
+        String sql="";
+        if(model.getStatus()==0)
+        {
+            sql="update Employee set status=1 where id="+model.getId()+"";
+        }
+        else
+            sql="update Employee set status=0 where id="+model.getId()+"";
+        SQLiteDatabase sqLiteDatabase= getWritableDatabase();
+        sqLiteDatabase.execSQL(sql);
+        sqLiteDatabase.close();
+    }
 
 }
