@@ -132,10 +132,10 @@ public class DatabaseHandle extends SQLiteOpenHelper{
         sqLiteDatabase.close();
         return listEmployee;
     }
-    public ArrayList<EmployeeModel> getAllEmployeeByGroup(String group)
+    public ArrayList<EmployeeModel> getAllEmployeeByGroup(String groupName)
     {
         ArrayList<EmployeeModel> listEmployee = new ArrayList<>();
-        String sql="select * from Employee where groupName= '"+group+"' ";
+        String sql="select * from Employee where groupName= '"+groupName+"' ";
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(sql,null);
         if (cursor != null) {
@@ -157,7 +157,7 @@ public class DatabaseHandle extends SQLiteOpenHelper{
                 int status = cursor.getInt(13);
                 String note = cursor.getString(14);
 
-                listEmployee.add(new EmployeeModel(id, name,gender, date,phone,address,avatar,exp,group,firstDayWork,
+                listEmployee.add(new EmployeeModel(id, name,gender, date,phone,address,avatar,exp,groupName,firstDayWork,
                         daySalary,totalSalary,previousMonthSalary,status,note));
                 cursor.moveToNext();
 
@@ -293,5 +293,19 @@ public class DatabaseHandle extends SQLiteOpenHelper{
         sqLiteDatabase.execSQL(sql);
         sqLiteDatabase.close();
     }
-
+    public void deleteGroup(String nameGroup)
+    {
+        String sql="delete from Employee where GroupName='"+nameGroup+"'";
+        SQLiteDatabase sqLiteDatabase=getReadableDatabase();
+        sqLiteDatabase.execSQL(sql);
+        sqLiteDatabase.close();
+    }
+//    public void addSalarytoTotal(EmployeeModel model)
+//    {
+//        int totalSalary = model.getTotalSalary();
+//        int toalSalaryAfterAdd = totalSalary+ model.getDaySalary();
+//        String sql="update Employee set TotalSalary = "+toalSalaryAfterAdd ;
+//        SQLiteDatabase sqLiteDatabase= getWritableDatabase();
+//        sqLiteDatabase
+//    }
 }
