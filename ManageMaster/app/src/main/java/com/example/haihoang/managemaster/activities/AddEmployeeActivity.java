@@ -79,7 +79,6 @@ public class AddEmployeeActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                clearEditText();
             }
         });
 
@@ -114,6 +113,8 @@ public class AddEmployeeActivity extends AppCompatActivity {
         edtDOB.setText("");
         edtHomeTown.setText("");
         edtName.setText("");
+        imgAvatar.setBackgroundResource(R.color.colorAccent);
+        base64 = "";
     }
 
     private void selectFuntion() {
@@ -199,6 +200,14 @@ public class AddEmployeeActivity extends AppCompatActivity {
 
 
     public void getInfor() throws ParseException {
+        boolean isSuccess = false;
+        String avatar;
+        if(base64 == null){
+            Toast.makeText(AddEmployeeActivity.this, "Hãy chọn ảnh!",Toast.LENGTH_SHORT).show();
+            return;
+        }else{
+            avatar = base64;
+        }
         String name = edtName.getText().toString().trim();
         if(name.equals("")){
             Toast.makeText(AddEmployeeActivity.this, "Hãy điền tên!",Toast.LENGTH_SHORT).show();
@@ -209,6 +218,7 @@ public class AddEmployeeActivity extends AppCompatActivity {
         String birthday = edtDOB.getText().toString().trim();
         if(birthday.equals("")){
             Toast.makeText(AddEmployeeActivity.this, "Hãy điền ngày sinh!",Toast.LENGTH_SHORT).show();
+            Log.e("check: ", "adasdas");
             return;
         }
         String phone = edtPhone.getText().toString().trim();
@@ -221,13 +231,7 @@ public class AddEmployeeActivity extends AppCompatActivity {
             Toast.makeText(AddEmployeeActivity.this, "Hãy điền địa chỉ!",Toast.LENGTH_SHORT).show();
             return;
         }
-        String avatar;
-        if(base64 == null){
-            Toast.makeText(AddEmployeeActivity.this, "Hãy chọn ảnh!",Toast.LENGTH_SHORT).show();
-            return;
-        }else{
-             avatar = base64;
-        }
+
         String exp = edtExp.getText().toString();
         if(exp.equals("")){
             Toast.makeText(AddEmployeeActivity.this, "Hãy điền kinh nghiệm!",Toast.LENGTH_SHORT).show();
@@ -262,6 +266,8 @@ public class AddEmployeeActivity extends AppCompatActivity {
         Log.e("data", employeeModel.getGender() + " ");
 
         DatabaseHandle.getInstance(AddEmployeeActivity.this).addEmployee(employeeModel);
+        Toast.makeText(AddEmployeeActivity.this, "Them nhan vien thanh cong!", Toast.LENGTH_LONG).show();
+        clearEditText();
 
     }
 

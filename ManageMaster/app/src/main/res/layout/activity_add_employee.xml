@@ -111,6 +111,7 @@
                 android:textColor="@color/textColor"
                 android:text="Điện Thoại:"/>
             <EditText
+                android:inputType="number"
                 android:paddingBottom="-3dp"
                 android:paddingLeft="3dp"
                 android:layout_weight="6.5"

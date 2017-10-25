@@ -31,7 +31,7 @@ public class ImageUtils {
         byte[] b = baos.toByteArray();
         String imageEncoded = Base64.encodeToString(b,Base64.DEFAULT);
 
-        Log.e("base64   ", imageEncoded);
+       // Log.e("base64   ", imageEncoded);
         return imageEncoded;
     }
 
