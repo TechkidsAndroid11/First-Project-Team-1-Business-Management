@@ -135,6 +135,7 @@ public class AddEmployeeActivity extends AppCompatActivity {
                 }
             }
         }).show();
+
     }
 
     private void galleryIntent() {
