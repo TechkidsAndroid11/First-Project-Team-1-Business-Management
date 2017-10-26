@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -33,7 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class AddEmployeeActivity extends AppCompatActivity {
+public class AddEmployeeActivity extends AppCompatActivity{
 
     ImageView imgAvatar;
     EditText edtName, edtId, edtDOB, edtPhone, edtHomeTown, edtExp, edtSalary;
@@ -115,6 +116,14 @@ public class AddEmployeeActivity extends AppCompatActivity {
         ArrayList<String> listNameGroup = handle.getAllGroup();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_item,listNameGroup);
         actvGroup.setThreshold(1);
+
+        actvGroup.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event){
+                actvGroup.showDropDown();
+                return false;
+            }
+        });
         actvGroup.setAdapter(adapter);
     }
     private void clearEditText(){

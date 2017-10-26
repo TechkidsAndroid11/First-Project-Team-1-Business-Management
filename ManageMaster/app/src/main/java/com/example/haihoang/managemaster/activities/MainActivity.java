@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextClock;
 import android.widget.TextView;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     FloatingActionButton btnAddEmployee;
     private boolean checkClick=true;
-
+    ImageView btnCheckTotal;
     ArrayList<String> listNameGroup;
     private ListView lvListGroup;
     Thread myThread = null;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_home);
+
         Log.d(TAG, "onCreate: ");
 //        setAdapter();
 //        addListener();
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupUI() {
+        btnCheckTotal = (ImageView) findViewById(R.id.btnCheckTotal);
         lvListGroup = (ListView) findViewById(R.id.lvListGroup);
         btnAddEmployee = (FloatingActionButton) findViewById(R.id.btnAdd);
         tcCurrenTime = (TextClock) findViewById(R.id.tcCurrentTime);
@@ -110,6 +113,13 @@ public class MainActivity extends AppCompatActivity {
     }
     private void addListener()
     {
+        btnCheckTotal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,SummaryActivity.class);
+                startActivity(intent);
+            }
+        });
         btnAddEmployee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
