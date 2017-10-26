@@ -13,6 +13,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -28,12 +30,14 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class AddEmployeeActivity extends AppCompatActivity {
 
     ImageView imgAvatar;
-    EditText edtName, edtId, edtDOB, edtPhone, edtHomeTown, edtExp, edtGroup, edtSalary;
+    EditText edtName, edtId, edtDOB, edtPhone, edtHomeTown, edtExp, edtSalary;
+    AutoCompleteTextView actvGroup;
     RadioGroup radioGender;
     FloatingActionButton btnDone;
     String base64;
@@ -48,7 +52,7 @@ public class AddEmployeeActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_home);
 
         setupUI();
-
+        setAdapterForAutoCompleteTextView();
         imgAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,13 +105,21 @@ public class AddEmployeeActivity extends AppCompatActivity {
         edtPhone = (EditText) findViewById(R.id.edtPhone);
         edtHomeTown = (EditText) findViewById(R.id.edtHomeTown);
         edtExp = (EditText) findViewById(R.id.edtExp);
-        edtGroup = (EditText) findViewById(R.id.edtGroup);
+      //  edtGroup = (EditText) findViewById(R.id.edtGroup);
         edtSalary = (EditText) findViewById(R.id.edtSalary);
+        actvGroup= (AutoCompleteTextView) findViewById(R.id.actvGroup);
     }
-
+    private void setAdapterForAutoCompleteTextView()
+    {
+        DatabaseHandle handle = DatabaseHandle.getInstance(this);
+        ArrayList<String> listNameGroup = handle.getAllGroup();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_item,listNameGroup);
+        actvGroup.setThreshold(1);
+        actvGroup.setAdapter(adapter);
+    }
     private void clearEditText(){
         edtPhone.setText("");
-        edtGroup.setText("");
+        actvGroup.setText("");
         edtSalary.setText("");
         edtExp.setText("");
         edtDOB.setText("");
@@ -237,7 +249,7 @@ public class AddEmployeeActivity extends AppCompatActivity {
             Toast.makeText(AddEmployeeActivity.this, "Hãy điền kinh nghiệm!",Toast.LENGTH_SHORT).show();
             return;
         }
-        String groupName = edtGroup.getText().toString().trim();
+        String groupName = actvGroup.getText().toString().trim();
         if(groupName.equals("")){
             Toast.makeText(AddEmployeeActivity.this, "Hãy điền nhóm!",Toast.LENGTH_SHORT).show();
             return;

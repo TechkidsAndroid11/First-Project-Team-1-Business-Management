@@ -106,6 +106,7 @@ public class ListEmployeeAdapter extends BaseAdapter {
                     viewHolder.tvStatus.setText("Present");
                     viewHolder.tvStatus.setBackground(context.getResources().getDrawable(R.drawable.custom_button_present));
                     handle.updateStatus(listEmployee.get(position));
+                    handle.addSalarytoTotal(listEmployee.get(position));
                     checkStatus=true;
                 }
                 else
@@ -113,6 +114,7 @@ public class ListEmployeeAdapter extends BaseAdapter {
                     viewHolder.tvStatus.setText("Absent");
                     viewHolder.tvStatus.setBackground(context.getResources().getDrawable(R.drawable.custom_button_absent));
                     handle.updateStatus(listEmployee.get(position));
+                    handle.minusSalarytoTotal(listEmployee.get(position));
                     checkStatus=false;
                 }
 

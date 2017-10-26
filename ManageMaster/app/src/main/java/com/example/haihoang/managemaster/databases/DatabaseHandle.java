@@ -300,6 +300,26 @@ public class DatabaseHandle extends SQLiteOpenHelper{
         sqLiteDatabase.execSQL(sql);
         sqLiteDatabase.close();
     }
+    public void addSalarytoTotal(EmployeeModel model)
+    {
+        int daySalary = model.getDaySalary();
+        int totalSalary = model.getTotalSalary();
+        totalSalary+=daySalary;
+        String sql="update Employee set TotalSalary = "+totalSalary+" where id="+model.getId()+"";
+        SQLiteDatabase sqLiteDatabase =getWritableDatabase();
+        sqLiteDatabase.execSQL(sql);
+        sqLiteDatabase.close();
+    }
+    public void minusSalarytoTotal(EmployeeModel model)
+    {
+        int daySalary = model.getDaySalary();
+        int totalSalary = model.getTotalSalary();
+        totalSalary-=daySalary;
+        String sql="update Employee set TotalSalary = "+totalSalary+" where id="+model.getId()+"";
+        SQLiteDatabase sqLiteDatabase =getWritableDatabase();
+        sqLiteDatabase.execSQL(sql);
+        sqLiteDatabase.close();
+    }
 //    public void addSalarytoTotal(EmployeeModel model)
 //    {
 //        int totalSalary = model.getTotalSalary();
