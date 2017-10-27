@@ -15,6 +15,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.databases.DatabaseHandle;
@@ -113,7 +114,8 @@ public class ListEmployeeAdapter extends BaseAdapter implements Filterable {
                     viewHolder.tvStatus.setText("Present");
                     viewHolder.tvStatus.setBackground(context.getResources().getDrawable(R.drawable.custom_button_present));
                     handle.updateStatus(listEmployee.get(position));
-                    handle.addSalarytoTotal(listEmployee.get(position));
+
+                   // handle.addSalarytoTotal(listEmployee.get(position));
                     checkStatus=true;
                 }
                 else
@@ -121,7 +123,7 @@ public class ListEmployeeAdapter extends BaseAdapter implements Filterable {
                     viewHolder.tvStatus.setText("Absent");
                     viewHolder.tvStatus.setBackground(context.getResources().getDrawable(R.drawable.custom_button_absent));
                     handle.updateStatus(listEmployee.get(position));
-                    handle.minusSalarytoTotal(listEmployee.get(position));
+                   // handle.minusSalarytoTotal(listEmployee.get(position));
                     checkStatus=false;
                 }
 
