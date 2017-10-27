@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.adapters.ListEmployeeAdapter;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 public class ListEmployeeActivity extends AppCompatActivity {
     private ListView lvListEmployee;
     private String nameGroup;
+    private SearchView svEmployee;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +82,7 @@ public class ListEmployeeActivity extends AppCompatActivity {
     }
 
     private void setupUI() {
+        svEmployee= (SearchView) findViewById(R.id.svListEmployee);
         lvListEmployee = (ListView) findViewById(R.id.lvListEmployee);
     }
 
@@ -89,7 +92,20 @@ public class ListEmployeeActivity extends AppCompatActivity {
         nameGroup = intent.getStringExtra(ListGroupAdapter.NAME_GROUP);
         DatabaseHandle handle = DatabaseHandle.getInstance(this);
         ArrayList<EmployeeModel> listEmployee = handle.getAllEmployeeByGroup(nameGroup);
-        ListEmployeeAdapter adapter = new ListEmployeeAdapter(this,R.layout.item_list_employee,listEmployee);
+        final ListEmployeeAdapter adapter = new ListEmployeeAdapter(this,R.layout.item_list_employee,listEmployee);
         lvListEmployee.setAdapter(adapter);
+
+        svEmployee.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 }

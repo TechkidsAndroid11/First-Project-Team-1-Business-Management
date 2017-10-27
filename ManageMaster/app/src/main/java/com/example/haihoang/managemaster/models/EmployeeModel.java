@@ -37,7 +37,16 @@ public class EmployeeModel {
         this.status = status;
         this.note = note;
     }
+    public EmployeeModel(String name,String date,String startTime,String avatar,int salary,int status)
+    {
 
+        this.name=name;
+        this.date=date;
+        this.firstDayWork=startTime;
+        this.avatar=avatar;
+        this.daySalary=salary;
+        this.status=status;
+    }
     public EmployeeModel(int id, String name, int gender, String date, String phone, String address, String avatar, String experience, String group, String firstDayWork, int daySalary, int totalSalary, int previousSalary, int status, String note) {
         this.id = id;
         this.name = name;

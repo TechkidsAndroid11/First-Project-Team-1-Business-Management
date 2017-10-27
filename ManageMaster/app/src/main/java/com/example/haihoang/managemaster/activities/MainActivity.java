@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     Thread myThread = null;
     private TextClock tcCurrenTime;
     private String myDate;
+    private SearchView svGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupUI() {
+        svGroup = (SearchView) findViewById(R.id.svGroup);
         btnCheckTotal = (ImageView) findViewById(R.id.btnCheckTotal);
         lvListGroup = (ListView) findViewById(R.id.lvListGroup);
         btnAddEmployee = (FloatingActionButton) findViewById(R.id.btnAdd);
@@ -106,9 +109,21 @@ public class MainActivity extends AppCompatActivity {
             String nameGroup = listNameGroup.get(i).toString();
             listGroup.add(new Group(nameGroup,handle.getCountEmployeeInGroup(nameGroup)));
         }
-        ListGroupAdapter adapter = new ListGroupAdapter(this,R.layout.item_list_group,listGroup);
+        final ListGroupAdapter adapter = new ListGroupAdapter(this,R.layout.item_list_group,listGroup);
         lvListGroup.setAdapter(adapter);
 
+        svGroup.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
     }
     private void addListener()

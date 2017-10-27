@@ -46,6 +46,7 @@ public class ListSalaryAdapter extends ArrayAdapter<EmployeeModel> {
             convertView = LayoutInflater.from(context).inflate(resource,parent,false);
             viewHolder.ivAvatar = convertView.findViewById(R.id.ivAvatar);
             viewHolder.tvName = convertView.findViewById(R.id.tvName);
+            viewHolder.tvPreviousMonthSalary= convertView.findViewById(R.id.tvPreviousMonthSalary);
             viewHolder.tvDaySalary = convertView.findViewById(R.id.tvSalary);
             viewHolder.tvTotalSalary = convertView.findViewById(R.id.tvMonthSalary);
             convertView.setTag(convertView);
@@ -54,6 +55,7 @@ public class ListSalaryAdapter extends ArrayAdapter<EmployeeModel> {
             viewHolder = (ViewHolder) convertView.getTag();
 
         viewHolder.tvName.setText("Name: "+listEmployee.get(position).getName());
+        viewHolder.tvPreviousMonthSalary.setText("Previous Month Salary: "+listEmployee.get(position).getPreviousSalary());
         viewHolder.tvDaySalary.setText("Salary (/day): "+listEmployee.get(position).getDaySalary());
         viewHolder.tvTotalSalary.setTextColor(Color.RED);
         viewHolder.tvTotalSalary.setText("Month Salary: "+listEmployee.get(position).getDaySalary());
@@ -73,6 +75,7 @@ public class ListSalaryAdapter extends ArrayAdapter<EmployeeModel> {
     {
         ImageView ivAvatar;
         TextView tvName;
+        TextView tvPreviousMonthSalary;
         TextView tvDaySalary;
         TextView tvTotalSalary;
 
