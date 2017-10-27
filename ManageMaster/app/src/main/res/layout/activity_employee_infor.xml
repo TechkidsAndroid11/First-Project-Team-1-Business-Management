@@ -43,7 +43,7 @@
                 android:textColor="@color/textColor"
                 android:layout_marginTop="@dimen/def_margin_text"
                 android:layout_below="@+id/tvName"
-                android:text="Giớ tính: "
+                android:text="Giới tính: "
                 android:id="@+id/tvGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
