@@ -35,9 +35,12 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".activities.SummaryActivity"></activity>
-        <activity android:name=".activities.EmployeeSalaryActivity"></activity>
-        <service android:name=".models.AlarmService"/>
+        <activity android:name=".activities.SummaryActivity" />
+        <activity android:name=".activities.EmployeeSalaryActivity" />
+
+        <service android:name=".models.AlarmService" />
+
+        <activity android:name=".activities.EmployeeInforActivity"></activity>
     </application>
 
 </manifest>

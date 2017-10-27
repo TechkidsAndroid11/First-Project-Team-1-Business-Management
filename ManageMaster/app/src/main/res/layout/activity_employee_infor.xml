@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:paddingLeft="20dp"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:weightSum="10"
+        android:orientation="horizontal"
+        android:layout_weight="4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <ImageView
+            android:background="#2af5e1"
+            android:layout_weight="3.5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:layout_marginLeft="@dimen/def_margin"
+            android:layout_weight="6.5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:textSize="16sp"
+                android:textColor="@color/textColor"
+                android:layout_marginTop="10dp"
+                android:id="@+id/tvName"
+                android:text="Name: "
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="@color/textColor"
+                android:layout_marginTop="@dimen/def_margin_text"
+                android:layout_below="@+id/tvName"
+                android:text="Gender: "
+                android:id="@+id/tvGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="@color/textColor"
+                android:layout_marginTop="@dimen/def_margin_text"
+                android:layout_below="@id/tvGender"
+                android:text="Birth Day: "
+                android:id="@+id/tvDOB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="@color/textColor"
+                android:layout_marginTop="@dimen/def_margin_text"
+                android:layout_below="@id/tvDOB"
+                android:text="Phone: "
+                android:id="@+id/tvPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="@color/textColor"
+                android:layout_marginTop="@dimen/def_margin_text"
+                android:layout_below="@id/tvPhone"
+                android:text="Group: "
+                android:id="@+id/tvGroupName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="@color/textColor"
+                android:layout_marginTop="@dimen/def_margin_text"
+                android:layout_below="@id/tvGroupName"
+                android:text="Salary (/day): "
+                android:id="@+id/tvSalary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_weight="6"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            android:textColor="@color/textColor"
+            android:id="@+id/tvAddress"
+            android:text="Address: "
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="@dimen/def_margin_text"
+            android:layout_below="@+id/tvAddress"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/textColor"
+            android:id="@+id/tvFirstDayWork"
+            android:text="First Day Work: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="@dimen/def_margin_text"
+            android:layout_below="@+id/tvFirstDayWork"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/textColor"
+            android:id="@+id/tvExp"
+            android:text="Experience: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/tvExp"
+            android:layout_marginLeft="20dp"
+            android:textColor="#f50303"
+            android:id="@+id/tvPreviousMonthSalary"
+            android:text="Previous Moth Salary: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>

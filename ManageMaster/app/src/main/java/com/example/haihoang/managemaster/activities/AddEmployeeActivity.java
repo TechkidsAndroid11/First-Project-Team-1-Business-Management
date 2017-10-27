@@ -50,7 +50,7 @@ public class AddEmployeeActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_employee);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.custom_action_bar_home);
+        getSupportActionBar().setCustomView(R.layout.custom_action_bar_add_employee);
 
         setupUI();
         setAdapterForAutoCompleteTextView();
