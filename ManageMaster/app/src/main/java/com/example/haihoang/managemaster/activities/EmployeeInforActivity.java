@@ -38,6 +38,7 @@ public class EmployeeInforActivity extends AppCompatActivity {
         tvLastSalary = (TextView) findViewById(R.id.tvPreviousMonthSalary);
         ivImage = (ImageView) findViewById(R.id.ivAvatar);
     }
+
     private void setData() {
         tvname.setText(tvname.getText()+" "+empl.getName());
         tvgender.setText(tvgender.getText()+" "+(empl.getGender()==0?"Nữ":"Nam"));

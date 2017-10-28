@@ -1,16 +1,12 @@
 package com.example.haihoang.managemaster.activities;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,18 +14,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextClock;
-import android.widget.Toast;
 
 import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.adapters.ListGroupAdapter;
 import com.example.haihoang.managemaster.databases.DatabaseHandle;
-import com.example.haihoang.managemaster.models.AlarmService;
 import com.example.haihoang.managemaster.models.Group;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class SummaryActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -79,21 +70,8 @@ public class SummaryActivity extends AppCompatActivity {
         btnAddEmployee = (FloatingActionButton) findViewById(R.id.btnAdd);
         tcCurrenTime = (TextClock) findViewById(R.id.tcCurrentTime);
 
-        //myThread = new Thread(new TimeRunner());
-        //myThread.start();
     }
 
-    //    private void getTime(){
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                Date dt = new Date();
-//                DateFormat sb = new SimpleDateFormat("dd/MM/yyyy");
-//                String curTime = "Today: "+ sb.format(dt);
-//                tvcurrentTime.setText(curTime);
-//            }
-//        });
-//    }
     private void setAdapter()
     {
         DatabaseHandle handle = DatabaseHandle.getInstance(this);

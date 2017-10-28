@@ -135,11 +135,12 @@ public class DatabaseHandle extends SQLiteOpenHelper{
     public ArrayList<EmployeeModel> getAllEmployeeByGroup(String groupName)
     {
         ArrayList<EmployeeModel> listEmployee = new ArrayList<>();
-        String sql="select * from Employee where groupName= '"+groupName+"' ";
+        String sql="select * from Employee where groupName = '"+groupName+"' ";
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(sql,null);
         if (cursor != null) {
             cursor.moveToFirst();
+            Log.d(TAG, "getAllEmployeeByGroup: " + cursor.getCount() + " " + cursor.getColumnCount());
             while (!cursor.isAfterLast()) {
                 int id = cursor.getInt(0);
                 String name = cursor.getString(1);

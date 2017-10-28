@@ -24,7 +24,7 @@ public class EmployeeSalaryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_summary);
+        setContentView(R.layout.activity_list_employee);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_summary);
 
@@ -34,7 +34,7 @@ public class EmployeeSalaryActivity extends AppCompatActivity {
     }
 
     private void setupUI() {
-        lvListSalary = (ListView) findViewById(R.id.lvListSalary);
+        lvListSalary = (ListView) findViewById(R.id.lvListEmployee);
     }
 
     private void getData() {
