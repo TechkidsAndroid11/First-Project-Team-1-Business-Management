@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextClock;
 
 import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.adapters.ListGroupAdapter;
@@ -30,14 +29,13 @@ public class SummaryActivity extends AppCompatActivity {
     ArrayList<String> listNameGroup;
     private ListView lvListGroup;
     Thread myThread = null;
-    private TextClock tcCurrenTime;
     private String myDate;
     private SearchView svGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list_employee);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_summary);
 
@@ -65,10 +63,8 @@ public class SummaryActivity extends AppCompatActivity {
     }
 
     private void setupUI() {
-        svGroup=(SearchView) findViewById(R.id.svGroup);
-        lvListGroup = (ListView) findViewById(R.id.lvListGroup);
-        btnAddEmployee = (FloatingActionButton) findViewById(R.id.btnAdd);
-        tcCurrenTime = (TextClock) findViewById(R.id.tcCurrentTime);
+        svGroup=(SearchView) findViewById(R.id.svListEmployee);
+        lvListGroup = (ListView) findViewById(R.id.lvListEmployee);
 
     }
 
@@ -101,13 +97,6 @@ public class SummaryActivity extends AppCompatActivity {
     private void addListener()
     {
 
-        btnAddEmployee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SummaryActivity.this, AddEmployeeActivity.class);
-                startActivity(intent);
-            }
-        });
 
         lvListGroup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -159,23 +148,4 @@ public class SummaryActivity extends AppCompatActivity {
 
 
 
-//    class TimeRunner implements Runnable{
-//
-//    }
-//
-//    private void setupUI() {
-//
-//        @Override
-//        public void run() {
-//            while(!Thread.currentThread().isInterrupted()){
-//                getTime();
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }catch (Exception e){}
-//            }
-//        }
-//
-//    }
 }
