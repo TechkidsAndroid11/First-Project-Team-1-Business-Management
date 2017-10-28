@@ -40,7 +40,8 @@
 
         <service android:name=".models.AlarmService" />
 
-        <activity android:name=".activities.EmployeeInforActivity"></activity>
+        <activity android:name=".activities.EmployeeInforActivity" />
+        <activity android:name=".activities.UpdateEmployee"></activity>
     </application>
 
 </manifest>
