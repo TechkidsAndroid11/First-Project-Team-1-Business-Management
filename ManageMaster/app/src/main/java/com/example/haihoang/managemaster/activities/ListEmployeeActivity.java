@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.adapters.ListEmployeeAdapter;
@@ -20,9 +22,12 @@ import com.example.haihoang.managemaster.models.EmployeeModel;
 import java.util.ArrayList;
 
 public class ListEmployeeActivity extends AppCompatActivity {
+    private static final String TAG = "ListEmployeeActivity";
+    public static final String EMPLOYEE = "employee";
     private ListView lvListEmployee;
     private String nameGroup;
     private SearchView svEmployee;
+    private TextView tvGroupName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,7 @@ public class ListEmployeeActivity extends AppCompatActivity {
         setupUI();
         getDataIntent();
         addListener();
+        Log.d(TAG, "onCreate: ");
     }
 
     @Override
@@ -79,17 +85,30 @@ public class ListEmployeeActivity extends AppCompatActivity {
                 return false;
             }
         });
+        lvListEmployee.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                final DatabaseHandle handle = DatabaseHandle.getInstance(ListEmployeeActivity.this);
+                final ArrayList<EmployeeModel> listEmployee = handle.getAllEmployeeByGroup(nameGroup);
+                Intent intent = new Intent(ListEmployeeActivity.this,EmployeeInforActivity.class);
+                intent.putExtra(EMPLOYEE,listEmployee.get(position));
+                startActivity(intent);
+            }
+        });
     }
 
     private void setupUI() {
         svEmployee= (SearchView) findViewById(R.id.svListEmployee);
         lvListEmployee = (ListView) findViewById(R.id.lvListEmployee);
+        tvGroupName = (TextView) findViewById(R.id.txtGroupName);
     }
 
     public void getDataIntent()
     {
         Intent intent = getIntent();
         nameGroup = intent.getStringExtra(ListGroupAdapter.NAME_GROUP);
+
+        tvGroupName.setText(nameGroup);
         DatabaseHandle handle = DatabaseHandle.getInstance(this);
         ArrayList<EmployeeModel> listEmployee = handle.getAllEmployeeByGroup(nameGroup);
         final ListEmployeeAdapter adapter = new ListEmployeeAdapter(this,R.layout.item_list_employee,listEmployee);

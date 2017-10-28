@@ -58,7 +58,7 @@ public class ListSalaryAdapter extends ArrayAdapter<EmployeeModel> {
         viewHolder.tvPreviousMonthSalary.setText("Previous Month Salary: "+listEmployee.get(position).getPreviousSalary());
         viewHolder.tvDaySalary.setText("Salary (/day): "+listEmployee.get(position).getDaySalary());
         viewHolder.tvTotalSalary.setTextColor(Color.RED);
-        viewHolder.tvTotalSalary.setText("Month Salary: "+listEmployee.get(position).getDaySalary());
+        viewHolder.tvTotalSalary.setText("Month Salary: "+listEmployee.get(position).getTotalSalary());
 
         String[] base64 = listEmployee.get(position).getAvatar().split(",");
         Bitmap bitmap = BitmapFactory.decodeByteArray(

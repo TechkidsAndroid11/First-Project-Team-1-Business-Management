@@ -283,12 +283,19 @@ public class DatabaseHandle extends SQLiteOpenHelper{
     public void updateStatus(EmployeeModel model)
     {
         String sql="";
+        int daySalary = model.getDaySalary();
+        int totalSalary = model.getTotalSalary();
+        //totalSalary+=daySalary;
         if(model.getStatus()==0)
         {
-            sql="update Employee set status=1 where id="+model.getId()+"";
+            totalSalary+=daySalary;
+            sql="update Employee set status=1,TotalSalary= "+totalSalary+" where id="+model.getId()+"";
         }
         else
-            sql="update Employee set status=0 where id="+model.getId()+"";
+        {
+            totalSalary-=daySalary;
+            sql="update Employee set status=0,TotalSalary= "+totalSalary+" where id="+model.getId()+"";
+        }
         SQLiteDatabase sqLiteDatabase= getWritableDatabase();
         sqLiteDatabase.execSQL(sql);
         sqLiteDatabase.close();

@@ -16,10 +16,12 @@
         android:layout_height="0dp">
 
         <ImageView
+            android:id="@+id/ivAvatar"
             android:background="#2af5e1"
             android:layout_weight="3.5"
             android:layout_width="0dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
 
         <RelativeLayout
             android:layout_marginLeft="@dimen/def_margin"
@@ -32,7 +34,7 @@
                 android:textColor="@color/textColor"
                 android:layout_marginTop="10dp"
                 android:id="@+id/tvName"
-                android:text="Name: "
+                android:text="Họ và tên: "
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -41,7 +43,7 @@
                 android:textColor="@color/textColor"
                 android:layout_marginTop="@dimen/def_margin_text"
                 android:layout_below="@+id/tvName"
-                android:text="Gender: "
+                android:text="Giới tính: "
                 android:id="@+id/tvGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -50,7 +52,7 @@
                 android:textColor="@color/textColor"
                 android:layout_marginTop="@dimen/def_margin_text"
                 android:layout_below="@id/tvGender"
-                android:text="Birth Day: "
+                android:text="Ngày sinh: "
                 android:id="@+id/tvDOB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -59,7 +61,7 @@
                 android:textColor="@color/textColor"
                 android:layout_marginTop="@dimen/def_margin_text"
                 android:layout_below="@id/tvDOB"
-                android:text="Phone: "
+                android:text="Số điện thoại: "
                 android:id="@+id/tvPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -94,7 +96,7 @@
         <TextView
             android:textColor="@color/textColor"
             android:id="@+id/tvAddress"
-            android:text="Address: "
+            android:text="Địa chỉ: "
             android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -105,7 +107,7 @@
             android:layout_marginLeft="20dp"
             android:textColor="@color/textColor"
             android:id="@+id/tvFirstDayWork"
-            android:text="First Day Work: "
+            android:text="Bắt đầu làm: "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -127,7 +129,7 @@
             android:layout_marginLeft="20dp"
             android:textColor="#f50303"
             android:id="@+id/tvPreviousMonthSalary"
-            android:text="Previous Moth Salary: "
+            android:text="Lương tháng trước: "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

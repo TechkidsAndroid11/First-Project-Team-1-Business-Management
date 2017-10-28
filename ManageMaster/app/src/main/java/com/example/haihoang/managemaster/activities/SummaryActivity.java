@@ -53,7 +53,7 @@ public class SummaryActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: ");
 //        setAdapter();
 //        addListener();
-        createNotification();
+
 
     }
     @Override
@@ -63,7 +63,7 @@ public class SummaryActivity extends AppCompatActivity {
         setupUI();
         setAdapter();
         addListener();
-        checkDate();
+
     }
 
 
@@ -178,46 +178,8 @@ public class SummaryActivity extends AppCompatActivity {
         intent.putExtra(ListGroupAdapter.NAME_GROUP,nameGroup);
         startActivity(intent);
     }
-    private void createNotification() {
-        Calendar cal = Calendar.getInstance();
-        //tạo thông báo vào 7 giờ sáng
-        cal.set(Calendar.HOUR_OF_DAY,7);
-        cal.set(Calendar.MINUTE,0);
-        cal.set(Calendar.SECOND,0);
 
-        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, AlarmService.class);
-        PendingIntent pendingIntent = PendingIntent.getService(this,0,intent,0);
 
-        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),1000,pendingIntent);
-
-    }
-    private void checkDate() {
-        SharedPreferences sharedPreferences = getSharedPreferences("my_date",MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        myDate = sharedPreferences.getString("date","");
-        String currtime = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-        if(myDate.equals("")){
-            editor.putString("date",currtime);
-            myDate = currtime;
-            editor.commit();
-        }else{
-            if(getDay(myDate)!= getDay(currtime)){
-                editor.clear();
-                editor.putString("date",currtime);
-                editor.commit();
-                //Reset Absent
-                DatabaseHandle handle = DatabaseHandle.getInstance(this);
-                handle.resetStatusAllAbsent();
-
-                Toast.makeText(this,"Sang ngày mới!! Reset Absent.",Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-    public int getDay(String s){
-        String []aday = s.split("/");
-        return Integer.parseInt(aday[0]);
-    }
 
 //    class TimeRunner implements Runnable{
 //

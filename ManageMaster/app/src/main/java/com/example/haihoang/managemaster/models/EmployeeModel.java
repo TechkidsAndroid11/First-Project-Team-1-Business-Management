@@ -1,10 +1,12 @@
 package com.example.haihoang.managemaster.models;
 
+import java.io.Serializable;
+
 /**
  * Created by Linh Phan on 10/23/2017.
  */
 
-public class EmployeeModel {
+public class EmployeeModel implements Serializable {
     int id;
     String name;
     int gender;
