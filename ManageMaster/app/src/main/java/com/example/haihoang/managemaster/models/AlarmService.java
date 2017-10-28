@@ -2,6 +2,7 @@ package com.example.haihoang.managemaster.models;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
@@ -10,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.haihoang.managemaster.R;
+import com.example.haihoang.managemaster.activities.SummaryActivity;
 
 import java.util.Date;
 
@@ -31,9 +33,13 @@ public class AlarmService extends Service {
         Date date = new Date();
         Log.d(TAG, "onStartCommand: "+date.getDate());
         if(date.getDate() == 1){
+            Intent intent1 = new Intent(this, SummaryActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this,(int)System.currentTimeMillis(),intent1,0);
+
             Notification noti = new Notification.Builder(this).setContentTitle("New month!!")
                     .setContentText("Tổng kết lương thôi bạn ơi!!")
-                    .setSmallIcon(R.drawable.ic_attach_money_wthite_24dp).build();
+                    .setSmallIcon(R.drawable.ic_attach_money_wthite_24dp)
+                    .setContentIntent(pendingIntent).build();
             NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
             manager.notify(0,noti);
