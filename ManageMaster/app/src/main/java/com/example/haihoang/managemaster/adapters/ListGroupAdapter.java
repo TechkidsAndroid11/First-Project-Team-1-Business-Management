@@ -106,6 +106,7 @@ public class ListGroupAdapter extends BaseAdapter implements Filterable {
                     {
                         Group p=new Group(filterList.get(i).getName(),filterList.get(i).getNumberOfPerson());
                         filters.add(p);
+
                     }
                 }
 
