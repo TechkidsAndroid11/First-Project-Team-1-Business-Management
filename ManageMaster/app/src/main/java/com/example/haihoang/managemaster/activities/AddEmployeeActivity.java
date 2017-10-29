@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.databases.DatabaseHandle;
 import com.example.haihoang.managemaster.models.EmployeeModel;
+import com.example.haihoang.managemaster.utils.CircleTransform;
 import com.example.haihoang.managemaster.utils.ImageUtils;
 import com.squareup.picasso.Picasso;
 
@@ -48,7 +49,7 @@ public class AddEmployeeActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_employee);
+        setContentView(R.layout.activity_add_employee1);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_add_employee);
 
@@ -182,6 +183,7 @@ public class AddEmployeeActivity extends AppCompatActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        CircleTransform circleTransform = new CircleTransform();
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
                 if (data != null) {
@@ -198,9 +200,11 @@ public class AddEmployeeActivity extends AppCompatActivity{
 
                 String tempBase64 = imU.encodeTobase64(bitmap);
                 base64 = ImageUtils.resizeBase64Image(tempBase64);
+                imgAvatar.setPadding(0,0,0,0);
 
-                Picasso.with(AddEmployeeActivity.this).load(data.getData()).noPlaceholder().fit().centerCrop()
-                        .into((ImageView) findViewById(R.id.ivAddImage));
+                circleTransform.transform(bitmap);
+                Picasso.with(AddEmployeeActivity.this).load(data.getData()).transform(new CircleTransform()).into((ImageView) findViewById(R.id.ivAddImage));
+
             }
             else if(requestCode == 2){
                 Log.e("check request", "I'm here 222");
@@ -213,7 +217,9 @@ public class AddEmployeeActivity extends AppCompatActivity{
                         String tempBase64 = imU.encodeTobase64(bitmap);
                         base64 = ImageUtils.resizeBase64Image(tempBase64);
                     }
-                Picasso.with(AddEmployeeActivity.this).load(uri).noPlaceholder().centerCrop().fit().into((ImageView) findViewById(R.id.ivAddImage));
+                imgAvatar.setPadding(0,0,0,0);
+                circleTransform.transform(bitmap);
+                Picasso.with(AddEmployeeActivity.this).load(uri).transform(new CircleTransform()).into((ImageView) findViewById(R.id.ivAddImage));
 
             }
 
