@@ -1,35 +1,25 @@
 package com.example.haihoang.managemaster.activities;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextClock;
-import android.widget.Toast;
 
 import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.adapters.ListGroupAdapter;
 import com.example.haihoang.managemaster.databases.DatabaseHandle;
-import com.example.haihoang.managemaster.models.AlarmService;
 import com.example.haihoang.managemaster.models.Group;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class SummaryActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -39,14 +29,13 @@ public class SummaryActivity extends AppCompatActivity {
     ArrayList<String> listNameGroup;
     private ListView lvListGroup;
     Thread myThread = null;
-    private TextClock tcCurrenTime;
     private String myDate;
     private SearchView svGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list_employee);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_summary);
 
@@ -73,15 +62,18 @@ public class SummaryActivity extends AppCompatActivity {
     }
 
     private void setupUI() {
-        svGroup=(SearchView) findViewById(R.id.svGroup);
-        lvListGroup = (ListView) findViewById(R.id.lvListGroup);
-        btnAddEmployee = (FloatingActionButton) findViewById(R.id.btnAdd);
-        tcCurrenTime = (TextClock) findViewById(R.id.tcCurrentTime);
+        svGroup=(SearchView) findViewById(R.id.svListEmployee);
+        lvListGroup = (ListView) findViewById(R.id.lvListEmployee);
 
+<<<<<<< HEAD
 
     }
 
 
+=======
+    }
+
+>>>>>>> e34a04ae8b8dad797c9aaa269261df72c0e1d92c
     private void setAdapter()
     {
         DatabaseHandle handle = DatabaseHandle.getInstance(this);
@@ -111,13 +103,6 @@ public class SummaryActivity extends AppCompatActivity {
     private void addListener()
     {
 
-        btnAddEmployee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SummaryActivity.this, AddEmployeeActivity.class);
-                startActivity(intent);
-            }
-        });
 
         lvListGroup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -169,5 +154,8 @@ public class SummaryActivity extends AppCompatActivity {
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e34a04ae8b8dad797c9aaa269261df72c0e1d92c
 }

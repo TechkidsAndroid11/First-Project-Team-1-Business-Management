@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.haihoang.managemaster.models.EmployeeModel;
+import com.example.haihoang.managemaster.models.Group;
 
 import java.util.ArrayList;
 
@@ -44,13 +45,16 @@ public class DatabaseHandle extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d(TAG, "onCreate: ");
-        String sqlQuery = "CREATE TABLE Employee (Id INTEGER PRIMARY KEY AUTOINCREMENT,Name text, Gender integer, DOB text,Phone text, Address text,Avatar text, Experience text,GroupName text, Firstdaywork text, DaySalary integer, TotalSalary integer,PreviousMonthSalary integer,Status integer,Note text);";
+        String sqlQuery = "CREATE TABLE Employee (Id INTEGER PRIMARY KEY AUTOINCREMENT,Name text, " +
+                "Gender integer, DOB text,Phone text, Address text,Avatar text, Experience text,GroupName text," +
+                " Firstdaywork text, DaySalary integer, TotalSalary integer," +
+                "PreviousMonthSalary integer,Status integer,Note text);";
         db.execSQL(sqlQuery);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXITS Employee");
+        db.execSQL("DROP TABLE IF EXISTS Employee");
         onCreate(db);
     }
     public static DatabaseHandle getInstance(Context context)
@@ -135,11 +139,12 @@ public class DatabaseHandle extends SQLiteOpenHelper{
     public ArrayList<EmployeeModel> getAllEmployeeByGroup(String groupName)
     {
         ArrayList<EmployeeModel> listEmployee = new ArrayList<>();
-        String sql="select * from Employee where groupName= '"+groupName+"' ";
+        String sql="select * from Employee where groupName = '"+groupName+"' ";
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(sql,null);
         if (cursor != null) {
             cursor.moveToFirst();
+            Log.d(TAG, "getAllEmployeeByGroup: " + cursor.getCount() + " " + cursor.getColumnCount());
             while (!cursor.isAfterLast()) {
                 int id = cursor.getInt(0);
                 String name = cursor.getString(1);
@@ -307,32 +312,48 @@ public class DatabaseHandle extends SQLiteOpenHelper{
         sqLiteDatabase.execSQL(sql);
         sqLiteDatabase.close();
     }
-    public void addSalarytoTotal(EmployeeModel model)
+    public void updateEmployee(EmployeeModel model)
     {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        int id = model.getId();
+        String name = model.getName();
+        int gender = model.getGender();
+        String date = model.getDate();
+        String phone =model.getPhone();
+        String address = model.getAddress();
+        String avatar = model.getAvatar();
+        String exp = model.getExperience();
+        String group = model.getGroup();
+        String firstDayWork = model.getFirstDayWork();
         int daySalary = model.getDaySalary();
         int totalSalary = model.getTotalSalary();
-        totalSalary+=daySalary;
-        String sql="update Employee set TotalSalary = "+totalSalary+" where id="+model.getId()+"";
-        SQLiteDatabase sqLiteDatabase =getWritableDatabase();
+        int previousMonthSalary = model.getPreviousSalary();
+        int status = model.getStatus();
+        String note = model.getNote();
+        String sql="update Employee set name='"+name+"',gender="+gender+",DOB='"+date+"',phone='"+phone+"',address='"+address+"'," +
+                "avatar='"+avatar+"',experience='"+exp+"',groupname='"+group+"',firstDaywork='"+firstDayWork+"',daySalary="+daySalary+"," +
+                "totalSalary='"+totalSalary+"',previousMonthSalary='"+previousMonthSalary+"',status='"+status+"',note='"+note+"' " +
+                "where id="+id+" ";
         sqLiteDatabase.execSQL(sql);
         sqLiteDatabase.close();
     }
-    public void minusSalarytoTotal(EmployeeModel model)
+    public void updatePreviousSalaryAndTotalSalary(EmployeeModel model)
     {
-        int daySalary = model.getDaySalary();
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        int id = model.getId();
         int totalSalary = model.getTotalSalary();
-        totalSalary-=daySalary;
-        String sql="update Employee set TotalSalary = "+totalSalary+" where id="+model.getId()+"";
-        SQLiteDatabase sqLiteDatabase =getWritableDatabase();
+        int previousMonthSalary = model.getPreviousSalary();
+        String sql="update Employee set previousMonthSalary="+totalSalary+", totalSalary="+0+" where id="+id+"";
+        sqLiteDatabase.execSQL(sql);
+        sqLiteDatabase.close();
+
+    }
+    public void updateGroup(String oldName, String newName)
+    {
+        String sql="update Employee set GroupName='"+newName+"' where GroupName='"+oldName+"'";
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         sqLiteDatabase.execSQL(sql);
         sqLiteDatabase.close();
     }
-//    public void addSalarytoTotal(EmployeeModel model)
-//    {
-//        int totalSalary = model.getTotalSalary();
-//        int toalSalaryAfterAdd = totalSalary+ model.getDaySalary();
-//        String sql="update Employee set TotalSalary = "+toalSalaryAfterAdd ;
-//        SQLiteDatabase sqLiteDatabase= getWritableDatabase();
-//        sqLiteDatabase
-//    }
 }
+

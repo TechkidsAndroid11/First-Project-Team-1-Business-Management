@@ -31,7 +31,7 @@ public class ImageUtils {
         byte[] b = baos.toByteArray();
         String imageEncoded = Base64.encodeToString(b,Base64.DEFAULT);
 
-       // Log.e("base64   ", imageEncoded);
+       Log.e("base64   ", imageEncoded);
         return imageEncoded;
     }
 
@@ -99,6 +99,27 @@ public class ImageUtils {
 
         Bitmap scaleBitmap = Bitmap.createScaledBitmap(bitmap, screenWith, (int) (screenWith/ratio), false);
         return scaleBitmap;
+    }
+
+    public static String resizeBase64Image(String base64image){
+        byte [] encodeByte=Base64.decode(base64image.getBytes(),Base64.DEFAULT);
+        BitmapFactory.Options options=new BitmapFactory.Options();
+        options.inPurgeable = true;
+        Bitmap image = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length,options);
+
+
+        if(image.getHeight() <= 400 && image.getWidth() <= 400){
+            return base64image;
+        }
+        image = Bitmap.createScaledBitmap(image, 250, 400, false);
+
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG,100, baos);
+
+        byte [] b=baos.toByteArray();
+        System.gc();
+        return Base64.encodeToString(b, Base64.NO_WRAP);
+
     }
 
 }

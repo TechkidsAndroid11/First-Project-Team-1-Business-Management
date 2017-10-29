@@ -82,7 +82,7 @@ public class ListEmployeeActivity extends AppCompatActivity {
                 });
 
                 builder.show();
-                return false;
+                return true;
             }
         });
         lvListEmployee.setOnItemClickListener(new AdapterView.OnItemClickListener() {

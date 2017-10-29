@@ -196,7 +196,8 @@ public class AddEmployeeActivity extends AppCompatActivity{
 
                 ImageUtils imU = new ImageUtils();
 
-                base64 = imU.encodeTobase64(bitmap);
+                String tempBase64 = imU.encodeTobase64(bitmap);
+                base64 = ImageUtils.resizeBase64Image(tempBase64);
 
                 Picasso.with(AddEmployeeActivity.this).load(data.getData()).noPlaceholder().fit().centerCrop()
                         .into((ImageView) findViewById(R.id.ivAddImage));
@@ -209,7 +210,8 @@ public class AddEmployeeActivity extends AppCompatActivity{
 
                         ImageUtils imU = new ImageUtils();
 
-                        base64 = imU.encodeTobase64(bitmap);
+                        String tempBase64 = imU.encodeTobase64(bitmap);
+                        base64 = ImageUtils.resizeBase64Image(tempBase64);
                     }
                 Picasso.with(AddEmployeeActivity.this).load(uri).noPlaceholder().centerCrop().fit().into((ImageView) findViewById(R.id.ivAddImage));
 
@@ -289,6 +291,8 @@ public class AddEmployeeActivity extends AppCompatActivity{
         DatabaseHandle.getInstance(AddEmployeeActivity.this).addEmployee(employeeModel);
         Toast.makeText(AddEmployeeActivity.this, "Them nhan vien thanh cong!", Toast.LENGTH_LONG).show();
         clearEditText();
+        Intent intent = new Intent(AddEmployeeActivity.this, MainActivity.class);
+        startActivity(intent);
 
     }
 
