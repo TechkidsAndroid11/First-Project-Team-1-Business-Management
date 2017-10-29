@@ -52,7 +52,7 @@ public class AddEmployeeActivity extends AppCompatActivity{
         setContentView(R.layout.activity_add_employee1);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_add_employee);
-
+        getSupportActionBar().setElevation(0);
         setupUI();
         setAdapterForAutoCompleteTextView();
         imgAvatar.setOnClickListener(new View.OnClickListener() {
