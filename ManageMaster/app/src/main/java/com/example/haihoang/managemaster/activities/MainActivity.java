@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+
                     }
                 });
                 builder.setNegativeButton("Update", new DialogInterface.OnClickListener() {
@@ -165,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+                builder.setCancelable(true);
                 builder.show();
                 return true; // ko cho phép sự kiện nào hoạt động song song cùng con này
             }

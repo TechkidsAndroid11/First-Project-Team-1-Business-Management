@@ -1,5 +1,6 @@
 package com.example.haihoang.managemaster.databases;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -30,7 +31,7 @@ public class DatabaseHandle extends SQLiteOpenHelper{
     public static String FRISTDAYWORK = "firstdaywork";
     public static String DAYSALARY = "daysalary";
     public static String TOTALSALARY = "totalsalary";
-    public static String PREVIOUSSALARY = "previoussalary";
+    public static String PreviousMonthSalary = "PreviousMonthSalary";
     public static String STATUS = "status";
     public static String NOTE = "note";
     private static DatabaseHandle databaseHandle;
@@ -299,7 +300,7 @@ public class DatabaseHandle extends SQLiteOpenHelper{
         else
         {
             totalSalary-=daySalary;
-            sql="update Employee set status=0,TotalSalary= "+totalSalary+" where id="+model.getId()+"";
+            sql="update Employee set status=0,TotalSalary= "+totalSalary+" where id="+model.getId()+" ";
         }
         SQLiteDatabase sqLiteDatabase= getWritableDatabase();
         sqLiteDatabase.execSQL(sql);
@@ -321,7 +322,7 @@ public class DatabaseHandle extends SQLiteOpenHelper{
         String date = model.getDate();
         String phone =model.getPhone();
         String address = model.getAddress();
-        String avatar = model.getAvatar();
+        String avatar =model.getAvatar();
         String exp = model.getExperience();
         String group = model.getGroup();
         String firstDayWork = model.getFirstDayWork();
@@ -330,11 +331,40 @@ public class DatabaseHandle extends SQLiteOpenHelper{
         int previousMonthSalary = model.getPreviousSalary();
         int status = model.getStatus();
         String note = model.getNote();
-        String sql="update Employee set name='"+name+"',gender="+gender+",DOB='"+date+"',phone='"+phone+"',address='"+address+"'," +
-                "avatar='"+avatar+"',experience='"+exp+"',groupname='"+group+"',firstDaywork='"+firstDayWork+"',daySalary="+daySalary+"," +
-                "totalSalary='"+totalSalary+"',previousMonthSalary='"+previousMonthSalary+"',status='"+status+"',note='"+note+"' " +
-                "where id="+id+" ";
-        sqLiteDatabase.execSQL(sql);
+
+        Log.d(TAG, "updateEmployee: ID="+id);
+        Log.d(TAG, "updateEmployee: "+name);
+        Log.d(TAG, "updateEmployee: "+gender);
+        Log.d(TAG, "updateEmployee: "+date);
+        Log.d(TAG, "updateEmployee: "+phone);
+        Log.d(TAG, "updateEmployee: "+address);
+        Log.d(TAG, "updateEmployee: "+avatar);
+        Log.d(TAG, "updateEmployee: "+group);
+        Log.d(TAG, "updateEmployee: "+firstDayWork);
+        Log.d(TAG, "updateEmployee: "+totalSalary);
+        Log.d(TAG, "updateEmployee: "+previousMonthSalary);
+        Log.d(TAG, "updateEmployee: "+status);
+        Log.d(TAG, "updateEmployee: "+note);
+
+        ContentValues value = new ContentValues();
+        value.put(NAME,name);
+        value.put(GENDER,gender);
+        value.put(DOB,date);
+        value.put(PHONE,phone);
+        value.put(ADDRESS,address);
+        value.put(AVATAR,avatar);
+        value.put(EXPERIENCE,exp);
+        value.put(GROUPNAME,group);
+        value.put(FRISTDAYWORK,firstDayWork);
+        value.put(DAYSALARY,daySalary);
+        value.put(TOTALSALARY,totalSalary);
+        value.put(PreviousMonthSalary,previousMonthSalary);
+        value.put(STATUS,status);
+        value.put(NOTE,note);
+        sqLiteDatabase.update("Employee",value,ID+"=?",new String[]{String.valueOf(model.getId())});
+
+        Log.d(TAG, "updateEmployee: update ok");
+       //sqLiteDatabase.execSQL(sql);
         sqLiteDatabase.close();
     }
     public void updatePreviousSalaryAndTotalSalary(EmployeeModel model)

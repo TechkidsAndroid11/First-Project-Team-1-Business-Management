@@ -77,10 +77,12 @@ public class ListEmployeeActivity extends AppCompatActivity {
                 builder.setNegativeButton("Update", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        Intent intent = new Intent(ListEmployeeActivity.this,UpdateEmployee.class);
+                        intent.putExtra("Employee",listEmployee.get(position));
+                        startActivity(intent);
                     }
                 });
-
+                builder.setCancelable(true);
                 builder.show();
                 return true;
             }
