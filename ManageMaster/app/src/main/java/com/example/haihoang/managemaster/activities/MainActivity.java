@@ -193,13 +193,13 @@ public class MainActivity extends AppCompatActivity {
     }
     private void createNotification() {
         Log.d(TAG, "createNotification: ");
-        Calendar cal = Calendar.getInstance();
+//        Calendar cal = Calendar.getInstance();
 //        cal.clear();
 //        //
 //        cal.set(Calendar.YEAR,2016);
 //        cal.set(Calendar.MONTH,0);
 //        cal.set(Calendar.DATE,1);
-        Log.d(TAG, "createNotification: "+cal.toString());
+//        Log.d(TAG, "createNotification: "+cal.toString());
         AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmService.class);
         PendingIntent pendingIntent = PendingIntent.getService(this,0,intent,0);
