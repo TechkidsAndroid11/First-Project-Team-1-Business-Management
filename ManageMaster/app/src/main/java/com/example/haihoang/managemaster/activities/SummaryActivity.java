@@ -59,7 +59,7 @@ public class SummaryActivity extends AppCompatActivity {
         lvListGroup = (ListView) findViewById(R.id.lvListEmployee);
 
     }
-    
+
 
 
     private void setAdapter()

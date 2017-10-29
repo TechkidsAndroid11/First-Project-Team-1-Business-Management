@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#0099CC</color>
     <color name="colorAccent">#66CCFF</color>
     <color name="background">#FFFFFF</color>
-    <color name="backgroundList">#FAFAFA</color>
+    <color name="backgroundList">#fffefe</color>
     <color name="floatingButton">#66CCFF</color>
     <color name="textColor">#131313</color>
 </resources>

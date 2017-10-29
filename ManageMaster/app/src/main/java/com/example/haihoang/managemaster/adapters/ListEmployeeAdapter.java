@@ -13,14 +13,12 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.databases.DatabaseHandle;
 import com.example.haihoang.managemaster.models.EmployeeModel;
-import com.example.haihoang.managemaster.models.Group;
+import com.example.haihoang.managemaster.utils.CircleTransform;
 
 import java.util.ArrayList;
 
@@ -33,6 +31,7 @@ public class ListEmployeeAdapter extends BaseAdapter implements Filterable {
     private Context context;
     private int resource;
     private ArrayList<EmployeeModel> listEmployee;
+    CircleTransform circleTransform = new CircleTransform();
 
     CustomFilter filter;
     ArrayList<EmployeeModel> filterList;
@@ -68,7 +67,6 @@ public class ListEmployeeAdapter extends BaseAdapter implements Filterable {
             convertView= LayoutInflater.from(context).inflate(resource,parent,false);
             viewHolder.tvName=convertView.findViewById(R.id.tvName);
             viewHolder.tvDate=convertView.findViewById(R.id.tvDOB);
-            viewHolder.tvStartTime=convertView.findViewById(R.id.tvStartTime);
             viewHolder.tvSalary=convertView.findViewById(R.id.tvSalary);
             viewHolder.tvStatus=convertView.findViewById(R.id.btnStatus);
             viewHolder.ivAvatar = convertView.findViewById(R.id.ivAvatar);
@@ -77,10 +75,9 @@ public class ListEmployeeAdapter extends BaseAdapter implements Filterable {
         else
             viewHolder= (ViewHolder) convertView.getTag();
 
-        viewHolder.tvName.setText("Name: "+listEmployee.get(position).getName());
-        viewHolder.tvDate.setText("Date of birth: "+listEmployee.get(position).getDate());
-        viewHolder.tvStartTime.setText("Start Time: "+listEmployee.get(position).getFirstDayWork());
-        viewHolder.tvSalary.setText("Salary (/day): "+listEmployee.get(position).getDaySalary());
+        viewHolder.tvName.setText(listEmployee.get(position).getName());
+        viewHolder.tvDate.setText(listEmployee.get(position).getDate());
+        viewHolder.tvSalary.setText("Lương (/ngày): "+listEmployee.get(position).getDaySalary());
 
         if(listEmployee.get(position).getStatus()==1)
         {
@@ -101,7 +98,9 @@ public class ListEmployeeAdapter extends BaseAdapter implements Filterable {
 
         );
 
-        viewHolder.ivAvatar.setImageBitmap(bitmap);
+        viewHolder.ivAvatar.setImageBitmap(circleTransform.transform(bitmap));
+
+        //Picasso.with(context).load(bitmap).transform(new CircleTransform()).into(viewHolder.ivAvatar);
 
         getCheckStatus(position);
         viewHolder.tvStatus.setOnClickListener(new View.OnClickListener() {
@@ -197,7 +196,6 @@ public class ListEmployeeAdapter extends BaseAdapter implements Filterable {
         private ImageView ivAvatar;
         private TextView tvName;
         private TextView tvDate;
-        private TextView tvStartTime;
         private TextView tvSalary;
         private TextView tvStatus;
 

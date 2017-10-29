@@ -1,5 +1,6 @@
 package com.example.haihoang.managemaster.activities;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,6 +17,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -33,11 +35,13 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class AddEmployeeActivity extends AppCompatActivity{
 
-    ImageView imgAvatar;
+    ImageView imgAvatar, ivPickDate;
     EditText edtName, edtId, edtDOB, edtPhone, edtHomeTown, edtExp, edtSalary;
     AutoCompleteTextView actvGroup;
     RadioGroup radioGender;
@@ -46,10 +50,12 @@ public class AddEmployeeActivity extends AppCompatActivity{
     Bitmap bitmap;
     int gender = 1;
     Uri uri;
+    Calendar cal;
+    Date date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_employee1);
+        setContentView(R.layout.activity_add_employee);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_add_employee);
         getSupportActionBar().setElevation(0);
@@ -88,7 +94,42 @@ public class AddEmployeeActivity extends AppCompatActivity{
             }
         });
 
+        ivPickDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickDateDialog();
+            }
+        });
 
+        cal=Calendar.getInstance();
+        SimpleDateFormat dft=null;
+        dft=new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String strDate=dft.format(cal.getTime());
+        edtDOB.setText(strDate);
+
+    }
+
+    private void pickDateDialog() {
+        DatePickerDialog.OnDateSetListener callback = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                // Set text cho textView
+                edtDOB.setText(day + "/" + (month +1) + "/" + year);
+                //Lưu vết lại ngày mới cập nhật
+                cal.set(year, month, day);
+                date = cal.getTime();
+            }
+        };
+        String s=edtDOB.getText()+"";
+        String strArrtmp[]=s.split("/");
+        int ngay=Integer.parseInt(strArrtmp[0]);
+        int thang=Integer.parseInt(strArrtmp[1]) - 1;
+        int nam=Integer.parseInt(strArrtmp[2]);
+        DatePickerDialog pic=new DatePickerDialog(
+                AddEmployeeActivity.this,
+                callback, nam, thang, ngay);
+        pic.setTitle("Chọn ngày hoàn thành");
+        pic.show();
     }
 
     @Override
@@ -98,16 +139,15 @@ public class AddEmployeeActivity extends AppCompatActivity{
     }
 
     private void setupUI() {
+        ivPickDate = (ImageView) findViewById(R.id.ivPickDate);
         radioGender = (RadioGroup) findViewById(R.id.radio_gender);
         btnDone = (FloatingActionButton) findViewById(R.id.btnDone);
         imgAvatar = (ImageView) findViewById(R.id.ivAddImage);
         edtName = (EditText) findViewById(R.id.edtName);
         edtDOB = (EditText) findViewById(R.id.edtDOB);
-        //edtId = (EditText) findViewById(R.id.edtId);
         edtPhone = (EditText) findViewById(R.id.edtPhone);
         edtHomeTown = (EditText) findViewById(R.id.edtHomeTown);
         edtExp = (EditText) findViewById(R.id.edtExp);
-      //  edtGroup = (EditText) findViewById(R.id.edtGroup);
         edtSalary = (EditText) findViewById(R.id.edtSalary);
         actvGroup= (AutoCompleteTextView) findViewById(R.id.actvGroup);
     }
