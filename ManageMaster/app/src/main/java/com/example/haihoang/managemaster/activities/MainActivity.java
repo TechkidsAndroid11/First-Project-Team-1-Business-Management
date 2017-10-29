@@ -6,11 +6,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-<<<<<<< HEAD
+
 import android.os.SystemClock;
-=======
+
 import android.os.Bundle;
->>>>>>> e34a04ae8b8dad797c9aaa269261df72c0e1d92c
+
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
