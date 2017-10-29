@@ -3,14 +3,12 @@ package com.example.haihoang.managemaster.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -23,13 +21,8 @@ import java.util.ArrayList;
 
 public class SummaryActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    FloatingActionButton btnAddEmployee;
-    private boolean checkClick=true;
-    ImageView btnCheckTotal;
     ArrayList<String> listNameGroup;
     private ListView lvListGroup;
-    Thread myThread = null;
-    private String myDate;
     private SearchView svGroup;
 
     @Override
@@ -65,15 +58,10 @@ public class SummaryActivity extends AppCompatActivity {
         svGroup=(SearchView) findViewById(R.id.svListEmployee);
         lvListGroup = (ListView) findViewById(R.id.lvListEmployee);
 
-<<<<<<< HEAD
-
     }
+    
 
 
-=======
-    }
-
->>>>>>> e34a04ae8b8dad797c9aaa269261df72c0e1d92c
     private void setAdapter()
     {
         DatabaseHandle handle = DatabaseHandle.getInstance(this);
@@ -154,8 +142,4 @@ public class SummaryActivity extends AppCompatActivity {
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> e34a04ae8b8dad797c9aaa269261df72c0e1d92c
 }
