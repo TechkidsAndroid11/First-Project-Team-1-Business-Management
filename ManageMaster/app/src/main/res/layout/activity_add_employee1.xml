@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ScrollView
+        android:paddingBottom="5dp"
+        android:paddingLeft="@dimen/def_margin"
+        android:paddingRight="@dimen/def_margin"
+        android:paddingTop="@dimen/def_margin"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/custom_background">
+
+
+            <ImageView
+                android:layout_marginTop="@dimen/def_margin"
+                android:padding="15dp"
+                android:id="@+id/ivAddImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/custom_add_picture"
+                android:src="@drawable/ic_add_a_photo_white_24dp" />
+
+
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/tvName"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="@dimen/def_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ivAddImage"
+                    android:layout_gravity="center_vertical"
+                    android:text="Họ Tên:"
+                    android:textColor="@color/textColor" />
+
+                <EditText
+                    android:layout_marginRight="@dimen/def_margin"
+                    android:layout_marginLeft="@dimen/def_margin"
+                    android:layout_below="@+id/tvName"
+                    android:id="@+id/edtName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="3dp" />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/tvGender"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/def_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edtName"
+                android:layout_gravity="center_vertical"
+                android:text="Giới tính:"
+                android:textColor="@color/textColor" />
+
+
+            <RadioGroup
+                android:layout_below="@+id/edtName"
+                android:layout_toRightOf="@+id/tvGender"
+                android:id="@+id/radio_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_nam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Nam"
+                    android:textSize="13sp" />
+
+                <RadioButton
+                    android:id="@+id/radio_nu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Nữ: "
+                    android:textSize="13sp" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/tvDOB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvGender"
+                android:layout_below="@+id/radio_gender"
+                android:layout_gravity="center_vertical"
+                android:text="Ngày Sinh:"
+                android:textColor="@color/textColor"
+                android:textStyle="bold" />
+
+            <EditText
+                android:inputType="date"
+                android:layout_marginLeft="@dimen/def_margin"
+                android:layout_marginRight="@dimen/def_margin"
+                android:layout_below="@+id/tvDOB"
+                android:id="@+id/edtDOB"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dp" />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/tvPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvGender"
+                android:layout_below="@+id/edtDOB"
+                android:layout_gravity="center_vertical"
+                android:text="Điện Thoại:"
+                android:textColor="@color/textColor"
+                android:textStyle="bold" />
+
+            <EditText
+                android:inputType="number"
+                android:layout_marginRight="@dimen/def_margin"
+                android:layout_marginLeft="@dimen/def_margin"
+                android:layout_below="@+id/tvPhone"
+                android:id="@+id/edtPhone"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dp" />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/tvAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvGender"
+                android:layout_below="@+id/edtPhone"
+                android:layout_gravity="center_vertical"
+                android:text="Địa Chỉ:"
+                android:textColor="@color/textColor"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_marginLeft="@dimen/def_margin"
+                android:layout_marginRight="@dimen/def_margin"
+                android:layout_below="@+id/tvAddress"
+                android:id="@+id/edtHomeTown"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:paddingLeft="3dp" />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/tvExp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvGender"
+                android:layout_below="@+id/edtHomeTown"
+                android:layout_gravity="center_vertical"
+                android:text="Trình Độ:"
+                android:textColor="@color/textColor"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_marginRight="@dimen/def_margin"
+                android:layout_marginLeft="@dimen/def_margin"
+                android:layout_below="@+id/tvExp"
+                android:id="@+id/edtExp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:paddingLeft="3dp" />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/tvGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvGender"
+                android:layout_below="@+id/edtExp"
+                android:layout_gravity="center_vertical"
+                android:text="Nhóm:"
+                android:textColor="@color/textColor"
+                android:textStyle="bold" />
+
+            <AutoCompleteTextView
+                android:layout_marginRight="@dimen/def_margin"
+                android:layout_marginLeft="@dimen/def_margin"
+                android:layout_below="@+id/tvGroup"
+                android:id="@+id/actvGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp" />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/tvSalary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvGender"
+                android:layout_below="@+id/actvGroup"
+                android:layout_gravity="center_vertical"
+                android:text="Lương:"
+                android:textColor="@color/textColor"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_marginRight="@dimen/def_margin"
+                android:layout_marginLeft="@dimen/def_margin"
+                android:layout_below="@+id/tvSalary"
+                android:id="@+id/edtSalary"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:paddingLeft="3dp" />
+
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btnDone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edtSalary"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/ic_done_white_24dp"
+                app:fabSize="normal" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
