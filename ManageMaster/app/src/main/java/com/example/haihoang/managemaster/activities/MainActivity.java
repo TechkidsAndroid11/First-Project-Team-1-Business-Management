@@ -6,7 +6,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+
+import android.os.SystemClock;
+
 import android.os.Bundle;
+
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -176,17 +180,19 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     private void createNotification() {
-        Calendar cal = Calendar.getInstance();
-        //tạo thông báo vào 7 giờ sáng
-        cal.set(Calendar.HOUR_OF_DAY,7);
-        cal.set(Calendar.MINUTE,0);
-        cal.set(Calendar.SECOND,0);
-
+        Log.d(TAG, "createNotification: ");
+//        Calendar cal = Calendar.getInstance();
+//        cal.clear();
+//        //
+//        cal.set(Calendar.YEAR,2016);
+//        cal.set(Calendar.MONTH,0);
+//        cal.set(Calendar.DATE,1);
+//        Log.d(TAG, "createNotification: "+cal.toString());
         AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmService.class);
         PendingIntent pendingIntent = PendingIntent.getService(this,0,intent,0);
 
-        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),1000,pendingIntent);
+        alarmMgr.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(),1000,pendingIntent);
 
     }
     private void checkDate() {

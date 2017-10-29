@@ -40,8 +40,7 @@ public class SummaryActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_summary);
 
         Log.d(TAG, "onCreate: ");
-//        setAdapter();
-//        addListener();
+
 
 
     }
@@ -66,8 +65,15 @@ public class SummaryActivity extends AppCompatActivity {
         svGroup=(SearchView) findViewById(R.id.svListEmployee);
         lvListGroup = (ListView) findViewById(R.id.lvListEmployee);
 
+<<<<<<< HEAD
+
     }
 
+
+=======
+    }
+
+>>>>>>> e34a04ae8b8dad797c9aaa269261df72c0e1d92c
     private void setAdapter()
     {
         DatabaseHandle handle = DatabaseHandle.getInstance(this);
@@ -148,4 +154,8 @@ public class SummaryActivity extends AppCompatActivity {
 
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> e34a04ae8b8dad797c9aaa269261df72c0e1d92c
 }
