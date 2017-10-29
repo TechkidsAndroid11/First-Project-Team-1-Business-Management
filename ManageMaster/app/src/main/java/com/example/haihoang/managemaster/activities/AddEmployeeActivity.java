@@ -291,6 +291,8 @@ public class AddEmployeeActivity extends AppCompatActivity{
         DatabaseHandle.getInstance(AddEmployeeActivity.this).addEmployee(employeeModel);
         Toast.makeText(AddEmployeeActivity.this, "Them nhan vien thanh cong!", Toast.LENGTH_LONG).show();
         clearEditText();
+        Intent intent = new Intent(AddEmployeeActivity.this, MainActivity.class);
+        startActivity(intent);
 
     }
 
