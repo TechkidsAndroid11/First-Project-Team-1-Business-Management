@@ -51,8 +51,7 @@ public class SummaryActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_summary);
 
         Log.d(TAG, "onCreate: ");
-//        setAdapter();
-//        addListener();
+
 
 
     }
@@ -79,21 +78,10 @@ public class SummaryActivity extends AppCompatActivity {
         btnAddEmployee = (FloatingActionButton) findViewById(R.id.btnAdd);
         tcCurrenTime = (TextClock) findViewById(R.id.tcCurrentTime);
 
-        //myThread = new Thread(new TimeRunner());
-        //myThread.start();
+
     }
 
-    //    private void getTime(){
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                Date dt = new Date();
-//                DateFormat sb = new SimpleDateFormat("dd/MM/yyyy");
-//                String curTime = "Today: "+ sb.format(dt);
-//                tvcurrentTime.setText(curTime);
-//            }
-//        });
-//    }
+
     private void setAdapter()
     {
         DatabaseHandle handle = DatabaseHandle.getInstance(this);
@@ -181,23 +169,5 @@ public class SummaryActivity extends AppCompatActivity {
 
 
 
-//    class TimeRunner implements Runnable{
-//
-//    }
-//
-//    private void setupUI() {
-//
-//        @Override
-//        public void run() {
-//            while(!Thread.currentThread().isInterrupted()){
-//                getTime();
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }catch (Exception e){}
-//            }
-//        }
-//
-//    }
+
 }

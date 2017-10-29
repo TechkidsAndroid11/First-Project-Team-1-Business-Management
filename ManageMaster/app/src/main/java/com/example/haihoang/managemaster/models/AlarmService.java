@@ -31,17 +31,19 @@ public class AlarmService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Date date = new Date();
-        Log.d(TAG, "onStartCommand: "+date.getDate());
-        if(date.getDate() == 1){
+        Log.d(TAG, "onStartCommand: "+date.getDate()+" "+ date.getHours()+" "+date.getMinutes()+" "+date.getSeconds());
+        if(date.getDate() == 1&& date.getHours() == 7&&date.getMinutes()==0){
             Intent intent1 = new Intent(this, SummaryActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this,(int)System.currentTimeMillis(),intent1,0);
 
             Notification noti = new Notification.Builder(this).setContentTitle("New month!!")
                     .setContentText("Tổng kết lương thôi bạn ơi!!")
                     .setSmallIcon(R.drawable.ic_attach_money_wthite_24dp)
-                    .setContentIntent(pendingIntent).build();
+                    .setContentIntent(pendingIntent)
+                    .build();
             NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
+            noti.flags = Notification.FLAG_AUTO_CANCEL;
             manager.notify(0,noti);
         }
         return super.onStartCommand(intent, flags, startId);
