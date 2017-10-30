@@ -33,7 +33,7 @@ public class ListEmployeeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_employee);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.custom_action_bar_list_employee);
+        getSupportActionBar().setCustomView(R.layout.custom_actionbar_title_listemployee);
         setupUI();
         getDataIntent();
         addListener();
@@ -53,6 +53,24 @@ public class ListEmployeeActivity extends AppCompatActivity {
     }
 
     private void addListener() {
+
+        svEmployee.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("check", "click2");
+                tvGroupName.setVisibility(View.GONE);
+            }
+        });
+
+        svEmployee.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                Log.e("check", "Close");
+                tvGroupName.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
         lvListEmployee.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {

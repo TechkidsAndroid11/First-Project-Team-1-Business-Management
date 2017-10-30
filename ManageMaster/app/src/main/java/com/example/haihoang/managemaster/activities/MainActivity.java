@@ -1,6 +1,7 @@
 package com.example.haihoang.managemaster.activities;
 
 import android.app.AlarmManager;
+import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -113,6 +115,26 @@ public class MainActivity extends AppCompatActivity {
     }
     private void addListener()
     {
+        svGroup.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("check", "click2");
+                tvTitle.setVisibility(View.GONE);
+                btnCheckTotal.setVisibility(View.GONE);
+            }
+        });
+
+        svGroup.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                Log.e("check", "Close");
+                tvTitle.setVisibility(View.VISIBLE);
+                btnCheckTotal.setVisibility(View.VISIBLE);
+
+                return false;
+            }
+        });
+
 
         btnCheckTotal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setNegativeButton("Update", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        showDialogUpdate();
                     }
                 });
                 builder.setCancelable(true);
@@ -170,6 +192,24 @@ public class MainActivity extends AppCompatActivity {
                 return true; // ko cho phép sự kiện nào hoạt động song song cùng con này
             }
         });
+    }
+
+    private void showDialogUpdate() {
+        final Dialog dialog = new Dialog(MainActivity.this);
+        dialog.setTitle("Cập nhật thông tin group: ");
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.custom_dialog_update_group);
+        EditText edtUpdateGroupName = (EditText) dialog.findViewById(R.id.edtUpdateGroup);
+        FloatingActionButton btnDone = (FloatingActionButton) dialog.findViewById(R.id.btnDone);
+        FloatingActionButton btnClose = (FloatingActionButton) dialog.findViewById(R.id.btnClose);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+            }
+        });
+        dialog.show();
     }
 
     public void check(String nameGroup)
@@ -180,13 +220,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void createNotification() {
         Log.d(TAG, "createNotification: ");
-//        Calendar cal = Calendar.getInstance();
-//        cal.clear();
-//        //
-//        cal.set(Calendar.YEAR,2016);
-//        cal.set(Calendar.MONTH,0);
-//        cal.set(Calendar.DATE,1);
-//        Log.d(TAG, "createNotification: "+cal.toString());
+
         AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmService.class);
         PendingIntent pendingIntent = PendingIntent.getService(this,0,intent,0);
@@ -221,23 +255,5 @@ public class MainActivity extends AppCompatActivity {
         return Integer.parseInt(aday[0]);
     }
 
-//    class TimeRunner implements Runnable{
-//
-//    }
-//
-//    private void setupUI() {
-//
-//        @Override
-//        public void run() {
-//            while(!Thread.currentThread().isInterrupted()){
-//                getTime();
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }catch (Exception e){}
-//            }
-//        }
-//
-//    }
+
 }

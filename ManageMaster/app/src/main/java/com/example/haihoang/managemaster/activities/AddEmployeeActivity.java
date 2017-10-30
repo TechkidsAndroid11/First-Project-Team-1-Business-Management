@@ -130,7 +130,7 @@ public class AddEmployeeActivity extends AppCompatActivity{
         DatePickerDialog pic=new DatePickerDialog(
                 AddEmployeeActivity.this,
                 callback, nam, thang, ngay);
-        pic.setTitle("Chọn ngày hoàn thành");
+        pic.setTitle("Chọn ngày sinh");
         pic.show();
     }
 

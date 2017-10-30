@@ -1,5 +1,6 @@
 package com.example.haihoang.managemaster.activities;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -30,17 +32,20 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class UpdateEmployee extends AppCompatActivity {
     EmployeeModel model;
-    private ImageView imgAvatar;
+    private ImageView imgAvatar, ivPickDate;
     private EditText edtName, edtDOB, edtPhone, edtHomeTown, edtExp, edtSalary;
     private AutoCompleteTextView actvGroup;
     private RadioGroup radioGender;
     private FloatingActionButton btnDone;
     private String[] base64;
     int gender = 1;
+    Calendar cal;
+    Date date;
     private TextView tvTitle;
     CircleTransform circleTransform = new CircleTransform();
     @Override
@@ -48,7 +53,7 @@ public class UpdateEmployee extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_employee);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        //getSupportActionBar().setCustomView(R.layout.custom_action_bar_add_employee);
+        getSupportActionBar().setCustomView(R.layout.custom_action_bar_update_employee);
         getSupportActionBar().setElevation(0);
         setupUI();
         Intent intent = getIntent();
@@ -98,9 +103,36 @@ public class UpdateEmployee extends AppCompatActivity {
         imgAvatar.setPadding(0,0,0,0);
         imgAvatar.setImageBitmap(circleTransform.transform(bitmap));
 
+        ivPickDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickDateDialog();
+            }
+        });
+
     }
+
+    private void pickDateDialog() {
+        DatePickerDialog.OnDateSetListener callback = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                edtDOB.setText(day + "/" + (month +1) + "/" + year);
+            }
+        };
+        String s=edtDOB.getText()+"";
+        String strArrtmp[]=s.split("/");
+        int ngay=Integer.parseInt(strArrtmp[0]);
+        int thang=Integer.parseInt(strArrtmp[1]) - 1;
+        int nam=Integer.parseInt(strArrtmp[2]);
+        DatePickerDialog pic=new DatePickerDialog(
+                UpdateEmployee.this,
+                callback, nam, thang, ngay);
+        pic.setTitle("Chọn ngày sinh");
+        pic.show();
+    }
+
     private void setupUI() {
-        //tvTitle = (TextView) findViewById(R.id.txtGroupName);
+        ivPickDate = (ImageView) findViewById(R.id.ivPickDate);
         radioGender = (RadioGroup) findViewById(R.id.radio_gender);
         btnDone = (FloatingActionButton) findViewById(R.id.btnDone);
         imgAvatar = (ImageView) findViewById(R.id.ivAddImage);

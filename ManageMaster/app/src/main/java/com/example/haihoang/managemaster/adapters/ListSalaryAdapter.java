@@ -80,19 +80,22 @@ public class ListSalaryAdapter extends BaseExpandableListAdapter{
             viewHolderGroup = new ViewHolderGroup();
             convertView = LayoutInflater.from(context).inflate(resourceGroup,parent,false);
             viewHolderGroup.tvGroupName= convertView.findViewById(R.id.tv_group);
-            viewHolderGroup.ivArrow= convertView.findViewById(R.id.iv_arrow);
+            viewHolderGroup.tvGroupName.setHeight(120);
+            viewHolderGroup.tvGroupName.setTextSize(20);
+
+//            viewHolderGroup.ivArrow= convertView.findViewById(R.id.iv_arrow);
             convertView.setTag(viewHolderGroup);
         }
         else
             viewHolderGroup = (ViewHolderGroup) convertView.getTag();
 
         viewHolderGroup.tvGroupName.setText(listGroup.get(groupPosition).getName());
-        if(isExpanded)
-        {
-            viewHolderGroup.ivArrow.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
-        }
-        else
-            viewHolderGroup.ivArrow.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
+//        if(isExpanded)
+//        {
+//            viewHolderGroup.ivArrow.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
+//        }
+//        else
+//            viewHolderGroup.ivArrow.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
         return convertView;
     }
 
@@ -139,7 +142,7 @@ public class ListSalaryAdapter extends BaseExpandableListAdapter{
     }
     public class ViewHolderGroup
     {
-        ImageView ivArrow;
+       // ImageView ivArrow;
         TextView tvGroupName;
 
     }
