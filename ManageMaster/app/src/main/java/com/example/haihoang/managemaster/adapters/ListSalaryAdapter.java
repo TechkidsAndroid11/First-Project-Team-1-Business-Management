@@ -4,19 +4,16 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.haihoang.managemaster.R;
-import com.example.haihoang.managemaster.models.EmployeeModel;
+import com.example.haihoang.managemaster.models.Group;
 import com.example.haihoang.managemaster.utils.CircleTransform;
 
 import java.util.ArrayList;
@@ -25,41 +22,104 @@ import java.util.ArrayList;
  * Created by Linh Phan on 10/26/2017.
  */
 
-public class ListSalaryAdapter extends ArrayAdapter<EmployeeModel> {
+public class ListSalaryAdapter extends BaseExpandableListAdapter{
     private Context context;
-    private int resource;
-    private ArrayList<EmployeeModel> listEmployee;
-    public ListSalaryAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<EmployeeModel> objects) {
-        super(context, resource, objects);
-        this.context=context;
-        this.resource=resource;
-        this.listEmployee=objects;
+    private int resourceGroup;
+    private int resourceEmployee;
+    private ArrayList<Group> listGroup;
+
+    public ListSalaryAdapter(Context context, int resourceGroup,int resourceEmployee, ArrayList<Group> listGroup) {
+        this.context = context;
+        this.resourceGroup = resourceGroup;
+        this.resourceEmployee = resourceEmployee;
+        this.listGroup = listGroup;
     }
 
-    @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        ViewHolder viewHolder;
-        CircleTransform circleTransform = new CircleTransform();
+    public int getGroupCount() {
+        return listGroup.size();
+    }
+
+    @Override
+    public int getChildrenCount(int groupPosition) {
+        return listGroup.get(groupPosition).getListEmployee().size();
+    }
+
+    @Override
+    public Object getGroup(int groupPosition) {
+        return listGroup.get(groupPosition);
+    }
+
+    @Override
+    public Object getChild(int groupPosition, int childPosition) {
+        return listGroup.get(groupPosition).getListEmployee().get(childPosition);
+    }
+
+    @Override
+    public long getGroupId(int groupPosition) {
+        return groupPosition;
+    }
+
+    @Override
+    public long getChildId(int groupPosition, int childPosition) {
+        return childPosition;
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return false;
+    }
+
+    @Override
+
+    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+        ViewHolderGroup viewHolderGroup = null;
+
         if(convertView==null)
         {
-            viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(resource,parent,false);
+            viewHolderGroup = new ViewHolderGroup();
+            convertView = LayoutInflater.from(context).inflate(resourceGroup,parent,false);
+            viewHolderGroup.tvGroupName= convertView.findViewById(R.id.tv_group);
+            viewHolderGroup.ivArrow= convertView.findViewById(R.id.iv_arrow);
+            convertView.setTag(viewHolderGroup);
+        }
+        else
+            viewHolderGroup = (ViewHolderGroup) convertView.getTag();
+
+        viewHolderGroup.tvGroupName.setText(listGroup.get(groupPosition).getName());
+        if(isExpanded)
+        {
+            viewHolderGroup.ivArrow.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
+        }
+        else
+            viewHolderGroup.ivArrow.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
+        return convertView;
+    }
+
+    @Override
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        ViewHolderEmployee viewHolder;
+        if(convertView==null)
+        {
+            viewHolder = new ViewHolderEmployee();
+            convertView = LayoutInflater.from(context).inflate(resourceEmployee,parent,false);
             viewHolder.ivAvatar = convertView.findViewById(R.id.ivAvatar);
             viewHolder.tvName = convertView.findViewById(R.id.tvName);
             viewHolder.tvDaySalary = convertView.findViewById(R.id.tvSalary);
             viewHolder.tvTotalSalary = convertView.findViewById(R.id.tvMonthSalary);
-            convertView.setTag(convertView);
+
+            convertView.setTag(viewHolder);
         }
         else
-            viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (ViewHolderEmployee) convertView.getTag();
 
-        viewHolder.tvName.setText("Name: "+listEmployee.get(position).getName());
-        viewHolder.tvDaySalary.setText("Salary (/day): "+listEmployee.get(position).getDaySalary());
+
+        viewHolder.tvName.setText("Name: "+listGroup.get(groupPosition).getListEmployee().get(childPosition).getName());
+        viewHolder.tvDaySalary.setText("Salary (/day): "+listGroup.get(groupPosition).getListEmployee().get(childPosition).getDaySalary());
         viewHolder.tvTotalSalary.setTextColor(Color.RED);
-        viewHolder.tvTotalSalary.setText("Month Salary: "+listEmployee.get(position).getTotalSalary());
+        viewHolder.tvTotalSalary.setText("Month Salary: "+listGroup.get(groupPosition).getListEmployee().get(childPosition).getTotalSalary());
 
-        String[] base64 = listEmployee.get(position).getAvatar().split(",");
+        String[] base64 = listGroup.get(groupPosition).getListEmployee().get(childPosition).getAvatar().split(",");
         Bitmap bitmap = BitmapFactory.decodeByteArray(
                 Base64.decode(base64[0],Base64.DEFAULT),
                 0,// offset: vị trí bđ
@@ -67,10 +127,23 @@ public class ListSalaryAdapter extends ArrayAdapter<EmployeeModel> {
 
         );
 
+        CircleTransform circleTransform = new CircleTransform();
         viewHolder.ivAvatar.setImageBitmap(circleTransform.transform(bitmap));
+
         return convertView;
     }
-    public class ViewHolder
+
+    @Override
+    public boolean isChildSelectable(int groupPosition, int childPosition) {
+        return true;
+    }
+    public class ViewHolderGroup
+    {
+        ImageView ivArrow;
+        TextView tvGroupName;
+
+    }
+    public class ViewHolderEmployee
     {
         ImageView ivAvatar;
         TextView tvName;
@@ -78,4 +151,5 @@ public class ListSalaryAdapter extends ArrayAdapter<EmployeeModel> {
         TextView tvTotalSalary;
 
     }
+
 }
