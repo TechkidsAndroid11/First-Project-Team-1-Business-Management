@@ -2,30 +2,36 @@ package com.example.haihoang.managemaster.activities;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.models.EmployeeModel;
+import com.example.haihoang.managemaster.utils.CircleTransform;
 
 public class EmployeeInforActivity extends AppCompatActivity {
     private EmployeeModel empl;
-    private TextView tvname,tvgender,tvdob,tvphone,tvGroup,tvsalary,tvadd,tvExp,tvLastSalary,tvFDW;
+    private TextView tvname,tvgender,tvdob,tvphone,tvGroup,tvsalary,tvadd,tvExp,tvLastSalary,tvFDW, tvTitle;
     private ImageView ivImage;
+    CircleTransform circleTransform = new CircleTransform();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_infor);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.custom_action_bar_list_employee);
+        getSupportActionBar().setElevation(0);
         setupUI();
         setData();
     }
 
     private void setupUI() {
         empl = (EmployeeModel) getIntent().getSerializableExtra(ListEmployeeActivity.EMPLOYEE);
-
+        tvTitle = (TextView) findViewById(R.id.txtGroupName);
         tvname = (TextView) findViewById(R.id.tvName);
         tvgender = (TextView) findViewById(R.id.tvGender);
         tvdob = (TextView) findViewById(R.id.tvDOB);
@@ -40,6 +46,7 @@ public class EmployeeInforActivity extends AppCompatActivity {
     }
 
     private void setData() {
+        tvTitle.setText("Thông tin nhân viên");
         tvname.setText(tvname.getText()+" "+empl.getName());
         tvgender.setText(tvgender.getText()+" "+(empl.getGender()==0?"Nữ":"Nam"));
         tvdob.setText(tvdob.getText()+" "+empl.getDate());
@@ -48,7 +55,7 @@ public class EmployeeInforActivity extends AppCompatActivity {
         tvsalary.setText(tvsalary.getText()+" "+empl.getDaySalary());
         tvadd.setText(tvadd.getText()+" "+empl.getAddress());
         tvFDW.setText(tvFDW.getText()+" "+empl.getFirstDayWork());
-        tvExp.setText(tvExp.getText()+" "+empl.getExperience());
+        tvExp.setText(empl.getExperience());
         tvLastSalary.setText(tvLastSalary.getText()+" "+empl.getPreviousSalary());
 
         String[] base64 = empl.getAvatar().split(",");
@@ -58,6 +65,7 @@ public class EmployeeInforActivity extends AppCompatActivity {
                 (Base64.decode(base64[0],Base64.DEFAULT)).length
 
         );
-        ivImage.setImageBitmap(bitmap);
+        ivImage.setPadding(0,0,0,0);
+        ivImage.setImageBitmap(circleTransform.transform(bitmap));
     }
 }

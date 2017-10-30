@@ -6,11 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-
-import android.os.SystemClock;
-
 import android.os.Bundle;
-
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -22,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextClock;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.haihoang.managemaster.R;
@@ -32,22 +30,22 @@ import com.example.haihoang.managemaster.models.Group;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    FloatingActionButton btnAddEmployee;
+    private FloatingActionButton btnAddEmployee;
     private boolean checkClick=true;
-    ImageView btnCheckTotal;
+    private ImageView btnCheckTotal;
     ArrayList<String> listNameGroup;
     private ListView lvListGroup;
     Thread myThread = null;
     private TextClock tcCurrenTime;
     private String myDate;
     private SearchView svGroup;
+    private TextView tvTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_home);
         Log.d(TAG, "onCreate: ");
-//        setAdapter();
-//        addListener();
         createNotification();
     }
     @Override
@@ -77,14 +73,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupUI() {
+        tvTitle = (TextView) findViewById(R.id.tvTitle);
         svGroup = (SearchView) findViewById(R.id.svGroup);
         btnCheckTotal = (ImageView) findViewById(R.id.btnCheckTotal);
         lvListGroup = (ListView) findViewById(R.id.lvListGroup);
         btnAddEmployee = (FloatingActionButton) findViewById(R.id.btnAdd);
         tcCurrenTime = (TextClock) findViewById(R.id.tcCurrentTime);
 
-
 }
+
 
     private void setAdapter()
     {
@@ -98,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         }
         final ListGroupAdapter adapter = new ListGroupAdapter(this,R.layout.item_list_group,listGroup);
         lvListGroup.setAdapter(adapter);
+
 
         svGroup.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -115,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void addListener()
     {
+
         btnCheckTotal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -21,6 +21,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.haihoang.managemaster.R;
@@ -41,11 +42,12 @@ import java.util.Locale;
 
 public class AddEmployeeActivity extends AppCompatActivity{
 
-    ImageView imgAvatar, ivPickDate;
-    EditText edtName, edtId, edtDOB, edtPhone, edtHomeTown, edtExp, edtSalary;
-    AutoCompleteTextView actvGroup;
-    RadioGroup radioGender;
-    FloatingActionButton btnDone;
+    private ImageView imgAvatar, ivPickDate;
+    private TextView tvTitle;
+    private EditText edtName, edtId, edtDOB, edtPhone, edtHomeTown, edtExp, edtSalary;
+    private AutoCompleteTextView actvGroup;
+    private RadioGroup radioGender;
+    private FloatingActionButton btnDone;
     String base64;
     Bitmap bitmap;
     int gender = 1;
@@ -135,10 +137,19 @@ public class AddEmployeeActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
+        Log.e("check", "Onresume");
 
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("check", "Onrestart");
+    }
+
+
     private void setupUI() {
+        tvTitle = (TextView) findViewById(R.id.tvTitle);
         ivPickDate = (ImageView) findViewById(R.id.ivPickDate);
         radioGender = (RadioGroup) findViewById(R.id.radio_gender);
         btnDone = (FloatingActionButton) findViewById(R.id.btnDone);

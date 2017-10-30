@@ -17,9 +17,9 @@ import android.widget.TextView;
 
 import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.models.EmployeeModel;
+import com.example.haihoang.managemaster.utils.CircleTransform;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Linh Phan on 10/26/2017.
@@ -40,13 +40,13 @@ public class ListSalaryAdapter extends ArrayAdapter<EmployeeModel> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         ViewHolder viewHolder;
+        CircleTransform circleTransform = new CircleTransform();
         if(convertView==null)
         {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(resource,parent,false);
             viewHolder.ivAvatar = convertView.findViewById(R.id.ivAvatar);
             viewHolder.tvName = convertView.findViewById(R.id.tvName);
-            viewHolder.tvPreviousMonthSalary= convertView.findViewById(R.id.tvPreviousMonthSalary);
             viewHolder.tvDaySalary = convertView.findViewById(R.id.tvSalary);
             viewHolder.tvTotalSalary = convertView.findViewById(R.id.tvMonthSalary);
             convertView.setTag(convertView);
@@ -55,7 +55,6 @@ public class ListSalaryAdapter extends ArrayAdapter<EmployeeModel> {
             viewHolder = (ViewHolder) convertView.getTag();
 
         viewHolder.tvName.setText("Name: "+listEmployee.get(position).getName());
-        viewHolder.tvPreviousMonthSalary.setText("Previous Month Salary: "+listEmployee.get(position).getPreviousSalary());
         viewHolder.tvDaySalary.setText("Salary (/day): "+listEmployee.get(position).getDaySalary());
         viewHolder.tvTotalSalary.setTextColor(Color.RED);
         viewHolder.tvTotalSalary.setText("Month Salary: "+listEmployee.get(position).getTotalSalary());
@@ -68,14 +67,13 @@ public class ListSalaryAdapter extends ArrayAdapter<EmployeeModel> {
 
         );
 
-        viewHolder.ivAvatar.setImageBitmap(bitmap);
+        viewHolder.ivAvatar.setImageBitmap(circleTransform.transform(bitmap));
         return convertView;
     }
     public class ViewHolder
     {
         ImageView ivAvatar;
         TextView tvName;
-        TextView tvPreviousMonthSalary;
         TextView tvDaySalary;
         TextView tvTotalSalary;
 

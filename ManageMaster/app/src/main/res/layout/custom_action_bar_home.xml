@@ -3,7 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <SearchView
+        android:id="@+id/svGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true" />
+
     <TextView
+        android:id="@+id/tvTitle"
         android:layout_centerInParent="true"
         android:textColor="@color/backgroundList"
         android:textStyle="bold"

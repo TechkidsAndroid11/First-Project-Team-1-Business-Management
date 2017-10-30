@@ -1,110 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="10"
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/colorAccent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:paddingLeft="20dp"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:weightSum="10"
-        android:orientation="horizontal"
-        android:layout_weight="4"
+    <RelativeLayout
+        android:background="@drawable/custom_background"
+        android:layout_marginLeft="@dimen/def_margin"
+        android:layout_marginRight="@dimen/def_margin"
+        android:layout_marginBottom="@dimen/def_margin"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="match_parent">
 
         <ImageView
+            android:layout_marginTop="@dimen/def_margin"
+            android:padding="15dp"
             android:id="@+id/ivAvatar"
-            android:background="#2af5e1"
-            android:layout_weight="3.5"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
-
-        <RelativeLayout
-            android:layout_marginLeft="@dimen/def_margin"
-            android:layout_weight="6.5"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:textSize="16sp"
-                android:textColor="@color/textColor"
-                android:layout_marginTop="10dp"
-                android:id="@+id/tvName"
-                android:text="Họ và tên: "
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:textColor="@color/textColor"
-                android:layout_marginTop="@dimen/def_margin_text"
-                android:layout_below="@+id/tvName"
-                android:text="Giới tính: "
-                android:id="@+id/tvGender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:textColor="@color/textColor"
-                android:layout_marginTop="@dimen/def_margin_text"
-                android:layout_below="@id/tvGender"
-                android:text="Ngày sinh: "
-                android:id="@+id/tvDOB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:textColor="@color/textColor"
-                android:layout_marginTop="@dimen/def_margin_text"
-                android:layout_below="@id/tvDOB"
-                android:text="Số điện thoại: "
-                android:id="@+id/tvPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:textColor="@color/textColor"
-                android:layout_marginTop="@dimen/def_margin_text"
-                android:layout_below="@id/tvPhone"
-                android:text="Group: "
-                android:id="@+id/tvGroupName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:textColor="@color/textColor"
-                android:layout_marginTop="@dimen/def_margin_text"
-                android:layout_below="@id/tvGroupName"
-                android:text="Salary (/day): "
-                android:id="@+id/tvSalary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_weight="6"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/custom_add_picture" />
 
         <TextView
+            android:layout_marginTop="@dimen/def_margin"
+            android:layout_marginLeft="@dimen/def_margin"
+            android:layout_below="@+id/ivAvatar"
+            android:textSize="16sp"
+            android:textColor="@color/textColor"
+            android:id="@+id/tvName"
+            android:text="Họ tên: "
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="@dimen/def_margin"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="@dimen/def_margin_text"
+            android:layout_below="@+id/tvName"
+            android:text="Giới tính: "
+            android:id="@+id/tvGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="@dimen/def_margin"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="@dimen/def_margin_text"
+            android:layout_below="@id/tvGender"
+            android:text="Ngày sinh: "
+            android:id="@+id/tvDOB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="@dimen/def_margin"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="@dimen/def_margin_text"
+            android:layout_below="@id/tvDOB"
+            android:text="Số điện thoại: "
+            android:id="@+id/tvPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="@dimen/def_margin"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="@dimen/def_margin_text"
+            android:layout_below="@id/tvPhone"
+            android:text="Group: "
+            android:id="@+id/tvGroupName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="@dimen/def_margin"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="@dimen/def_margin_text"
+            android:layout_below="@id/tvGroupName"
+            android:text="Salary (/day): "
+            android:id="@+id/tvSalary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="@dimen/def_margin_text"
+            android:layout_below="@+id/tvSalary"
             android:textColor="@color/textColor"
             android:id="@+id/tvAddress"
             android:text="Địa chỉ: "
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/def_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
             android:layout_marginTop="@dimen/def_margin_text"
             android:layout_below="@+id/tvAddress"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/def_margin"
             android:textColor="@color/textColor"
             android:id="@+id/tvFirstDayWork"
             android:text="Bắt đầu làm: "
@@ -112,9 +105,19 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:textColor="@color/textColor"
+            android:id="@+id/tvkn"
+            android:text="Kinh nghiệm: "
+            android:layout_marginTop="@dimen/def_margin_text"
+            android:layout_marginLeft="@dimen/def_margin"
+            android:layout_below="@+id/tvFirstDayWork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_toRightOf="@+id/tvkn"
             android:layout_marginTop="@dimen/def_margin_text"
             android:layout_below="@+id/tvFirstDayWork"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="5dp"
             android:textColor="@color/textColor"
             android:id="@+id/tvExp"
             android:text="Experience: "
@@ -137,4 +140,4 @@
 
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

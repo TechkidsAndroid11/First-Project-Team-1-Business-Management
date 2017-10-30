@@ -109,7 +109,6 @@ public class ListEmployeeActivity extends AppCompatActivity {
     {
         Intent intent = getIntent();
         nameGroup = intent.getStringExtra(ListGroupAdapter.NAME_GROUP);
-
         tvGroupName.setText(nameGroup);
         DatabaseHandle handle = DatabaseHandle.getInstance(this);
         ArrayList<EmployeeModel> listEmployee = handle.getAllEmployeeByGroup(nameGroup);
