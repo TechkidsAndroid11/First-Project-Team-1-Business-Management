@@ -28,27 +28,6 @@ public class EmployeeSalaryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_summary);
 
-        getData();
-        setupUI();
-        setAdapter();
-    }
-
-    private void setupUI() {
-        lvListSalary = (ListView) findViewById(R.id.lvListEmployee);
-    }
-
-    private void getData() {
-        Intent intent = getIntent();
-        String nameGroup = intent.getStringExtra(ListGroupAdapter.NAME_GROUP);
-
-        DatabaseHandle handle = DatabaseHandle.getInstance(this);
-        listEmployee=handle.getAllEmployeeByGroup(nameGroup);
-    }
-
-    private void setAdapter()
-    {
-        ListSalaryAdapter adapter = new ListSalaryAdapter(this,R.layout.item_list_salary,listEmployee);
-        lvListSalary.setAdapter(adapter);
 
     }
 

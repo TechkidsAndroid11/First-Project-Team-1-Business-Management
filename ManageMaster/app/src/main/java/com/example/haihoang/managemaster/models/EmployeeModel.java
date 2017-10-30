@@ -23,6 +23,13 @@ public class EmployeeModel implements Serializable {
     int status;
     String note;
 
+    public EmployeeModel(String name, int daySalary, int totalSalary, int previousSalary) {
+        this.name = name;
+        this.daySalary = daySalary;
+        this.totalSalary = totalSalary;
+        this.previousSalary = previousSalary;
+    }
+
     public EmployeeModel(String name, int gender, String date, String phone, String address, String avatar, String experience, String group, String firstDayWork, int daySalary, int totalSalary, int previousSalary, int status, String note) {
         this.name = name;
         this.gender = gender;
