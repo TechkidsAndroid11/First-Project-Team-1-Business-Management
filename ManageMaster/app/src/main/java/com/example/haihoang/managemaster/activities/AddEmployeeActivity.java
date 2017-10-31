@@ -343,7 +343,6 @@ public class AddEmployeeActivity extends AppCompatActivity{
         EmployeeModel employeeModel = new EmployeeModel(name, gender,birthday,phone,address,avatar,exp,groupName
                 ,firstDayWork,salary,totalSalary,previousMonthSalary,status,note);
 
-        Log.e("data", employeeModel.getGender() + " ");
 
         DatabaseHandle.getInstance(AddEmployeeActivity.this).addEmployee(employeeModel);
         Toast.makeText(AddEmployeeActivity.this, "Them nhan vien thanh cong!", Toast.LENGTH_LONG).show();

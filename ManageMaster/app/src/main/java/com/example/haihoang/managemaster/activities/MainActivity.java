@@ -217,6 +217,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ListEmployeeActivity.class);
         intent.putExtra(ListGroupAdapter.NAME_GROUP,nameGroup);
         startActivity(intent);
+        overridePendingTransition(R.anim.side_in_right, R.anim.side_out_left);
     }
     private void createNotification() {
         Log.d(TAG, "createNotification: ");
@@ -253,6 +254,10 @@ public class MainActivity extends AppCompatActivity {
     public int getDay(String s){
         String []aday = s.split("/");
         return Integer.parseInt(aday[0]);
+    }
+
+    private void animation(){
+
     }
 
 

@@ -142,9 +142,7 @@ public class ListSalaryAdapter extends BaseExpandableListAdapter{
     }
     public class ViewHolderGroup
     {
-       // ImageView ivArrow;
         TextView tvGroupName;
-
     }
     public class ViewHolderEmployee
     {
