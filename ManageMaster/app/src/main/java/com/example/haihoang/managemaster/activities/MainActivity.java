@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setNegativeButton("Update", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        showDialogUpdate();
+                        showDialogUpdate(listNameGroup.get(position));
                     }
                 });
                 builder.setCancelable(true);
@@ -194,18 +194,29 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void showDialogUpdate() {
+    private void showDialogUpdate(final String oldName) {
         final Dialog dialog = new Dialog(MainActivity.this);
         dialog.setTitle("Cập nhật thông tin group: ");
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.custom_dialog_update_group);
-        EditText edtUpdateGroupName = (EditText) dialog.findViewById(R.id.edtUpdateGroup);
+        final EditText edtUpdateGroupName = (EditText) dialog.findViewById(R.id.edtUpdateGroup);
         FloatingActionButton btnDone = (FloatingActionButton) dialog.findViewById(R.id.btnDone);
         FloatingActionButton btnClose = (FloatingActionButton) dialog.findViewById(R.id.btnClose);
 
+        edtUpdateGroupName.setText(oldName);
+        edtUpdateGroupName.requestFocus();
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.cancel();
+            }
+        });
+        btnDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseHandle handle = DatabaseHandle.getInstance(MainActivity.this);
+                handle.updateGroup(oldName,edtUpdateGroupName.getText().toString());
+                MainActivity.this.onStart();
                 dialog.cancel();
             }
         });
