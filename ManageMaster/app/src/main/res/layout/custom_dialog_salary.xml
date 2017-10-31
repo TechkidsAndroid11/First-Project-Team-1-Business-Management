@@ -33,7 +33,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="@dimen/def_margin_text"
             android:textColor="@color/textColor"
-            android:text="Ghi chứ: "
+            android:text="Ghi chú: "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
