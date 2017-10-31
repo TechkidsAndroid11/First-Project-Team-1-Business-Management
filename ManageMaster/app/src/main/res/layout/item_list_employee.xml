@@ -39,7 +39,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/textColor"
                     android:id="@+id/tvName"
-                    android:text="Name: "
+                    android:text="Họ và tên: "
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -49,7 +49,7 @@
                     android:id="@+id/tvDOB"
                     android:textSize="@dimen/def_textSize"
                     android:textColor="@color/textColor"
-                    android:text="Date of birth"
+                    android:text="Ngày sinh: "
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -59,7 +59,7 @@
                     android:id="@+id/tvSalary"
                     android:textSize="@dimen/def_textSize"
                     android:textColor="@color/textColor"
-                    android:text="Salary (/day):"
+                    android:text="Lương (/ngày):"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

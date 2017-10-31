@@ -69,7 +69,7 @@
             android:textColor="@color/textColor"
             android:layout_marginTop="@dimen/def_margin_text"
             android:layout_below="@id/tvPhone"
-            android:text="Group: "
+            android:text="Nhóm: "
             android:id="@+id/tvGroupName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -79,7 +79,7 @@
             android:textColor="@color/textColor"
             android:layout_marginTop="@dimen/def_margin_text"
             android:layout_below="@id/tvGroupName"
-            android:text="Salary (/day): "
+            android:text="Lương (/ngày): "
             android:id="@+id/tvSalary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

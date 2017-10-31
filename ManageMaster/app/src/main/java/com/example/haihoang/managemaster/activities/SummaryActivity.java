@@ -3,7 +3,10 @@ package com.example.haihoang.managemaster.activities;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.adapters.ListSalaryAdapter;
@@ -26,6 +29,19 @@ public class SummaryActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_summary);
         setupUI();
         setAdapter();
+        setOnclickList();
+
+    }
+
+    private void setOnclickList() {
+
+        elvListSalary.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(SummaryActivity.this, "long click", Toast.LENGTH_LONG);
+                return true;
+            }
+        });
 
     }
 

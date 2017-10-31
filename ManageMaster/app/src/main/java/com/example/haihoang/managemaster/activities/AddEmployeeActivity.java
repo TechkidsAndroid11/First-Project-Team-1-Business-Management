@@ -191,17 +191,17 @@ public class AddEmployeeActivity extends AppCompatActivity{
     }
 
     private void selectFuntion() {
-        final String[] item = {"Take Photo", "Open Library", "Cancel"};
+        final String[] item = {"Chụp ảnh", "Mở Bộ sưu tập", "Huỷ"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(AddEmployeeActivity.this);
         builder.setTitle("Thêm Ảnh");
         builder.setItems(item, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(item[i].equals("Take Photo")){
+                if(item[i].equals("Chụp ảnh")){
                     cameraIntent();
                 }
-                else if(item[i].equals("Open Library")){
+                else if(item[i].equals("Mở Bộ sưu tập")){
                     galleryIntent();
                 }
                 else{
@@ -216,7 +216,7 @@ public class AddEmployeeActivity extends AppCompatActivity{
         Intent intent = new Intent();
         intent.setType("image/*"); // mở tất cả các folder lưa trữ ảnh
         intent.setAction(Intent.ACTION_GET_CONTENT); // đi đến folder mình chọn
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+        startActivityForResult(Intent.createChooser(intent, "Chọn Ảnh"), 1);
     }
 
     private void cameraIntent() {
@@ -343,10 +343,9 @@ public class AddEmployeeActivity extends AppCompatActivity{
         EmployeeModel employeeModel = new EmployeeModel(name, gender,birthday,phone,address,avatar,exp,groupName
                 ,firstDayWork,salary,totalSalary,previousMonthSalary,status,note);
 
-        Log.e("data", employeeModel.getGender() + " ");
 
         DatabaseHandle.getInstance(AddEmployeeActivity.this).addEmployee(employeeModel);
-        Toast.makeText(AddEmployeeActivity.this, "Them nhan vien thanh cong!", Toast.LENGTH_LONG).show();
+        Toast.makeText(AddEmployeeActivity.this, "Thêm nhân viên thành công!", Toast.LENGTH_LONG).show();
         clearEditText();
         Intent intent = new Intent(AddEmployeeActivity.this, MainActivity.class);
         startActivity(intent);

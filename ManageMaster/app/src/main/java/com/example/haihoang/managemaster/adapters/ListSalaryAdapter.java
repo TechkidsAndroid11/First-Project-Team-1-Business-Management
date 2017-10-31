@@ -82,7 +82,6 @@ public class ListSalaryAdapter extends BaseExpandableListAdapter{
             viewHolderGroup.tvGroupName= convertView.findViewById(R.id.tv_group);
             viewHolderGroup.tvGroupName.setHeight(120);
             viewHolderGroup.tvGroupName.setTextSize(20);
-
             viewHolderGroup.ivArrow= convertView.findViewById(R.id.iv_arrow);
             convertView.setTag(viewHolderGroup);
         }
@@ -142,9 +141,10 @@ public class ListSalaryAdapter extends BaseExpandableListAdapter{
     }
     public class ViewHolderGroup
     {
-        ImageView ivArrow;
-        TextView tvGroupName;
 
+        ImageView ivArrow;
+
+        TextView tvGroupName;
     }
     public class ViewHolderEmployee
     {

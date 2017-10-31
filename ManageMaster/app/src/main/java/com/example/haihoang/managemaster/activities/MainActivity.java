@@ -167,24 +167,24 @@ public class MainActivity extends AppCompatActivity {
                 final DatabaseHandle handle = DatabaseHandle.getInstance(MainActivity.this);
                 final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle(listNameGroup.get(position));
-                builder.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
+                builder.setNeutralButton("Xoá", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         handle.deleteGroup(listNameGroup.get(position));
                         onStart();
                     }
                 });
-                builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Huỷ", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
 
                     }
                 });
-                builder.setNegativeButton("Update", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Cập Nhật", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        showDialogUpdate();
+                        showDialogUpdate(listNameGroup.get(position));
                     }
                 });
                 builder.setCancelable(true);
@@ -194,18 +194,29 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void showDialogUpdate() {
+    private void showDialogUpdate(final String oldName) {
         final Dialog dialog = new Dialog(MainActivity.this);
-        dialog.setTitle("Cập nhật thông tin group: ");
+        dialog.setTitle("Cập nhật thông tin nhóm: ");
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.custom_dialog_update_group);
-        EditText edtUpdateGroupName = (EditText) dialog.findViewById(R.id.edtUpdateGroup);
+        final EditText edtUpdateGroupName = (EditText) dialog.findViewById(R.id.edtUpdateGroup);
         FloatingActionButton btnDone = (FloatingActionButton) dialog.findViewById(R.id.btnDone);
         FloatingActionButton btnClose = (FloatingActionButton) dialog.findViewById(R.id.btnClose);
 
+        edtUpdateGroupName.setText(oldName);
+        edtUpdateGroupName.requestFocus();
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.cancel();
+            }
+        });
+        btnDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseHandle handle = DatabaseHandle.getInstance(MainActivity.this);
+                handle.updateGroup(oldName,edtUpdateGroupName.getText().toString());
+                MainActivity.this.onStart();
                 dialog.cancel();
             }
         });
@@ -217,6 +228,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ListEmployeeActivity.class);
         intent.putExtra(ListGroupAdapter.NAME_GROUP,nameGroup);
         startActivity(intent);
+        overridePendingTransition(R.anim.side_in_right, R.anim.side_out_left);
     }
     private void createNotification() {
         Log.d(TAG, "createNotification: ");
@@ -253,6 +265,10 @@ public class MainActivity extends AppCompatActivity {
     public int getDay(String s){
         String []aday = s.split("/");
         return Integer.parseInt(aday[0]);
+    }
+
+    private void animation(){
+
     }
 
 
