@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/colorAccent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:background="@drawable/custom_background"
+        android:layout_marginLeft="@dimen/def_margin"
+        android:layout_marginRight="@dimen/def_margin"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_marginTop="@dimen/def_margin"
+            android:padding="15dp"
+            android:id="@+id/ivAvatar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/custom_add_picture" />
+
+        <TextView
+            android:layout_marginTop="@dimen/def_margin"
+            android:layout_marginLeft="@dimen/def_margin"
+            android:layout_below="@+id/ivAvatar"
+            android:textSize="18sp"
+            android:textColor="@color/textColor"
+            android:id="@+id/tvName"
+            android:text="Họ tên: "
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="@dimen/def_margin"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="@dimen/def_margin_text"
+            android:layout_below="@+id/tvName"
+            android:text="Lương tháng hiện tại: "
+            android:id="@+id/tvMonthSalary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="@dimen/def_margin"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="@dimen/def_margin_text"
+            android:layout_below="@id/tvMonthSalary"
+            android:text="Lương tháng trước: "
+            android:id="@+id/tvPreMothSalary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/def_margin"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="@dimen/def_margin_text"
+            android:layout_below="@id/tvPreMothSalary"
+            android:text="Note"
+            android:id="@+id/tvNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ScrollView
+            android:padding="20dp"
+            android:layout_below="@+id/tvNote"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:textStyle="bold"
+                android:textColor="@color/textColor"
+                android:id="@+id/tvPreviousMonthSalary"
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </ScrollView>
+
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -236,9 +236,9 @@ public class DatabaseHandle extends SQLiteOpenHelper{
         cursor.close();
         return listGroup;
     }
-    public float getTotalSalaryById(int id)
+    public int getTotalSalaryById(int id)
     {
-        float totalSalary=0;
+        int totalSalary=0;
         String sql="select totalSalary from Employee where id="+id+" ";
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(sql,null);

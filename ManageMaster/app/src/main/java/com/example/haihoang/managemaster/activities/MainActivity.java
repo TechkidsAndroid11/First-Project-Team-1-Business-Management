@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private TextClock tcCurrenTime;
     private String myDate;
     private SearchView svGroup;
-    private TextView tvTitle;
+    private TextView tvTitle, tvNoti;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupUI() {
+        tvNoti = (TextView) findViewById(R.id.tvNoti);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         svGroup = (SearchView) findViewById(R.id.svGroup);
         btnCheckTotal = (ImageView) findViewById(R.id.btnCheckTotal);
@@ -89,30 +90,40 @@ public class MainActivity extends AppCompatActivity {
     {
         DatabaseHandle handle = DatabaseHandle.getInstance(this);
         listNameGroup = handle.getAllGroup();
-        ArrayList<Group> listGroup=new ArrayList<Group>();
-        for(int i=0;i<listNameGroup.size();i++)
-        {
-            String nameGroup = listNameGroup.get(i).toString();
-            listGroup.add(new Group(nameGroup,handle.getCountEmployeeInGroup(nameGroup)));
+        Log.e("ListNameGroup", listNameGroup.size() + " ");
+        if(listNameGroup.size() == 0){
+            tvNoti.setVisibility(View.VISIBLE);
+            lvListGroup.setVisibility(View.INVISIBLE);
         }
-        final ListGroupAdapter adapter = new ListGroupAdapter(this,R.layout.item_list_group,listGroup);
-        lvListGroup.setAdapter(adapter);
-
-
-        svGroup.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
+        else{
+            lvListGroup.setVisibility(View.VISIBLE);
+            ArrayList<Group> listGroup=new ArrayList<Group>();
+            for(int i=0;i<listNameGroup.size();i++)
+            {
+                String nameGroup = listNameGroup.get(i).toString();
+                listGroup.add(new Group(nameGroup,handle.getCountEmployeeInGroup(nameGroup)));
             }
+            final ListGroupAdapter adapter = new ListGroupAdapter(this,R.layout.item_list_group,listGroup);
+            lvListGroup.setAdapter(adapter);
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        });
+
+            svGroup.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    adapter.getFilter().filter(newText);
+                    return false;
+                }
+            });
+            tvNoti.setVisibility(View.GONE);
+        }
 
     }
+
     private void addListener()
     {
         svGroup.setOnSearchClickListener(new View.OnClickListener() {

@@ -2,6 +2,7 @@ package com.example.haihoang.managemaster.activities;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
@@ -30,7 +31,7 @@ public class SummaryActivity extends AppCompatActivity {
     ArrayList<Group> listGroup;
     String date;
     ExpandableListView elvListSalary;
-
+    public static final String EMPLOYEE = "employee";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,19 @@ public class SummaryActivity extends AppCompatActivity {
 
     private void setOnclickList() {
 
+        elvListSalary.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
+                final DatabaseHandle handle = DatabaseHandle.getInstance(SummaryActivity.this);
+                final ArrayList<EmployeeModel> listEmployee = handle.getAllEmployeeByGroup(listNameGroup.get(groupPosition));
+                Intent intent = new Intent(SummaryActivity.this,EmployeeInfoSalary.class);
+                intent.putExtra(EMPLOYEE,listEmployee.get(childPosition));
+                startActivity(intent);
+                return false;
+            }
+        });
+
+
         elvListSalary.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -64,13 +78,13 @@ public class SummaryActivity extends AppCompatActivity {
                 if (itemType == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
                     onChildLongClick(groupPosition, childPosition);
                 }
-                return false;
+                return true;
             }
         });
 
 
-    }
 
+    }
     private void onChildLongClick(final int groupPosition, final int childPosition) {
         AlertDialog.Builder builder = new AlertDialog.Builder(SummaryActivity.this);
         builder.setCancelable(true);
@@ -122,10 +136,6 @@ public class SummaryActivity extends AppCompatActivity {
                 if(sMoney.equals(""))
                 {
                     Toast.makeText(SummaryActivity.this, "Bạn chưa nhập số tiền", Toast.LENGTH_SHORT).show();
-                }else if(!sMoney.matches("[0-9]+"))
-                {
-                    Toast.makeText(SummaryActivity.this, "Số tiền sai định dạng!!!", Toast.LENGTH_SHORT).show();
-
                 }else if(note.equals(""))
                 {
                     Toast.makeText(SummaryActivity.this, "Bạn chưa nhập ghi chú", Toast.LENGTH_SHORT).show();
@@ -135,7 +145,7 @@ public class SummaryActivity extends AppCompatActivity {
                     String beforeNote = handle.getNote(model);
                     Log.e("beforeNote", beforeNote);
                     beforeNote += "+ " + date + ":(Thưởng) " + money + "\n"
-                                  + note + "\r\n";
+                            + note + "\r\n";
                     Log.e("date: ", beforeNote);
                     handle.addMoneyToTotalSalary(model,money,beforeNote);
                     Log.d(TAG, "onClick: Note:"+ model.getNote());
@@ -182,16 +192,21 @@ public class SummaryActivity extends AppCompatActivity {
                 else
                 {
                     int money = Integer.parseInt(sMoney);
-
-                    String beforeNote = handle.getNote(model);
-                    Log.e("beforeNote", beforeNote);
-                    beforeNote += "+ " + date + ":(Trừ Lương) " + money + "\n"
-                            + note + "\r\n";
-                    Log.e("date: ", beforeNote);
-                    handle.minusMoneyToTotalSalary(model,money,note);
-                    Log.d("check model: ",  "dasas");
-                    dialog.dismiss();
-                    onResume();
+                    int totalSalary = handle.getTotalSalaryById(model.getId());
+                    if(money < totalSalary) {
+                        Log.e("totalsalary", totalSalary + "");
+                        String beforeNote = handle.getNote(model);
+                        Log.e("beforeNote", beforeNote);
+                        beforeNote += "+ " + date + ":(Trừ Lương) " + money + "\n"
+                                + note + "\r\n";
+                        Log.e("date: ", beforeNote);
+                        handle.minusMoneyToTotalSalary(model, money, note);
+                        dialog.dismiss();
+                        onResume();
+                    }else{
+                        Toast.makeText(SummaryActivity.this, "Lương tháng hiện tại không đủ để trừ", Toast.LENGTH_LONG ).show();
+                        dialog.dismiss();
+                    }
                 }
             }
         });
