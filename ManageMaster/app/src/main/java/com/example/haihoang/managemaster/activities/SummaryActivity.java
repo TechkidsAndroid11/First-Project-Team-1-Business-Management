@@ -88,6 +88,7 @@ public class SummaryActivity extends AppCompatActivity {
     private void onChildLongClick(final int groupPosition, final int childPosition) {
         AlertDialog.Builder builder = new AlertDialog.Builder(SummaryActivity.this);
         builder.setCancelable(true);
+        builder.setTitle(listGroup.get(groupPosition).getListEmployee().get(childPosition).getName());
         builder.setNegativeButton("Thưởng", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -130,8 +131,6 @@ public class SummaryActivity extends AppCompatActivity {
                 DatabaseHandle handle = DatabaseHandle.getInstance(SummaryActivity.this);
                 String sMoney = edtMoney.getText().toString();
                 String note = edtNote.getText().toString();
-                Log.e("check note", note);
-                Log.e("check date", date);
 
                 if(sMoney.equals(""))
                 {
@@ -143,12 +142,9 @@ public class SummaryActivity extends AppCompatActivity {
                 {
                     int money = Integer.parseInt(sMoney);
                     String beforeNote = handle.getNote(model);
-                    Log.e("beforeNote", beforeNote);
-                    beforeNote += "+ " + date + ":(Thưởng) " + money + "\n"
-                            + note + "\r\n";
-                    Log.e("date: ", beforeNote);
+                    beforeNote += "- " + date + ":(Thưởng) " + money + "\n"
+                            + note + "\n";
                     handle.addMoneyToTotalSalary(model,money,beforeNote);
-                    Log.d(TAG, "onClick: Note:"+ model.getNote());
                     dialog.dismiss();
                     onResume();
                 }
@@ -194,13 +190,11 @@ public class SummaryActivity extends AppCompatActivity {
                     int money = Integer.parseInt(sMoney);
                     int totalSalary = handle.getTotalSalaryById(model.getId());
                     if(money < totalSalary) {
-                        Log.e("totalsalary", totalSalary + "");
                         String beforeNote = handle.getNote(model);
-                        Log.e("beforeNote", beforeNote);
-                        beforeNote += "+ " + date + ":(Trừ Lương) " + money + "\n"
+
+                        beforeNote += "- " + date + ":(Phạt) " + money + "\n"
                                 + note + "\r\n";
-                        Log.e("date: ", beforeNote);
-                        handle.minusMoneyToTotalSalary(model, money, note);
+                        handle.minusMoneyToTotalSalary(model, money, beforeNote);
                         dialog.dismiss();
                         onResume();
                     }else{

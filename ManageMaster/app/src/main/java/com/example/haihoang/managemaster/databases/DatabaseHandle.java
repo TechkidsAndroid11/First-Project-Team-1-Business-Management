@@ -388,7 +388,7 @@ public class DatabaseHandle extends SQLiteOpenHelper{
     {
         int totalSalary = model.getTotalSalary();
         totalSalary =totalSalary+ money;
-        String sql="update Employee set totalSalary="+totalSalary+",Note='"+note+"' where id="+model.getId()+" ";
+        String sql="update Employee set totalSalary="+totalSalary+", Note='"+note+"' where id="+model.getId()+" ";
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         sqLiteDatabase.execSQL(sql);
         sqLiteDatabase.close();
@@ -397,14 +397,13 @@ public class DatabaseHandle extends SQLiteOpenHelper{
     {
         int totalSalary = model.getTotalSalary();
         totalSalary =totalSalary- money;
-        String sql="update Employee set totalSalary="+totalSalary+",Note='"+note+"' where id="+model.getId()+" ";
+        String sql="update Employee set totalSalary="+totalSalary+", Note='"+note+"' where id="+model.getId()+" ";
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         sqLiteDatabase.execSQL(sql);
         sqLiteDatabase.close();
     }
     public String getNote(EmployeeModel model)
     {
-        //String sql="select Note from Employee ";
         String sql="select Note from Employee where id="+model.getId()+"";
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(sql,null);
@@ -412,11 +411,25 @@ public class DatabaseHandle extends SQLiteOpenHelper{
         cursor.moveToFirst();
         while(!cursor.isAfterLast())
         {
-            note = cursor.getColumnName(0);
+            note = cursor.getString(0);
             cursor.moveToNext();
         }
         sqLiteDatabase.close();
         return note;
+    }
+    public void resetAllNote()
+    {
+        String sql="update Employee set Note='' ";
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        sqLiteDatabase.execSQL(sql);
+        sqLiteDatabase.close();
+    }
+    public void resetAllTotalSalary()
+    {
+        String sql="update Employee set totalSalary=0 ";
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        sqLiteDatabase.execSQL(sql);
+        sqLiteDatabase.close();
     }
 }
 
