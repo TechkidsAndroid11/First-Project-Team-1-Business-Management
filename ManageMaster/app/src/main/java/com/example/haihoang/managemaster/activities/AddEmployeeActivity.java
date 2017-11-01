@@ -32,7 +32,6 @@ import com.example.haihoang.managemaster.utils.ImageUtils;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,9 +41,9 @@ import java.util.Locale;
 
 public class AddEmployeeActivity extends AppCompatActivity{
 
-    private ImageView imgAvatar, ivPickDate;
+    private ImageView imgAvatar, ivPickDate, ivPickDate2;
     private TextView tvTitle;
-    private EditText edtName, edtId, edtDOB, edtPhone, edtHomeTown, edtExp, edtSalary;
+    private EditText edtName, edtDOB, edtPhone, edtHomeTown, edtExp, edtSalary, edtFirstDayWork;
     private AutoCompleteTextView actvGroup;
     private RadioGroup radioGender;
     private FloatingActionButton btnDone;
@@ -103,11 +102,19 @@ public class AddEmployeeActivity extends AppCompatActivity{
             }
         });
 
+        ivPickDate2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickDateDialog2();
+            }
+        });
+
         cal=Calendar.getInstance();
         SimpleDateFormat dft=null;
         dft=new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String strDate=dft.format(cal.getTime());
         edtDOB.setText(strDate);
+        edtFirstDayWork.setText(strDate);
 
     }
 
@@ -115,9 +122,7 @@ public class AddEmployeeActivity extends AppCompatActivity{
         DatePickerDialog.OnDateSetListener callback = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                // Set text cho textView
                 edtDOB.setText(day + "/" + (month +1) + "/" + year);
-                //Lưu vết lại ngày mới cập nhật
                 cal.set(year, month, day);
                 date = cal.getTime();
             }
@@ -131,6 +136,28 @@ public class AddEmployeeActivity extends AppCompatActivity{
                 AddEmployeeActivity.this,
                 callback, nam, thang, ngay);
         pic.setTitle("Chọn ngày sinh");
+        pic.show();
+    }
+
+    private void pickDateDialog2() {
+        DatePickerDialog.OnDateSetListener callback = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                edtFirstDayWork.setText(day + "/" + (month +1) + "/" + year);
+                cal.set(year, month, day);
+                date = cal.getTime();
+
+            }
+        };
+        String s=edtFirstDayWork.getText()+"";
+        String strArrtmp2[]=s.split("/");
+        int ngay=Integer.parseInt(strArrtmp2[0]);
+        int thang=Integer.parseInt(strArrtmp2[1]) - 1;
+        int nam=Integer.parseInt(strArrtmp2[2]);
+        DatePickerDialog pic=new DatePickerDialog(
+                AddEmployeeActivity.this,
+                callback, nam, thang, ngay);
+        pic.setTitle("Chọn Ngày Gia Nhập");
         pic.show();
     }
 
@@ -149,7 +176,9 @@ public class AddEmployeeActivity extends AppCompatActivity{
 
 
     private void setupUI() {
+        edtFirstDayWork = (EditText) findViewById(R.id.edtFirstDayWork);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
+        ivPickDate2 = (ImageView) findViewById(R.id.ivPickDate2);
         ivPickDate = (ImageView) findViewById(R.id.ivPickDate);
         radioGender = (RadioGroup) findViewById(R.id.radio_gender);
         btnDone = (FloatingActionButton) findViewById(R.id.btnDone);
@@ -322,8 +351,7 @@ public class AddEmployeeActivity extends AppCompatActivity{
             Toast.makeText(AddEmployeeActivity.this, "Hãy điền nhóm!",Toast.LENGTH_SHORT).show();
             return;
         }
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String firstDayWork = dateFormat.format(new Date()).toString();
+        String firstDayWork = edtFirstDayWork.getText().toString();
         int salary;
         try {
             salary = Integer.parseInt(edtSalary.getText().toString());
@@ -347,8 +375,7 @@ public class AddEmployeeActivity extends AppCompatActivity{
         DatabaseHandle.getInstance(AddEmployeeActivity.this).addEmployee(employeeModel);
         Toast.makeText(AddEmployeeActivity.this, "Thêm nhân viên thành công!", Toast.LENGTH_LONG).show();
         clearEditText();
-        Intent intent = new Intent(AddEmployeeActivity.this, MainActivity.class);
-        startActivity(intent);
+        finish();
 
     }
 
