@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.haihoang.managemaster.R;
@@ -116,12 +117,12 @@ public class SummaryActivity extends AppCompatActivity {
         Date d = new Date();
         date = df.format(d);
         final Dialog dialog = new Dialog(this);
-        dialog.setTitle("Thưởng");
         dialog.setCancelable(true);
-
         dialog.setContentView(R.layout.custom_dialog_salary);
         FloatingActionButton btnDone = dialog.findViewById(R.id.btnDone);
         FloatingActionButton btnClose = dialog.findViewById(R.id.btnClose);
+        TextView tvTitle = dialog.findViewById(R.id.tvTitle);
+        tvTitle.setText("Thưởng Tiền");
         final EditText edtMoney = dialog.findViewById(R.id.edtMoney);
         final EditText edtNote = dialog.findViewById(R.id.edtNote);
         btnDone.setOnClickListener(new View.OnClickListener() {
@@ -166,9 +167,10 @@ public class SummaryActivity extends AppCompatActivity {
         dialog.setCancelable(true);
 
         dialog.setContentView(R.layout.custom_dialog_salary);
-        dialog.setTitle("Phạt");
         FloatingActionButton btnDone = dialog.findViewById(R.id.btnDone);
         FloatingActionButton btnClose = dialog.findViewById(R.id.btnClose);
+        TextView tvTitle = dialog.findViewById(R.id.tvTitle);
+        tvTitle.setText("Ứng/Phạt");
         final EditText edtMoney = dialog.findViewById(R.id.edtMoney);
         final EditText edtNote = dialog.findViewById(R.id.edtNote);
         btnDone.setOnClickListener(new View.OnClickListener() {
@@ -192,7 +194,7 @@ public class SummaryActivity extends AppCompatActivity {
                         String beforeNote = handle.getNote(model);
 
 
-                        beforeNote += "- " + date + ":(Phạt) " + money + "\n"
+                        beforeNote += "- " + date + ":(Ứng/Phạt) " + money + "\n"
                                 + note + "\r\n";
                         handle.minusMoneyToTotalSalary(model, money, beforeNote);
                         dialog.dismiss();
