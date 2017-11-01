@@ -71,7 +71,6 @@ public class UpdateEmployee extends AppCompatActivity {
         radioGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                Log.e("radio", "Isaaaaaa");
                 switch (i){
                     case R.id.radio_nam:
                         gender = 1;
