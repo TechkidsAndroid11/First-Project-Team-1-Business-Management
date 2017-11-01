@@ -51,6 +51,7 @@ public class AlarmService extends Service {
             DatabaseHandle handle = DatabaseHandle.getInstance(this);
             handle.resetAllNote();
             handle.resetAllTotalSalary();
+            handle.resetStatusAllAbsent();
         }
         return super.onStartCommand(intent, flags, startId);
     }
