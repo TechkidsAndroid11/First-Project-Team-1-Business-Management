@@ -198,7 +198,7 @@ public class SummaryActivity extends AppCompatActivity {
                         String beforeNote = handle.getNote(model);
                         Log.e("beforeNote", beforeNote);
                         beforeNote += "+ " + date + ":(Trừ Lương) " + money + "\n"
-                                + note + "\r\n";
+                                + note + "\n";
                         Log.e("date: ", beforeNote);
                         handle.minusMoneyToTotalSalary(model, money, note);
                         dialog.dismiss();

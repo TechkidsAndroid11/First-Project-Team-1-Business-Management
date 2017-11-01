@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageView btnCheckTotal;
     ArrayList<String> listNameGroup;
     private ListView lvListGroup;
-    Thread myThread = null;
     private TextClock tcCurrenTime;
     private String myDate;
     private SearchView svGroup;
@@ -268,7 +267,6 @@ public class MainActivity extends AppCompatActivity {
                 //Reset Absent
                 DatabaseHandle handle = DatabaseHandle.getInstance(this);
                 handle.resetStatusAllAbsent();
-
                 Toast.makeText(this,"Sang ngày mới!! Reset Absent.",Toast.LENGTH_LONG).show();
             }
         }
@@ -278,9 +276,6 @@ public class MainActivity extends AppCompatActivity {
         return Integer.parseInt(aday[0]);
     }
 
-    private void animation(){
-
-    }
 
 
 }
