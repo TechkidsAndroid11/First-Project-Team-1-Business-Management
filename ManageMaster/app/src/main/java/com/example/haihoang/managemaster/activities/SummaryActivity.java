@@ -36,10 +36,21 @@ public class SummaryActivity extends AppCompatActivity {
     private void setOnclickList() {
 
         elvListSalary.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(SummaryActivity.this, "long click", Toast.LENGTH_LONG);
-                return true;
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                long packedPosition = elvListSalary.getExpandableListPosition(position);
+                if (ExpandableListView.getPackedPositionType(packedPosition) ==
+                        ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+                    Toast.makeText(SummaryActivity.this, "Long click ", Toast.LENGTH_LONG);
+                    // get item ID's
+                    int groupPosition = ExpandableListView.getPackedPositionGroup(packedPosition);
+                    int childPosition = ExpandableListView.getPackedPositionChild(packedPosition);
+
+
+                    return true;
+                }
+                return false;
             }
         });
 
