@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.models.Group;
 import com.example.haihoang.managemaster.utils.CircleTransform;
+import com.example.haihoang.managemaster.utils.FormatNumber;
 
 import java.util.ArrayList;
 
@@ -117,9 +118,9 @@ public class ListSalaryAdapter extends BaseExpandableListAdapter{
 
 
         viewHolder.tvName.setText("Name: "+listGroup.get(groupPosition).getListEmployee().get(childPosition).getName());
-        viewHolder.tvDaySalary.setText("Salary (/day): "+listGroup.get(groupPosition).getListEmployee().get(childPosition).getDaySalary());
+        viewHolder.tvDaySalary.setText("Salary (/day): "+ FormatNumber.formatNumber(listGroup.get(groupPosition).getListEmployee().get(childPosition).getDaySalary())+"đ");
         viewHolder.tvTotalSalary.setTextColor(Color.RED);
-        viewHolder.tvTotalSalary.setText("Month Salary: "+listGroup.get(groupPosition).getListEmployee().get(childPosition).getTotalSalary());
+        viewHolder.tvTotalSalary.setText("Month Salary: "+FormatNumber.formatNumber(listGroup.get(groupPosition).getListEmployee().get(childPosition).getTotalSalary())+"đ");
 
         String[] base64 = listGroup.get(groupPosition).getListEmployee().get(childPosition).getAvatar().split(",");
         Bitmap bitmap = BitmapFactory.decodeByteArray(
