@@ -8,7 +8,7 @@
         android:textColor="@color/backgroundList"
         android:textStyle="bold"
         android:textSize="25sp"
-        android:text="Add Employee"
+        android:text="Thêm nhân viên"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

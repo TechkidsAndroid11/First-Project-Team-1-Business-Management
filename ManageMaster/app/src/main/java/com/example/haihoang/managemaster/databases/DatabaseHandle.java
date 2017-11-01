@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.haihoang.managemaster.models.EmployeeModel;
-import com.example.haihoang.managemaster.models.Group;
 
 import java.util.ArrayList;
 
@@ -384,6 +383,40 @@ public class DatabaseHandle extends SQLiteOpenHelper{
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         sqLiteDatabase.execSQL(sql);
         sqLiteDatabase.close();
+    }
+    public void addMoneyToTotalSalary(EmployeeModel model, int money,String note)
+    {
+        int totalSalary = model.getTotalSalary();
+        totalSalary =totalSalary+ money;
+        String sql="update Employee set totalSalary="+totalSalary+",Note='"+note+"' where id="+model.getId()+" ";
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        sqLiteDatabase.execSQL(sql);
+        sqLiteDatabase.close();
+    }
+    public void minusMoneyToTotalSalary(EmployeeModel model, int money,String note)
+    {
+        int totalSalary = model.getTotalSalary();
+        totalSalary =totalSalary- money;
+        String sql="update Employee set totalSalary="+totalSalary+",Note='"+note+"' where id="+model.getId()+" ";
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        sqLiteDatabase.execSQL(sql);
+        sqLiteDatabase.close();
+    }
+    public String getNote(EmployeeModel model)
+    {
+        //String sql="select Note from Employee ";
+        String sql="select Note from Employee where id="+model.getId()+"";
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(sql,null);
+        String note="";
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+            note = cursor.getColumnName(0);
+            cursor.moveToNext();
+        }
+        sqLiteDatabase.close();
+        return note;
     }
 }
 

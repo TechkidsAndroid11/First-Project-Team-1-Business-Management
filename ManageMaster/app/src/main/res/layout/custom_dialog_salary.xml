@@ -22,6 +22,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:inputType="number"
             android:id="@+id/edtMoney"
             android:layout_marginRight="@dimen/def_margin"
             android:layout_marginLeft="@dimen/def_margin"
@@ -33,7 +34,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="@dimen/def_margin_text"
             android:textColor="@color/textColor"
-            android:text="Note: "
+            android:text="Ghi chú: "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

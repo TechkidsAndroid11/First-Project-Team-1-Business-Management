@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ public class ListEmployeeActivity extends AppCompatActivity {
     private String nameGroup;
     private SearchView svEmployee;
     private TextView tvGroupName;
+    private ImageView ivSave;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,7 @@ public class ListEmployeeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.e("check", "click2");
                 tvGroupName.setVisibility(View.GONE);
+                ivSave.setVisibility(View.GONE);
             }
         });
 
@@ -67,6 +70,7 @@ public class ListEmployeeActivity extends AppCompatActivity {
             public boolean onClose() {
                 Log.e("check", "Close");
                 tvGroupName.setVisibility(View.VISIBLE);
+                ivSave.setVisibility(View.VISIBLE);
                 return false;
             }
         });
@@ -79,20 +83,20 @@ public class ListEmployeeActivity extends AppCompatActivity {
                 final ArrayList<EmployeeModel> listEmployee = handle.getAllEmployeeByGroup(nameGroup);
                 final AlertDialog.Builder builder = new AlertDialog.Builder(ListEmployeeActivity.this);
                 builder.setTitle(listEmployee.get(position).getName());
-                builder.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
+                builder.setNeutralButton("Xoá", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         handle.deleteEmployee(listEmployee.get(position));
                         onResume();
                     }
                 });
-                builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Huỷ", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
                 });
-                builder.setNegativeButton("Update", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Cập nhật", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(ListEmployeeActivity.this,UpdateEmployee.class);
@@ -115,12 +119,19 @@ public class ListEmployeeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        ivSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     private void setupUI() {
         svEmployee= (SearchView) findViewById(R.id.svListEmployee);
         lvListEmployee = (ListView) findViewById(R.id.lvListEmployee);
         tvGroupName = (TextView) findViewById(R.id.txtGroupName);
+        ivSave = (ImageView) findViewById(R.id.iv_luu);
     }
 
     public void getDataIntent()

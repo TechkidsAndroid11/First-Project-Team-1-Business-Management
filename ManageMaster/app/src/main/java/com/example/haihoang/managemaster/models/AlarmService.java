@@ -37,7 +37,7 @@ public class AlarmService extends Service {
             PendingIntent pendingIntent = PendingIntent.getActivity(this,(int)System.currentTimeMillis(),intent1,0);
 
             Notification noti = new Notification.Builder(this).setContentTitle("Cuối tháng rồi!!")
-                    .setContentText("Tổng kết lương thôi bạn ơi!!")
+                    .setContentText("Hãy tổng kết lương!!")
                     .setSmallIcon(R.drawable.ic_attach_money_wthite_24dp)
                     .setContentIntent(pendingIntent)
                     .build();

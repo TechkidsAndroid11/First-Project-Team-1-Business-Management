@@ -81,12 +81,12 @@ public class ListEmployeeAdapter extends BaseAdapter implements Filterable {
 
         if(listEmployee.get(position).getStatus()==1)
         {
-            viewHolder.tvStatus.setText("Present");
+            viewHolder.tvStatus.setText("Có mặt");
             viewHolder.tvStatus.setBackground(context.getResources().getDrawable(R.drawable.custom_button_present));
         }
         else
         {
-            viewHolder.tvStatus.setText("Absent");
+            viewHolder.tvStatus.setText("Vắng mặt");
             viewHolder.tvStatus.setBackground(context.getResources().getDrawable(R.drawable.custom_button_absent));
         }
 
@@ -110,7 +110,7 @@ public class ListEmployeeAdapter extends BaseAdapter implements Filterable {
                 DatabaseHandle handle = DatabaseHandle.getInstance(context);
                 if(!checkStatus)
                 {
-                    viewHolder.tvStatus.setText("Present");
+                    viewHolder.tvStatus.setText("Có mặt");
                     viewHolder.tvStatus.setBackground(context.getResources().getDrawable(R.drawable.custom_button_present));
                     handle.updateStatus(listEmployee.get(position));
 
@@ -119,7 +119,7 @@ public class ListEmployeeAdapter extends BaseAdapter implements Filterable {
                 }
                 else
                 {
-                    viewHolder.tvStatus.setText("Absent");
+                    viewHolder.tvStatus.setText("Vắng mặt");
                     viewHolder.tvStatus.setBackground(context.getResources().getDrawable(R.drawable.custom_button_absent));
                     handle.updateStatus(listEmployee.get(position));
                    // handle.minusSalarytoTotal(listEmployee.get(position));
