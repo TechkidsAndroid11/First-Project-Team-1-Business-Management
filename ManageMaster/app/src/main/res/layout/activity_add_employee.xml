@@ -114,7 +114,10 @@
                     android:layout_marginRight="@dimen/def_margin"
                     android:layout_marginLeft="@dimen/def_margin"
                     android:weightSum="10">
-                    <EditText
+                    <TextView
+                        android:textSize="18sp"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/textColor"
                         android:editable="false"
                         android:layout_weight="9"
                         android:inputType="date"
@@ -206,7 +209,10 @@
                     android:layout_marginRight="@dimen/def_margin"
                     android:layout_marginLeft="@dimen/def_margin"
                     android:weightSum="10">
-                    <EditText
+                    <TextView
+                        android:textColor="@color/textColor"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="18sp"
                         android:editable="false"
                         android:layout_weight="9"
                         android:inputType="date"

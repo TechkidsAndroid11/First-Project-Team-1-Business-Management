@@ -37,8 +37,8 @@ import java.util.Date;
 
 public class UpdateEmployee extends AppCompatActivity {
     EmployeeModel model;
-    private ImageView imgAvatar, ivPickDate;
-    private EditText edtName, edtDOB, edtPhone, edtHomeTown, edtExp, edtSalary;
+    private ImageView imgAvatar, ivPickDate , ivPickDate2;
+    private EditText edtName, edtPhone, edtHomeTown, edtExp, edtSalary;
     private AutoCompleteTextView actvGroup;
     private RadioGroup radioGender;
     private FloatingActionButton btnDone;
@@ -46,7 +46,7 @@ public class UpdateEmployee extends AppCompatActivity {
     int gender = 1;
     Calendar cal;
     Date date;
-    private TextView tvTitle;
+    private TextView tvTitle,edtDOB, edtFirstDayWork;
     CircleTransform circleTransform = new CircleTransform();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +66,7 @@ public class UpdateEmployee extends AppCompatActivity {
         edtExp.setText(model.getExperience());
         edtSalary.setText(model.getDaySalary()+"");
         actvGroup.setText(model.getGroup());
+        edtFirstDayWork.setText(model.getFirstDayWork());
 
 
         radioGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -109,6 +110,13 @@ public class UpdateEmployee extends AppCompatActivity {
             }
         });
 
+        ivPickDate2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickDateDialog2();
+            }
+        });
+
     }
 
     private void pickDateDialog() {
@@ -130,13 +138,34 @@ public class UpdateEmployee extends AppCompatActivity {
         pic.show();
     }
 
+    private void pickDateDialog2() {
+        DatePickerDialog.OnDateSetListener callback = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                edtFirstDayWork.setText(day + "/" + (month +1) + "/" + year);
+            }
+        };
+        String s=edtFirstDayWork.getText()+"";
+        String strArrtmp[]=s.split("/");
+        int ngay=Integer.parseInt(strArrtmp[0]);
+        int thang=Integer.parseInt(strArrtmp[1]) - 1;
+        int nam=Integer.parseInt(strArrtmp[2]);
+        DatePickerDialog pic=new DatePickerDialog(
+                UpdateEmployee.this,
+                callback, nam, thang, ngay);
+        pic.setTitle("Chọn ngày sinh");
+        pic.show();
+    }
+
     private void setupUI() {
+        ivPickDate2 = (ImageView) findViewById(R.id.ivPickDate2);
+        edtFirstDayWork = (TextView) findViewById(R.id.edtFirstDayWork);
         ivPickDate = (ImageView) findViewById(R.id.ivPickDate);
         radioGender = (RadioGroup) findViewById(R.id.radio_gender);
         btnDone = (FloatingActionButton) findViewById(R.id.btnDone);
         imgAvatar = (ImageView) findViewById(R.id.ivAddImage);
         edtName = (EditText) findViewById(R.id.edtName);
-        edtDOB = (EditText) findViewById(R.id.edtDOB);
+        edtDOB = (TextView) findViewById(R.id.edtDOB);
         edtPhone = (EditText) findViewById(R.id.edtPhone);
         edtHomeTown = (EditText) findViewById(R.id.edtHomeTown);
         edtExp = (EditText) findViewById(R.id.edtExp);
@@ -233,10 +262,11 @@ public class UpdateEmployee extends AppCompatActivity {
 
         DatabaseHandle.getInstance(UpdateEmployee.this).updateEmployee(employeeModel);
         Toast.makeText(UpdateEmployee.this, "Sửa nhân viên thành công!", Toast.LENGTH_SHORT).show();
-        clearEditText();
         Intent intent = new Intent(UpdateEmployee.this, ListEmployeeActivity.class);
         intent.putExtra(ListGroupAdapter.NAME_GROUP,model.getGroup());
         startActivity(intent);
+        finish();
+
 
     }
 }

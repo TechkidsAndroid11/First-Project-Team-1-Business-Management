@@ -102,6 +102,7 @@ public class ListEmployeeActivity extends AppCompatActivity {
                         Intent intent = new Intent(ListEmployeeActivity.this,UpdateEmployee.class);
                         intent.putExtra("Employee",listEmployee.get(position));
                         startActivity(intent);
+                        finish();
                     }
                 });
                 builder.setCancelable(true);

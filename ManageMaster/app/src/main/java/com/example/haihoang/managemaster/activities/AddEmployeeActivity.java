@@ -42,8 +42,8 @@ import java.util.Locale;
 public class AddEmployeeActivity extends AppCompatActivity{
 
     private ImageView imgAvatar, ivPickDate, ivPickDate2;
-    private TextView tvTitle;
-    private EditText edtName, edtDOB, edtPhone, edtHomeTown, edtExp, edtSalary, edtFirstDayWork;
+    private TextView edtDOB, edtFirstDayWork, tvTitle;
+    private EditText edtName, edtPhone, edtHomeTown, edtExp, edtSalary;
     private AutoCompleteTextView actvGroup;
     private RadioGroup radioGender;
     private FloatingActionButton btnDone;
@@ -176,7 +176,7 @@ public class AddEmployeeActivity extends AppCompatActivity{
 
 
     private void setupUI() {
-        edtFirstDayWork = (EditText) findViewById(R.id.edtFirstDayWork);
+        edtFirstDayWork = (TextView) findViewById(R.id.edtFirstDayWork);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         ivPickDate2 = (ImageView) findViewById(R.id.ivPickDate2);
         ivPickDate = (ImageView) findViewById(R.id.ivPickDate);
@@ -184,7 +184,7 @@ public class AddEmployeeActivity extends AppCompatActivity{
         btnDone = (FloatingActionButton) findViewById(R.id.btnDone);
         imgAvatar = (ImageView) findViewById(R.id.ivAddImage);
         edtName = (EditText) findViewById(R.id.edtName);
-        edtDOB = (EditText) findViewById(R.id.edtDOB);
+        edtDOB = (TextView) findViewById(R.id.edtDOB);
         edtPhone = (EditText) findViewById(R.id.edtPhone);
         edtHomeTown = (EditText) findViewById(R.id.edtHomeTown);
         edtExp = (EditText) findViewById(R.id.edtExp);
@@ -322,8 +322,6 @@ public class AddEmployeeActivity extends AppCompatActivity{
             Toast.makeText(AddEmployeeActivity.this, "Hãy điền tên!",Toast.LENGTH_SHORT).show();
             return;
         }
-        //int id = Integer.parseInt(edtId.getText().toString().trim());
-
         String birthday = edtDOB.getText().toString().trim();
         if(birthday.equals("")){
             Toast.makeText(AddEmployeeActivity.this, "Hãy điền ngày sinh!",Toast.LENGTH_SHORT).show();
@@ -340,7 +338,6 @@ public class AddEmployeeActivity extends AppCompatActivity{
             Toast.makeText(AddEmployeeActivity.this, "Hãy điền địa chỉ!",Toast.LENGTH_SHORT).show();
             return;
         }
-
         String exp = edtExp.getText().toString();
         if(exp.equals("")){
             Toast.makeText(AddEmployeeActivity.this, "Hãy điền kinh nghiệm!",Toast.LENGTH_SHORT).show();

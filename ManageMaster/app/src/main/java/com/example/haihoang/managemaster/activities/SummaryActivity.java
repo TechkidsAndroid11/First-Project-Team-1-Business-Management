@@ -62,7 +62,7 @@ public class SummaryActivity extends AppCompatActivity {
                 Intent intent = new Intent(SummaryActivity.this,EmployeeInfoSalary.class);
                 intent.putExtra(EMPLOYEE,listEmployee.get(childPosition));
                 startActivity(intent);
-                return false;
+                return true;
             }
         });
 
