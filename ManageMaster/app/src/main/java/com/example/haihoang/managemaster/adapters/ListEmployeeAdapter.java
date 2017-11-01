@@ -19,6 +19,7 @@ import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.databases.DatabaseHandle;
 import com.example.haihoang.managemaster.models.EmployeeModel;
 import com.example.haihoang.managemaster.utils.CircleTransform;
+import com.example.haihoang.managemaster.utils.FormatNumber;
 
 import java.util.ArrayList;
 
@@ -77,7 +78,7 @@ public class ListEmployeeAdapter extends BaseAdapter implements Filterable {
 
         viewHolder.tvName.setText(listEmployee.get(position).getName());
         viewHolder.tvDate.setText(listEmployee.get(position).getDate());
-        viewHolder.tvSalary.setText("Lương (/ngày): "+listEmployee.get(position).getDaySalary());
+        viewHolder.tvSalary.setText("Lương (/ngày): "+ FormatNumber.formatNumber(listEmployee.get(position).getDaySalary())+"đ");
 
         if(listEmployee.get(position).getStatus()==1)
         {

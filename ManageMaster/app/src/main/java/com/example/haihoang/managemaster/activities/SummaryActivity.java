@@ -96,13 +96,14 @@ public class SummaryActivity extends AppCompatActivity {
                 showDialogAddSalary(model);
             }
         });
-        builder.setPositiveButton("Phạt", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Ứng/Phạt", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 EmployeeModel model = listGroup.get(groupPosition).getListEmployee().get(childPosition);
                 showDialogMinusSalary(model);
             }
         });
+
         builder.setNeutralButton("Hủy", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -167,6 +168,7 @@ public class SummaryActivity extends AppCompatActivity {
         dialog.setCancelable(true);
 
         dialog.setContentView(R.layout.custom_dialog_salary);
+
         FloatingActionButton btnDone = dialog.findViewById(R.id.btnDone);
         FloatingActionButton btnClose = dialog.findViewById(R.id.btnClose);
         TextView tvTitle = dialog.findViewById(R.id.tvTitle);
@@ -193,8 +195,8 @@ public class SummaryActivity extends AppCompatActivity {
                     if(money < totalSalary) {
                         String beforeNote = handle.getNote(model);
 
-
                         beforeNote += "- " + date + ":(Ứng/Phạt) " + money + "\n"
+
                                 + note + "\r\n";
                         handle.minusMoneyToTotalSalary(model, money, beforeNote);
                         dialog.dismiss();
@@ -229,7 +231,7 @@ public class SummaryActivity extends AppCompatActivity {
         {
             listGroup.add(new Group(listNameGroup.get(i),handle.getAllEmployeeByGroup(listNameGroup.get(i))));
         }
-        ListSalaryAdapter adapter = new ListSalaryAdapter(this,R.layout.item_group_salary,R.layout.item_list_salary,listGroup);
+        ListSalaryAdapter adapter = new ListSalaryAdapter(this,R.layout.item_parent_group,R.layout.item_list_salary,listGroup);
         elvListSalary.setAdapter(adapter);
 
     }

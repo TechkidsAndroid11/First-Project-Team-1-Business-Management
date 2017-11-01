@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.models.EmployeeModel;
 import com.example.haihoang.managemaster.utils.CircleTransform;
+import com.example.haihoang.managemaster.utils.FormatNumber;
 
 public class EmployeeInfoSalary extends AppCompatActivity {
     EmployeeModel employeeModel;
@@ -33,8 +34,8 @@ public class EmployeeInfoSalary extends AppCompatActivity {
         employeeModel = (EmployeeModel) getIntent().getSerializableExtra(SummaryActivity.EMPLOYEE);
 
         tvName.setText(tvName.getText() + employeeModel.getName());
-        tvMothSalary.setText(tvMothSalary.getText() + " " + employeeModel.getTotalSalary());
-        tvPreMothSalary.setText(tvPreMothSalary.getText() + " " + employeeModel.getPreviousSalary());
+        tvMothSalary.setText(tvMothSalary.getText() + " " + FormatNumber.formatNumber(employeeModel.getTotalSalary())+"đ");
+        tvPreMothSalary.setText(tvPreMothSalary.getText() + " " + FormatNumber.formatNumber(employeeModel.getPreviousSalary())+"đ");
         String[] base64 = employeeModel.getAvatar().split(",");
         Bitmap bitmap = BitmapFactory.decodeByteArray(
                 Base64.decode(base64[0],Base64.DEFAULT),

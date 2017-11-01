@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.activities.SummaryActivity;
+import com.example.haihoang.managemaster.databases.DatabaseHandle;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -46,6 +47,12 @@ public class AlarmService extends Service {
             noti.flags = Notification.FLAG_AUTO_CANCEL;
             manager.notify(0,noti);
         }
+        if (checkFistDayOfMonth()){
+            DatabaseHandle handle = DatabaseHandle.getInstance(this);
+            handle.resetAllNote();
+            handle.resetAllTotalSalary();
+            handle.resetStatusAllAbsent();
+        }
         return super.onStartCommand(intent, flags, startId);
     }
     public boolean checkLastDayOfMonth(){
@@ -76,6 +83,20 @@ public class AlarmService extends Service {
     }
     public boolean checkNamNhuan(int year){
         if (((year % 4 == 0) && (year % 100!= 0)) || (year%400 == 0)) return true;
+        return false;
+    }
+    public boolean checkFistDayOfMonth(){
+        Date date = new Date();
+        String tmp = new SimpleDateFormat("dd/MM/yyyy").format(date);
+        Log.d(TAG, "checkFirstDayOfMonth: "+tmp+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());
+        String[] ntn=tmp.split("/");
+        int ngay = Integer.parseInt(ntn[0]);
+        if(date.getHours()!=3||date.getMinutes()!=0){
+            return false;
+        }
+        if(ngay==1){
+            return true;
+        }
         return false;
     }
 }

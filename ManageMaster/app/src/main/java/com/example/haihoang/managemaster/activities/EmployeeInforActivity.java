@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.models.EmployeeModel;
 import com.example.haihoang.managemaster.utils.CircleTransform;
+import com.example.haihoang.managemaster.utils.FormatNumber;
 
 public class EmployeeInforActivity extends AppCompatActivity {
     private EmployeeModel empl;
@@ -52,7 +53,7 @@ public class EmployeeInforActivity extends AppCompatActivity {
         tvdob.setText(tvdob.getText()+" "+empl.getDate());
         tvphone.setText(tvphone.getText()+" "+empl.getPhone());
         tvGroup.setText(tvGroup.getText()+" "+empl.getGroup());
-        tvsalary.setText(tvsalary.getText()+" "+empl.getDaySalary());
+        tvsalary.setText(tvsalary.getText()+" "+ FormatNumber.formatNumber(empl.getDaySalary())+"đ");
         tvadd.setText(tvadd.getText()+" "+empl.getAddress());
         tvFDW.setText(tvFDW.getText()+" "+empl.getFirstDayWork());
         tvExp.setText(empl.getExperience());
