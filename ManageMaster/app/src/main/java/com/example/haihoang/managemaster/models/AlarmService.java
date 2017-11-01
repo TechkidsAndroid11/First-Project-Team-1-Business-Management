@@ -15,6 +15,7 @@ import com.example.haihoang.managemaster.activities.SummaryActivity;
 import com.example.haihoang.managemaster.databases.DatabaseHandle;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -48,10 +49,18 @@ public class AlarmService extends Service {
             manager.notify(0,noti);
         }
         if (checkFistDayOfMonth()){
+            Log.d(TAG, "onStartCommand: reset");
             DatabaseHandle handle = DatabaseHandle.getInstance(this);
+            ArrayList<EmployeeModel> model = handle.getAllEmployee();
+            for(int i=0;i<model.size();i++)
+            {
+                handle.updatePreviousSalaryAndTotalSalary(model.get(i));
+            }
             handle.resetAllNote();
             handle.resetAllTotalSalary();
             handle.resetStatusAllAbsent();
+
+
         }
         return super.onStartCommand(intent, flags, startId);
     }

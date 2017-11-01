@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -190,7 +191,6 @@ public class SummaryActivity extends AppCompatActivity {
                     int totalSalary = handle.getTotalSalaryById(model.getId());
                     if(money < totalSalary) {
                         String beforeNote = handle.getNote(model);
-
 
                         beforeNote += "- " + date + ":(Phạt) " + money + "\n"
                                 + note + "\r\n";

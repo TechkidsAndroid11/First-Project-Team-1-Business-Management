@@ -238,6 +238,6 @@ public class UpdateEmployee extends AppCompatActivity {
         Intent intent = new Intent(UpdateEmployee.this, ListEmployeeActivity.class);
         intent.putExtra(ListGroupAdapter.NAME_GROUP,model.getGroup());
         startActivity(intent);
-
+        finish();
     }
 }
