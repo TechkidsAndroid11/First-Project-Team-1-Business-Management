@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         setAdapter();
         addListener();
         checkDate();
+       // DatabaseHandle.getInstance(this).resetAllNote();
     }
 
 
