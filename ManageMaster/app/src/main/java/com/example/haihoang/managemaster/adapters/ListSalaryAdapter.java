@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.haihoang.managemaster.R;
+import com.example.haihoang.managemaster.databases.DatabaseHandle;
 import com.example.haihoang.managemaster.models.Group;
 import com.example.haihoang.managemaster.utils.CircleTransform;
 import com.example.haihoang.managemaster.utils.FormatNumber;
@@ -80,16 +81,18 @@ public class ListSalaryAdapter extends BaseExpandableListAdapter{
         {
             viewHolderGroup = new ViewHolderGroup();
             convertView = LayoutInflater.from(context).inflate(resourceGroup,parent,false);
-            viewHolderGroup.tvGroupName= convertView.findViewById(R.id.tv_group);
-            viewHolderGroup.tvGroupName.setHeight(120);
-            viewHolderGroup.tvGroupName.setTextSize(20);
+            viewHolderGroup.tvGroupName= convertView.findViewById(R.id.tv_Group);
+            viewHolderGroup.tvNumberOfPeople=convertView.findViewById(R.id.tv_numberOfPeople);
+//            viewHolderGroup.tvGroupName.setHeight(120);
+//            viewHolderGroup.tvGroupName.setTextSize(20);
             viewHolderGroup.ivArrow= convertView.findViewById(R.id.iv_arrow);
             convertView.setTag(viewHolderGroup);
         }
         else
             viewHolderGroup = (ViewHolderGroup) convertView.getTag();
-
-        viewHolderGroup.tvGroupName.setText(listGroup.get(groupPosition).getName());
+        int numberPerson = DatabaseHandle.getInstance(context).getCountEmployeeInGroup(listGroup.get(groupPosition).getName());
+        viewHolderGroup.tvGroupName.setText("Vị trí: "+listGroup.get(groupPosition).getName());
+        viewHolderGroup.tvNumberOfPeople.setText("Số nhân viên: "+numberPerson);
         if(isExpanded)
         {
             viewHolderGroup.ivArrow.setImageResource(R.drawable.ic_arrow_drop_up_black_24dp);
@@ -110,7 +113,6 @@ public class ListSalaryAdapter extends BaseExpandableListAdapter{
             viewHolder.tvName = convertView.findViewById(R.id.tvName);
             viewHolder.tvDaySalary = convertView.findViewById(R.id.tvSalary);
             viewHolder.tvTotalSalary = convertView.findViewById(R.id.tvMonthSalary);
-
             convertView.setTag(viewHolder);
         }
         else
@@ -144,7 +146,7 @@ public class ListSalaryAdapter extends BaseExpandableListAdapter{
     {
 
         ImageView ivArrow;
-
+        TextView tvNumberOfPeople;
         TextView tvGroupName;
     }
     public class ViewHolderEmployee
