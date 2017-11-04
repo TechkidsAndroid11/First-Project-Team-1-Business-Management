@@ -101,8 +101,6 @@ public class ListEmployeeAdapter extends BaseAdapter implements Filterable {
 
         viewHolder.ivAvatar.setImageBitmap(circleTransform.transform(bitmap));
 
-        //Picasso.with(context).load(bitmap).transform(new CircleTransform()).into(viewHolder.ivAvatar);
-
         getCheckStatus(position);
         viewHolder.tvStatus.setOnClickListener(new View.OnClickListener() {
             @Override

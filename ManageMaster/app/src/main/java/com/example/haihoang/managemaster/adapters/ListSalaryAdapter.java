@@ -19,6 +19,8 @@ import com.example.haihoang.managemaster.utils.CircleTransform;
 import com.example.haihoang.managemaster.utils.FormatNumber;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Linh Phan on 10/26/2017.
@@ -118,11 +120,13 @@ public class ListSalaryAdapter extends BaseExpandableListAdapter{
         else
             viewHolder = (ViewHolderEmployee) convertView.getTag();
 
-
+        Date date = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
         viewHolder.tvName.setText("Name: "+listGroup.get(groupPosition).getListEmployee().get(childPosition).getName());
-        viewHolder.tvDaySalary.setText("Salary (/day): "+ FormatNumber.formatNumber(listGroup.get(groupPosition).getListEmployee().get(childPosition).getDaySalary())+"đ");
+        viewHolder.tvDaySalary.setText("Lương (/ngày): "+ FormatNumber.formatNumber(listGroup.get(groupPosition).getListEmployee().get(childPosition).getDaySalary())+"đ");
         viewHolder.tvTotalSalary.setTextColor(Color.RED);
-        viewHolder.tvTotalSalary.setText("Month Salary: "+FormatNumber.formatNumber(listGroup.get(groupPosition).getListEmployee().get(childPosition).getTotalSalary())+"đ");
+        viewHolder.tvTotalSalary.setText("Lương tháng " + (cal.get(Calendar.MONTH) + 1) + ": "+FormatNumber.formatNumber(listGroup.get(groupPosition).getListEmployee().get(childPosition).getTotalSalary())+"đ");
 
         String[] base64 = listGroup.get(groupPosition).getListEmployee().get(childPosition).getAvatar().split(",");
         Bitmap bitmap = BitmapFactory.decodeByteArray(

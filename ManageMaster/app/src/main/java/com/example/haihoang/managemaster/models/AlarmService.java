@@ -7,7 +7,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
-import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -114,7 +113,7 @@ public class AlarmService extends Service {
         Log.d(TAG, "checkFirstDayOfMonth: "+tmp+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+": "+ntn[1]);
 
         int ngay = Integer.parseInt(ntn[0]);
-        if(date.getHours()!=3||date.getMinutes()!=0){
+        if(date.getHours()!=1||date.getMinutes()!=0){
             return false;
         }
         if (ngay == 1){

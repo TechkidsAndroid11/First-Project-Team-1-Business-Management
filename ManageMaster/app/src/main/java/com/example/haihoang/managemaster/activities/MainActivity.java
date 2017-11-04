@@ -207,12 +207,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void showDialogUpdate(final String oldName) {
         final Dialog dialog = new Dialog(MainActivity.this);
-        dialog.setTitle("Cập nhật thông tin nhóm: ");
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.custom_dialog_update_group);
         final EditText edtUpdateGroupName = (EditText) dialog.findViewById(R.id.edtUpdateGroup);
-        FloatingActionButton btnDone = (FloatingActionButton) dialog.findViewById(R.id.btnDone);
-        FloatingActionButton btnClose = (FloatingActionButton) dialog.findViewById(R.id.btnClose);
+        FloatingActionButton btnDone =  dialog.findViewById(R.id.btnDone);
+        FloatingActionButton btnClose = dialog.findViewById(R.id.btnClose);
 
         edtUpdateGroupName.setText(oldName);
         edtUpdateGroupName.requestFocus();
