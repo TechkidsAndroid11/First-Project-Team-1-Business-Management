@@ -28,6 +28,7 @@ import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.databases.DatabaseHandle;
 import com.example.haihoang.managemaster.models.EmployeeModel;
 import com.example.haihoang.managemaster.utils.CircleTransform;
+import com.example.haihoang.managemaster.utils.FormatNumber;
 import com.example.haihoang.managemaster.utils.ImageUtils;
 import com.squareup.picasso.Picasso;
 
@@ -53,6 +54,7 @@ public class AddEmployeeActivity extends AppCompatActivity{
     Uri uri;
     Calendar cal;
     Date date;
+    int s;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,6 +117,8 @@ public class AddEmployeeActivity extends AppCompatActivity{
         String strDate=dft.format(cal.getTime());
         edtDOB.setText(strDate);
         edtFirstDayWork.setText(strDate);
+
+        edtSalary.addTextChangedListener(new NumberTextWatcher(edtSalary));
 
     }
 
@@ -349,22 +353,17 @@ public class AddEmployeeActivity extends AppCompatActivity{
             return;
         }
         String firstDayWork = edtFirstDayWork.getText().toString();
-        int salary;
-        try {
-            salary = Integer.parseInt(edtSalary.getText().toString());
-            if(edtSalary.getText().toString().equals("")){
-                Toast.makeText(AddEmployeeActivity.this, "Hãy điền lương!",Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }catch (NumberFormatException e){
-            Toast.makeText(AddEmployeeActivity.this, "Lương phải là số!",Toast.LENGTH_SHORT).show();
+        String sSalary;
+        sSalary = edtSalary.getText().toString();
+        if(edtSalary.getText().toString().equals("")){
+            Toast.makeText(AddEmployeeActivity.this, "Hãy điền lương!",Toast.LENGTH_SHORT).show();
             return;
         }
         int totalSalary = 0;
         int previousMonthSalary = 0;
         int status = 0;
         String note = "";
-
+        int salary = FormatNumber.getNumber(sSalary);
         EmployeeModel employeeModel = new EmployeeModel(name, gender,birthday,phone,address,avatar,exp,groupName
                 ,firstDayWork,salary,totalSalary,previousMonthSalary,status,note);
 

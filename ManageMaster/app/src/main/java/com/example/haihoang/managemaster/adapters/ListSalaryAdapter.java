@@ -126,7 +126,8 @@ public class ListSalaryAdapter extends BaseExpandableListAdapter{
         viewHolder.tvName.setText("Name: "+listGroup.get(groupPosition).getListEmployee().get(childPosition).getName());
         viewHolder.tvDaySalary.setText("Lương (/ngày): "+ FormatNumber.formatNumber(listGroup.get(groupPosition).getListEmployee().get(childPosition).getDaySalary())+"đ");
         viewHolder.tvTotalSalary.setTextColor(Color.RED);
-        viewHolder.tvTotalSalary.setText("Lương tháng " + (cal.get(Calendar.MONTH) + 1) + ": "+FormatNumber.formatNumber(listGroup.get(groupPosition).getListEmployee().get(childPosition).getTotalSalary())+"đ");
+        viewHolder.tvTotalSalary.setText("Lương tháng " + (cal.get(Calendar.MONTH) + 1) + ": "
+                +FormatNumber.formatNumber(listGroup.get(groupPosition).getListEmployee().get(childPosition).getTotalSalary())+"đ");
 
         String[] base64 = listGroup.get(groupPosition).getListEmployee().get(childPosition).getAvatar().split(",");
         Bitmap bitmap = BitmapFactory.decodeByteArray(

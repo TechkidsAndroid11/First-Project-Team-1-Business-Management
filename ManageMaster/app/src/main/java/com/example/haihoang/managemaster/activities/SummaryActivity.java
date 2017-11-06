@@ -8,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -21,6 +20,7 @@ import com.example.haihoang.managemaster.adapters.ListSalaryAdapter;
 import com.example.haihoang.managemaster.databases.DatabaseHandle;
 import com.example.haihoang.managemaster.models.EmployeeModel;
 import com.example.haihoang.managemaster.models.Group;
+import com.example.haihoang.managemaster.utils.FormatNumber;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,7 +42,6 @@ public class SummaryActivity extends AppCompatActivity {
         setupUI();
         setAdapter();
         setOnclickList();
-
     }
 
     @Override
@@ -127,6 +126,7 @@ public class SummaryActivity extends AppCompatActivity {
         tvTitle.setText("Thưởng Tiền");
         final EditText edtMoney = dialog.findViewById(R.id.edtMoney);
         final EditText edtNote = dialog.findViewById(R.id.edtNote);
+        edtMoney.addTextChangedListener(new NumberTextWatcher(edtMoney));
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,9 +142,9 @@ public class SummaryActivity extends AppCompatActivity {
                     Toast.makeText(SummaryActivity.this, "Bạn chưa nhập ghi chú", Toast.LENGTH_SHORT).show();
                 } else
                 {
-                    int money = Integer.parseInt(sMoney);
+                    int money = FormatNumber.getNumber(sMoney);
                     String beforeNote = handle.getNote(model);
-                    beforeNote += "- " + date + ":(Thưởng) " + money + "\n"
+                    beforeNote += "- " + date + ":(Thưởng) " + FormatNumber.formatNumber(money) + "đ \n"
                             + note + "\n";
                     handle.addMoneyToTotalSalary(model,money,beforeNote);
                     dialog.dismiss();
@@ -176,6 +176,7 @@ public class SummaryActivity extends AppCompatActivity {
         tvTitle.setText("Ứng/Phạt");
         final EditText edtMoney = dialog.findViewById(R.id.edtMoney);
         final EditText edtNote = dialog.findViewById(R.id.edtNote);
+        edtMoney.addTextChangedListener(new NumberTextWatcher(edtMoney));
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,12 +192,12 @@ public class SummaryActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    int money = Integer.parseInt(sMoney);
+                    int money = FormatNumber.getNumber(sMoney);
                     int totalSalary = handle.getTotalSalaryById(model.getId());
                     if(money < totalSalary) {
                         String beforeNote = handle.getNote(model);
 
-                        beforeNote += "- " + date + ":(Ứng/Phạt) " + money + "\n"
+                        beforeNote += "- " + date + ":(Ứng/Phạt) " + FormatNumber.formatNumber(money) + "đ \n"
 
                                 + note + "\r\n";
                         handle.minusMoneyToTotalSalary(model, money, beforeNote);

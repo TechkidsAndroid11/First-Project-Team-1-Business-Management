@@ -27,6 +27,7 @@ import com.example.haihoang.managemaster.adapters.ListGroupAdapter;
 import com.example.haihoang.managemaster.databases.DatabaseHandle;
 import com.example.haihoang.managemaster.models.EmployeeModel;
 import com.example.haihoang.managemaster.utils.CircleTransform;
+import com.example.haihoang.managemaster.utils.FormatNumber;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -116,6 +117,8 @@ public class UpdateEmployee extends AppCompatActivity {
                 pickDateDialog2();
             }
         });
+
+        edtSalary.addTextChangedListener(new NumberTextWatcher(edtSalary));
 
     }
 
@@ -239,15 +242,10 @@ public class UpdateEmployee extends AppCompatActivity {
         }
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String firstDayWork = dateFormat.format(new Date()).toString();
-        int salary;
-        try {
-            salary = Integer.parseInt(edtSalary.getText().toString());
-            if(edtSalary.getText().toString().equals("")){
-                Toast.makeText(UpdateEmployee.this, "Hãy điền lương!",Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }catch (NumberFormatException e){
-            Toast.makeText(UpdateEmployee.this, "Lương phải là số!",Toast.LENGTH_SHORT).show();
+        String sSalary;
+        sSalary = edtSalary.getText().toString().trim();
+        if(edtSalary.getText().toString().equals("")){
+            Toast.makeText(UpdateEmployee.this, "Hãy điền lương!",Toast.LENGTH_SHORT).show();
             return;
         }
         int totalSalary = model.getTotalSalary();
@@ -255,6 +253,7 @@ public class UpdateEmployee extends AppCompatActivity {
         int status = model.getStatus();
         String note = model.getNote();
         int id = model.getId();
+        int salary = FormatNumber.getNumber(sSalary);
         EmployeeModel employeeModel = new EmployeeModel(id,name, gender,birthday,phone,address,avatar,exp,groupName
                 ,firstDayWork,salary,totalSalary,previousMonthSalary,status,note);
 

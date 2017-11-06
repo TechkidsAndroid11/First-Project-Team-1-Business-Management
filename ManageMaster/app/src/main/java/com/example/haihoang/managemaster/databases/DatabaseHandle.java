@@ -372,7 +372,7 @@ public class DatabaseHandle extends SQLiteOpenHelper{
         int id = model.getId();
         int totalSalary = model.getTotalSalary();
         int previousMonthSalary = model.getPreviousSalary();
-        String sql="update Employee set previousMonthSalary="+totalSalary+", totalSalary="+0+" where id="+id+"";
+        String sql="update Employee set previousMonthSalary="+totalSalary+", totalSalary="+0+", Note='' where id="+model.getId()+"";
         sqLiteDatabase.execSQL(sql);
         sqLiteDatabase.close();
 

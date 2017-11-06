@@ -57,7 +57,7 @@ public class EmployeeInforActivity extends AppCompatActivity {
         tvadd.setText(tvadd.getText()+" "+empl.getAddress());
         tvFDW.setText(tvFDW.getText()+" "+empl.getFirstDayWork());
         tvExp.setText(empl.getExperience());
-        tvLastSalary.setText(tvLastSalary.getText()+" "+empl.getPreviousSalary());
+        tvLastSalary.setText(tvLastSalary.getText()+" "+ FormatNumber.formatNumber(empl.getPreviousSalary())+"đ" );
 
         String[] base64 = empl.getAvatar().split(",");
         Bitmap bitmap = BitmapFactory.decodeByteArray(

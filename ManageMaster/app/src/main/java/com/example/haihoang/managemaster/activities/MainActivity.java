@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
@@ -22,7 +21,6 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextClock;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.haihoang.managemaster.R;
 import com.example.haihoang.managemaster.adapters.ListGroupAdapter;
@@ -30,9 +28,7 @@ import com.example.haihoang.managemaster.databases.DatabaseHandle;
 import com.example.haihoang.managemaster.models.AlarmService;
 import com.example.haihoang.managemaster.models.Group;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 
@@ -44,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> listNameGroup;
     private ListView lvListGroup;
     private TextClock tcCurrenTime;
-    private String myDate;
     private SearchView svGroup;
     private TextView tvTitle, tvNoti;
     @Override
@@ -63,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         setupUI();
         setAdapter();
         addListener();
-        checkDate();
        // DatabaseHandle.getInstance(this).resetAllNote();
     }
 
@@ -250,31 +244,7 @@ public class MainActivity extends AppCompatActivity {
         alarmMgr.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(),1000,pendingIntent);
 
     }
-    private void checkDate() {
-        SharedPreferences sharedPreferences = getSharedPreferences("my_date",MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        myDate = sharedPreferences.getString("date","");
-        String currtime = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-        if(myDate.equals("")){
-            editor.putString("date",currtime);
-            myDate = currtime;
-            editor.commit();
-        }else{
-            if(getDay(myDate)!= getDay(currtime)){
-                editor.clear();
-                editor.putString("date",currtime);
-                editor.commit();
-                //Reset Absent
-                DatabaseHandle handle = DatabaseHandle.getInstance(this);
-                handle.resetStatusAllAbsent();
-                Toast.makeText(this,"Sang ngày mới!! Reset Absent.",Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-    public int getDay(String s){
-        String []aday = s.split("/");
-        return Integer.parseInt(aday[0]);
-    }
+
 
 
 
