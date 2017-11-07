@@ -4,7 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ManageMaster.iml" filepath="$PROJECT_DIR$/ManageMaster.iml" />
       <module fileurl="file://C:\Users\Admin\Desktop\Project1Android\First-Project-Team-1-Business-Management\ManageMaster\ManageMaster.iml" filepath="C:\Users\Admin\Desktop\Project1Android\First-Project-Team-1-Business-Management\ManageMaster\ManageMaster.iml" />
+      <module fileurl="file://C:\Users\Admin\Desktop\Android1\First-Project-Team-1-Business-Management\ManageMaster\ManageMaster.iml" filepath="C:\Users\Admin\Desktop\Android1\First-Project-Team-1-Business-Management\ManageMaster\ManageMaster.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Admin\Desktop\Android1\First-Project-Team-1-Business-Management\ManageMaster\app\app.iml" filepath="C:\Users\Admin\Desktop\Android1\First-Project-Team-1-Business-Management\ManageMaster\app\app.iml" />
       <module fileurl="file://C:\Users\Admin\Desktop\Project1Android\First-Project-Team-1-Business-Management\ManageMaster\app\app.iml" filepath="C:\Users\Admin\Desktop\Project1Android\First-Project-Team-1-Business-Management\ManageMaster\app\app.iml" />
     </modules>
   </component>
