@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -175,8 +176,9 @@ public class MainActivity extends AppCompatActivity {
                 builder.setNeutralButton("Xoá", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        handle.deleteGroup(listNameGroup.get(position));
-                        onStart();
+//                        handle.deleteGroup(listNameGroup.get(position));
+                        checkDelete(listNameGroup.get(position),MainActivity.this);
+
                     }
                 });
                 builder.setPositiveButton("Huỷ", new DialogInterface.OnClickListener() {
@@ -198,7 +200,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    public void checkDelete(final String nameGroup, Context context)
+    {
+        final DatabaseHandle handle = DatabaseHandle.getInstance(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Bạn có chắn chắn muốn xóa Group: "+nameGroup+"?");
+        builder.setCancelable(true);
+        builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
 
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                handle.deleteGroup(nameGroup);
+                onStart();
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
     private void showDialogUpdate(final String oldName) {
         final Dialog dialog = new Dialog(MainActivity.this);
         dialog.setCancelable(false);

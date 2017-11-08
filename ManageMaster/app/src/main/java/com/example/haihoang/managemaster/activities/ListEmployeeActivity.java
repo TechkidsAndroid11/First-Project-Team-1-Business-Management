@@ -1,5 +1,6 @@
 package com.example.haihoang.managemaster.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -86,8 +87,9 @@ public class ListEmployeeActivity extends AppCompatActivity {
                 builder.setNeutralButton("Xoá", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        handle.deleteEmployee(listEmployee.get(position));
-                        onResume();
+                       // handle.deleteEmployee(listEmployee.get(position));
+                        checkDelete(listEmployee.get(position),ListEmployeeActivity.this);
+
                     }
                 });
                 builder.setPositiveButton("Huỷ", new DialogInterface.OnClickListener() {
@@ -134,7 +136,40 @@ public class ListEmployeeActivity extends AppCompatActivity {
         tvGroupName = (TextView) findViewById(R.id.txtGroupName);
         ivSave = (ImageView) findViewById(R.id.iv_luu);
     }
+    public void checkDelete(final EmployeeModel model, Context context)
+    {
+        final DatabaseHandle handle = DatabaseHandle.getInstance(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Bạn có chắn chắn muốn xóa nhân viên: "+model.getName()+"?");
+        builder.setCancelable(true);
+        builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
 
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                handle.deleteEmployee(model);
+                checkListGroupEmpty(model.getGroup());
+                onResume();
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+    public void checkListGroupEmpty(String nameGroup)
+    {
+        DatabaseHandle handle = DatabaseHandle.getInstance(this);
+        ArrayList<EmployeeModel> model = handle.getAllEmployeeByGroup(nameGroup);
+        if(model.size()==0)
+        {
+            finish();
+        }
+
+    }
     public void getDataIntent()
     {
         Intent intent = getIntent();
