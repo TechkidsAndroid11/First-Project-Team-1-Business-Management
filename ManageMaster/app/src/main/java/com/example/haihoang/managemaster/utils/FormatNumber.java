@@ -18,9 +18,16 @@ public class FormatNumber {
     }
     public static int getNumber(String number){
         StringBuilder s = new StringBuilder(number);
-        while (s.indexOf(".")>0){
-            s.deleteCharAt(s.indexOf("."));
+        if(s.indexOf(".") > 0){
+            while (s.indexOf(".")>0){
+                s.deleteCharAt(s.indexOf("."));
+            }
+        }else{
+            while (s.indexOf(",")>0){
+                s.deleteCharAt(s.indexOf(","));
+            }
         }
+
         return Integer.parseInt(s.toString());
     }
 }
