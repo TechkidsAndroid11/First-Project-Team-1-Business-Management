@@ -18,9 +18,6 @@ import com.example.haihoang.managemaster.models.Group;
 
 import java.util.ArrayList;
 
-/**
- * Created by Linh Phan on 10/25/2017.
- */
 
 public class ListGroupAdapter extends BaseAdapter implements Filterable {
     public static final String NAME_GROUP="namegroup";

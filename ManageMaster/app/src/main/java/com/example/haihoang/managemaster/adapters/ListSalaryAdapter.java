@@ -22,9 +22,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by Linh Phan on 10/26/2017.
- */
 
 public class ListSalaryAdapter extends BaseExpandableListAdapter{
     private Context context;

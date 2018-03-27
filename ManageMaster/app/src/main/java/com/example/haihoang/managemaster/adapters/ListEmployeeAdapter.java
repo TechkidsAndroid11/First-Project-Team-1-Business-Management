@@ -23,9 +23,7 @@ import com.example.haihoang.managemaster.utils.FormatNumber;
 
 import java.util.ArrayList;
 
-/**
- * Created by Linh Phan on 10/25/2017.
- */
+
 
 public class ListEmployeeAdapter extends BaseAdapter implements Filterable {
     boolean checkStatus=true;

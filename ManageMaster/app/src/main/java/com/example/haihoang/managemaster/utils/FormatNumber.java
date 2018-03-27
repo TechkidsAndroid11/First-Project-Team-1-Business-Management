@@ -1,8 +1,6 @@
 package com.example.haihoang.managemaster.utils;
 
-/**
- * Created by Trần_Tân on 01/11/2017.
- */
+
 
 public class FormatNumber {
     public static String formatNumber(int number){

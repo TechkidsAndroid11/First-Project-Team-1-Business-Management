@@ -20,9 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-/**
- * Created by Trần_Tân on 25/10/2017.
- */
+
 
 public class AlarmService extends Service {
     private static final String TAG = "AlarmService";

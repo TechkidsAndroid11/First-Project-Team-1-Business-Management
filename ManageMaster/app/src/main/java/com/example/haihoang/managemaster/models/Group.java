@@ -2,9 +2,6 @@ package com.example.haihoang.managemaster.models;
 
 import java.util.ArrayList;
 
-/**
- * Created by haihoang on 10/23/17.
- */
 
 public class Group {
     String name;

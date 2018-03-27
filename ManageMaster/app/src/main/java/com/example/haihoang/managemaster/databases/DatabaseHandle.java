@@ -11,9 +11,6 @@ import com.example.haihoang.managemaster.models.EmployeeModel;
 
 import java.util.ArrayList;
 
-/**
- * Created by Linh Phan on 10/23/2017.
- */
 
 public class DatabaseHandle extends SQLiteOpenHelper{
     private static final String TAG = "DatabaseHandle";

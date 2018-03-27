@@ -14,9 +14,6 @@ import com.example.haihoang.managemaster.models.EmployeeModel;
 
 import java.util.ArrayList;
 
-/**
- * Created by haihoang on 10/25/17.
- */
 
 public class EmployeeSalaryActivity extends AppCompatActivity {
     ArrayList<EmployeeModel> listEmployee;

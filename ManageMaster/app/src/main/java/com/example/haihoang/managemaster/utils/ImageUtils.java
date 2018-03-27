@@ -18,9 +18,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 
-/**
- * Created by haihoang on 10/23/17.
- */
 
 public class ImageUtils {
     private static File tempFile;
